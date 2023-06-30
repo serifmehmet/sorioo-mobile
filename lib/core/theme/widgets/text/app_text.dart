@@ -42,11 +42,12 @@ class AppText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       data,
-      style: TextStyle(
-        color: color ?? const Color(0xffFFFFFF),
-        fontFamily: fontFamily,
-        fontSize: 16,
-      ),
+      style: style ??
+          TextStyle(
+            color: color ?? const Color(0xffFFFFFF),
+            fontFamily: fontFamily,
+            fontSize: 16,
+          ),
       textAlign: textAlign,
       maxLines: maxLines,
     );
