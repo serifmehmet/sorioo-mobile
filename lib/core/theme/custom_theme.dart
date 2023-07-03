@@ -33,6 +33,11 @@ class CustomTheme {
           fontSize: 14,
           color: kTextColor,
         ),
+        bodyLarge: TextStyle(
+          fontFamily: TFonts.primaryBold,
+          fontSize: 20,
+          color: kTextColor,
+        ),
       ),
     );
   }

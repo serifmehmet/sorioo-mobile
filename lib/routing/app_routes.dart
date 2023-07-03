@@ -8,7 +8,10 @@ enum AppRoutes {
   register(name: 'register', path: '/register'),
   forgotPassword(name: 'forgotPassword', path: '/forgotPassword'),
 
-  home(name: 'home', path: '/home');
+  home(name: 'home', path: '/home'),
+  category(name: 'category', path: '/category'),
+  profile(name: 'profile', path: '/profile'),
+  message(name: 'message', path: '/message');
 
   const AppRoutes({
     required this.name,
