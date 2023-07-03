@@ -10,7 +10,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
     navigatorKey: RoutingKeys.rootNavigatorKey,
     debugLogDiagnostics: true,
-    initialLocation: AppRoutes.home.path,
+    initialLocation: AppRoutes.category.path,
     routes: <RouteBase>[
       // GoRoute(
       //   name: AppRoutes.login.name,

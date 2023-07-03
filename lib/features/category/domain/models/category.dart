@@ -16,3 +16,5 @@ class Category with _$Category {
 
   factory Category.fromJson(Map<String, dynamic> json) => _$CategoryFromJson(json);
 }
+
+List<Category> categoriesFromJson(List<dynamic> data) => List<Category>.from(data.map((c) => Category.fromJson(c as Map<String, dynamic>)));
