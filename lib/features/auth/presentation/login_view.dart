@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:iconly/iconly.dart';
 import 'package:sorioo/core/theme/colors.dart';
 import 'package:sorioo/core/theme/constants.dart';
 import 'package:sorioo/core/theme/gap.dart';
 import 'package:sorioo/core/theme/widgets/button/app_button.dart';
 import 'package:sorioo/core/theme/widgets/text/app_text_form_field_widget.dart';
+import 'package:sorioo/routing/app_routes.dart';
 
 import '../../../core/theme/widgets/text/app_text.dart';
 
@@ -22,6 +24,11 @@ class _LoginViewState extends ConsumerState<LoginView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        iconTheme: const IconThemeData(color: kTextColor),
+        backgroundColor: Colors.white,
+      ),
       body: SafeArea(
         child: Padding(
           padding: kDefaultHorPadding,
@@ -86,7 +93,9 @@ class _LoginViewState extends ConsumerState<LoginView> {
                           color: AppColors.greySC500,
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            context.pushNamed(AppRoutes.register.name);
+                          },
                           child: AppText(
                             "Kayıt ol",
                             color: Theme.of(context).colorScheme.primary,

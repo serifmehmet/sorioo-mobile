@@ -40,6 +40,7 @@ class AppPrimaryButton extends StatelessWidget {
                 mainAxisSize: mainAxisSize,
                 icon: icon,
                 boxShape: boxShape,
+                disabledBackgroundColor: kTextColor,
               ),
             );
           default:

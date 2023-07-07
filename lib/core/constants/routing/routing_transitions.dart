@@ -21,4 +21,29 @@ class BuildPageWithTransition {
       },
     );
   }
+
+  static CustomTransitionPage buildPageWithSlideFromBottom<T>({
+    required BuildContext context,
+    required GoRouterState state,
+    required Widget child,
+  }) {
+    return CustomTransitionPage(
+      child: child,
+      key: state.pageKey,
+      transitionDuration: const Duration(milliseconds: 300),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        return SlideTransition(
+          position: animation.drive(
+            Tween(
+              begin: const Offset(0, 1.5),
+              end: Offset.zero,
+            ).chain(
+              CurveTween(curve: Curves.ease),
+            ),
+          ),
+          child: child,
+        );
+      },
+    );
+  }
 }

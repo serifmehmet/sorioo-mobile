@@ -9,6 +9,7 @@ class Category with _$Category {
   const factory Category({
     required String id,
     required String name,
+    String? description,
     required int status,
     String? catColor,
     Image? categoryImage,

@@ -11,13 +11,15 @@ class CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final catColor = "0xFF${category.catColor != '' ? category.catColor : 000000}";
     return Container(
-      decoration: const BoxDecoration(
-        color: Colors.black,
+      height: 300,
+      decoration: BoxDecoration(
+        color: Color(int.parse(catColor)),
         borderRadius: kRegularBorderRadius,
       ),
       child: Padding(
-        padding: kSemiSmallPadding,
+        padding: kSemiBigPadding,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -27,9 +29,10 @@ class CategoryCard extends StatelessWidget {
             ),
             const AppGap.semiBig(),
             AppText(
-              "Ofis programları hakkında destek alın.",
+              category.description ?? "",
               style: Theme.of(context).textTheme.bodyMedium,
             ),
+            const AppGap.semiBig(),
           ],
         ),
       ),

@@ -17,18 +17,11 @@ class CategoryController extends _$CategoryController {
     return categoryTask.getOrElse((l) => throw ApiException(message: l.toString())).run();
   }
 
-  Future<Unit> fetch() async {
+  Future<Unit> _fetchAllRequest() async {
     final repository = ref.read(categoryRepositoryProvider);
-    return _fetchAllRequest(
-      () => repository.fetchCategories(),
-    );
-  }
-
-  Future<Unit> _fetchAllRequest(
-    TaskEither<ApiException, List<Category>> Function() request,
-  ) async {
     state = const AsyncLoading();
-    final categories = request();
+    final categories = repository.fetchCategories();
+
     state = (await categories.run()).match(
       (error) => AsyncError(error, StackTrace.current),
       (categories) => AsyncData(categories),

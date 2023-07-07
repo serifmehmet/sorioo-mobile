@@ -6,6 +6,9 @@ enum AppRoutes {
 
   login(name: 'login', path: '/login'),
   register(name: 'register', path: '/register'),
+  emailRegister(name: 'email-register', path: '/emailRegister'),
+  emailRegisterLastStep(name: 'email-register-last-step', path: '/emailRegisterLastStep'),
+  emailRegisterVerification(name: 'email-register-verification', path: '/emailRegisterVerification'),
   forgotPassword(name: 'forgotPassword', path: '/forgotPassword'),
 
   home(name: 'home', path: '/home'),
