@@ -43,6 +43,10 @@ class InternalServerErrorException extends ApiException {
   InternalServerErrorException({String? message}) : super(message: message);
 }
 
+class UnSuccessfulOperationException extends ApiException {
+  UnSuccessfulOperationException({String? message}) : super(message: message);
+}
+
 class BadGatewayException extends ApiException {
   BadGatewayException({String? message}) : super(message: message);
 }
@@ -69,6 +73,9 @@ class ApiErrorHandler {
           return ConflictException(message: e?.statusMessage);
         case 500:
           return InternalServerErrorException(message: e?.statusMessage);
+        case 501:
+          return UnSuccessfulOperationException(message: e?.statusMessage);
+
         case 502:
           return BadGatewayException(message: e?.statusMessage);
         case 503:

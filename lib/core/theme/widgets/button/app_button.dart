@@ -12,6 +12,7 @@ class AppPrimaryButton extends StatelessWidget {
   final MainAxisSize mainAxisSize;
   final VoidCallback? onTap;
   final BoxShape? boxShape;
+  final bool isLoading;
 
   const AppPrimaryButton({
     Key? key,
@@ -20,6 +21,7 @@ class AppPrimaryButton extends StatelessWidget {
     this.onTap,
     this.boxShape,
     this.mainAxisSize = MainAxisSize.min,
+    this.isLoading = false,
   })  : assert(
           icon != null || title != null,
         ),
@@ -40,6 +42,8 @@ class AppPrimaryButton extends StatelessWidget {
                 mainAxisSize: mainAxisSize,
                 icon: icon,
                 boxShape: boxShape,
+                disabledBackgroundColor: kTextColor,
+                isLoading: isLoading,
               ),
             );
           default:
@@ -51,6 +55,7 @@ class AppPrimaryButton extends StatelessWidget {
                 mainAxisSize: mainAxisSize,
                 icon: icon,
                 boxShape: boxShape,
+                isLoading: isLoading,
               ),
             );
         }
@@ -80,6 +85,7 @@ class AppButtonLayout extends StatelessWidget {
   final Widget? image;
   final AppTextLevel? level;
   final TextStyle? style;
+  final bool isLoading;
 
   const AppButtonLayout.active({
     Key? key,
@@ -96,6 +102,7 @@ class AppButtonLayout extends StatelessWidget {
     this.hasBorder = false,
     this.level,
     this.style,
+    this.isLoading = false,
   })  : _state = AppButtonState.active,
         assert(icon != null || title != null, boxShape != null),
         super(key: key);
@@ -115,6 +122,7 @@ class AppButtonLayout extends StatelessWidget {
     this.hasBorder = false,
     this.level,
     this.style,
+    this.isLoading = false,
   })  : _state = AppButtonState.disabled,
         assert(
           icon != null || title != null,
@@ -156,11 +164,13 @@ class AppButtonLayout extends StatelessWidget {
           if (image != null) image!,
           if (image != null) const AppGap.regular(),
           if (title != null)
-            AppText(
-              color: fontColor ?? const Color(0xffFFFFFF),
-              level: level ?? AppTextLevel.bodyLarge,
-              title,
-            ),
+            isLoading
+                ? const CircularProgressIndicator(color: Colors.white)
+                : AppText(
+                    color: fontColor ?? const Color(0xffFFFFFF),
+                    level: level ?? AppTextLevel.bodyLarge,
+                    title,
+                  ),
           if (hasBoth) const AppGap.semiSmall(),
           if (icon != null) icon,
         ],

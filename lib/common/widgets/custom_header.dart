@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:sorioo/common/widgets/logged_in_user_area.dart';
+import 'package:sorioo/core/constants/preferences_keys.dart';
+import 'package:sorioo/core/init/cache_manager.dart';
+import 'package:sorioo/core/theme/widgets/button/app_button.dart';
+import 'package:sorioo/routing/app_routes.dart';
 
 import '../../../../core/theme/constants.dart';
 import '../../../../core/theme/font.dart';
@@ -41,32 +47,21 @@ class CustomHeader extends SliverPersistentHeaderDelegate {
         padding: const EdgeInsets.only(
           top: 30,
           left: 20,
+          right: 20,
         ),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    CircleAvatar(radius: avatarRadius, backgroundImage: Image.asset("assets/images/dummy-profile.png").image),
-                    const AppGap.regular(),
-                    SizedBox(
-                      width: 200,
-                      child: AppText(
-                        "Mehmet Şerif, hoş geldin",
-                        style: TextStyle(
-                          fontFamily: TFonts.primaryBold,
-                          fontSize: 20 * scale,
-                          color: kTextColor,
-                        ),
-                        maxLines: 3,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+            if (CacheManager.instance.getBoolValue(PreferencesKeys.isLoggedIn)) ...[
+              LoggedInUserArea(avatarRadius: avatarRadius, scale: scale),
+            ] else ...[
+              AppPrimaryButton(
+                title: "Giriş Yap",
+                onTap: () {
+                  context.pushNamed(AppRoutes.login.name);
+                },
+              ),
+            ],
+            if (!isReduced) const AppGap.big(),
             if (!isReduced)
               AppText(
                 "Nasıl yardımcı olabiliriz?",

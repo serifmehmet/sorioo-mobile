@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../common/widgets/category_card.dart';
+import '../../../common/widgets/custom_header.dart';
 import '../../../core/theme/gap.dart';
 import '../application/category_controller.dart';
-import 'widgets/category_card.dart';
-import 'widgets/custom_header.dart';
 
 class CategoryView extends StatelessWidget {
   const CategoryView({Key? key}) : super(key: key);
@@ -22,7 +22,7 @@ class CategoryView extends StatelessWidget {
           pinned: true,
           delegate: CustomHeader(
             collapsedHeight: kToolbarHeight + 20,
-            expandedHeight: 210,
+            expandedHeight: 250,
           ),
         ),
         const SliverToBoxAdapter(
@@ -40,6 +40,7 @@ class CategoryView extends StatelessWidget {
                 data: (data) {
                   return SliverGrid.builder(
                     gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                      mainAxisExtent: 200,
                       maxCrossAxisExtent: 220,
                       childAspectRatio: 3 / 2,
                       crossAxisSpacing: 10,
@@ -60,32 +61,6 @@ class CategoryView extends StatelessWidget {
           ),
         ),
       ],
-    )
-
-        // Consumer(
-        //   builder: (_, ref, child) {
-        //     var categoryController = ref.watch(categoryControllerProvider);
-        //     return categoryController.map(
-        //       data: (data) {
-        //         return ListView.builder(
-        //           itemBuilder: (context, index) {
-        //             return Center(
-        //               child: AppText(data.value[index].name, color: Colors.black),
-        //             );
-        //           },
-        //           itemCount: data.value.length,
-        //         );
-        //       },
-        //       error: (s) {
-        //         return const SizedBox(
-        //             child: Center(
-        //           child: AppText("error", color: Colors.black),
-        //         ));
-        //       },
-        //       loading: (l) => const CircularProgressIndicator(),
-        //     );
-        //   },
-        // ),
-        );
+    ));
   }
 }
