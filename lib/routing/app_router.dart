@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sorioo/features/auth/presentation/register/email_register_last_step_view.dart';
-import 'package:sorioo/features/auth/presentation/register/email_register_verification_view.dart';
+import 'package:sorioo/features/auth/presentation/register/email_register_second_step_view.dart';
+import 'package:sorioo/features/auth/presentation/register/route_args/email_register_second_page_args.dart';
+import 'package:sorioo/features/auth/presentation/verify/email_verification_view.dart';
 import '../core/constants/routing/routing_keys.dart';
 import '../core/constants/routing/routing_transitions.dart';
 import '../features/home/presentation/navbar/scaffold_with_bottom_navbar.dart';
@@ -62,7 +63,9 @@ final goRouterProvider = Provider<GoRouter>((ref) {
           return BuildPageWithTransition.buildPageWithSlideFromBottom(
             context: context,
             state: state,
-            child: const EmailRegisterLastStepView(),
+            child: EmailRegisterLastStepView(
+              args: state.extra as EmailRegisterSecondPageArgs,
+            ),
           );
         },
         parentNavigatorKey: RoutingKeys.rootNavigatorKey,
@@ -74,7 +77,9 @@ final goRouterProvider = Provider<GoRouter>((ref) {
           return BuildPageWithTransition.buildPageWithSlideFromBottom(
             context: context,
             state: state,
-            child: const EmailRegisterVerificationView(),
+            child: EmailVerificationView(
+              args: state.extra as EmailVerifyPageArgs,
+            ),
           );
         },
         parentNavigatorKey: RoutingKeys.rootNavigatorKey,

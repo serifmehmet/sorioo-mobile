@@ -11,8 +11,10 @@ class AppTextFormField extends StatefulWidget {
     required this.autofocus,
     required this.textInputAction,
     required this.textInputType,
+    this.autovalidateMode,
     this.onFieldSubmitted,
     this.onChanged,
+    this.onEditingComplete,
     required this.hintText,
     this.prefixIcon,
     this.focusNode,
@@ -29,8 +31,10 @@ class AppTextFormField extends StatefulWidget {
   final TextInputType textInputType;
   final void Function(String)? onFieldSubmitted;
   final void Function(String)? onChanged;
+  final void Function()? onEditingComplete;
   final String hintText;
   final List<TextInputFormatter>? inputFormatters;
+  final AutovalidateMode? autovalidateMode;
 
   final Icon? prefixIcon;
   final FocusNode? focusNode;
@@ -62,6 +66,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
       autofocus: widget.autofocus,
       textInputAction: widget.textInputAction,
       keyboardType: widget.textInputType,
+      autovalidateMode: widget.autovalidateMode,
       decoration: InputDecoration(
         hintText: widget.hintText,
         hintStyle: Theme.of(context).textTheme.bodyMedium,
@@ -88,6 +93,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
         ),
       ),
       onFieldSubmitted: widget.onFieldSubmitted,
+      onEditingComplete: widget.onEditingComplete,
       validator: widget.validator,
       obscureText: widget.obscureText!,
       onChanged: widget.onChanged,
