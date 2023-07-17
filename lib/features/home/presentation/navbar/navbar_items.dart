@@ -5,13 +5,15 @@ class CreateNavBarItems {
   const CreateNavBarItems._();
 
   static List<BottomNavigationBarItem> createBottomNavItems() {
-    List<BottomNavigationBarItem> bottomNavs = [];
+    final bottomNavs = <BottomNavigationBarItem>[];
 
     for (var i = 0; i < NavbarScreens.mapim.length; i++) {
       bottomNavs.add(
         BottomNavigationBarItem(
-          icon: Icon(NavbarScreens.mapim.values.elementAt(i)["icon"]),
-          label: NavbarScreens.mapim.values.elementAt(i)["label"],
+          icon: Icon(
+            NavbarScreens.mapim.values.elementAt(i)['icon'] as IconData,
+          ),
+          label: NavbarScreens.mapim.values.elementAt(i)['label'] as String,
         ),
       );
     }

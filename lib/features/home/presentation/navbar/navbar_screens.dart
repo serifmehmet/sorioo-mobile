@@ -7,26 +7,26 @@ import 'package:sorioo/features/profile/presentation/profile_view.dart';
 class NavbarScreens {
   const NavbarScreens._();
 
-  static const Map<String, Map> mapim = {
+  static const Map<String, dynamic> mapim = {
     '/home': {
-      "label": "",
-      "icon": IconlyLight.home,
-      "screen": HomeView(),
+      'label': '',
+      'icon': IconlyLight.home,
+      'screen': HomeView(),
     },
-    "/category": {
-      "label": "",
-      "icon": IconlyLight.category,
-      "screen": CategoryView(),
+    '/category': {
+      'label': '',
+      'icon': IconlyLight.category,
+      'screen': CategoryView(),
     },
-    "/message": {
-      "label": "",
-      "icon": IconlyLight.message,
-      "screen": MessageView(),
+    '/message': {
+      'label': '',
+      'icon': IconlyLight.message,
+      'screen': MessageView(),
     },
-    "/profile": {
-      "label": "",
-      "icon": IconlyLight.profile,
-      "screen": ProfileView(),
+    '/profile': {
+      'label': '',
+      'icon': IconlyLight.profile,
+      'screen': ProfileView(),
     },
   };
 

@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sorioo/core/theme/constants.dart';
+import 'package:sorioo/core/theme/gap.dart';
+import 'package:sorioo/core/theme/widgets/button/app_button.dart';
+import 'package:sorioo/core/theme/widgets/text/app_text.dart';
+import 'package:sorioo/core/theme/widgets/text/app_text_form_field_widget.dart';
 import 'package:sorioo/core/validation/string_validators.dart';
-import 'package:sorioo/features/auth/presentation/register/route_args/email_register_second_page_args.dart';
 import 'package:sorioo/features/auth/presentation/register/email_register_validators.dart';
+import 'package:sorioo/features/auth/presentation/register/route_args/email_register_second_page_args.dart';
 import 'package:sorioo/routing/navigation_helpers.dart';
-
-import '../../../../core/theme/constants.dart';
-import '../../../../core/theme/gap.dart';
-import '../../../../core/theme/widgets/button/app_button.dart';
-import '../../../../core/theme/widgets/text/app_text.dart';
-import '../../../../core/theme/widgets/text/app_text_form_field_widget.dart';
 
 class EmailRegisterView extends ConsumerStatefulWidget {
   const EmailRegisterView({super.key});
@@ -99,7 +98,7 @@ class _EmailRegisterViewState extends ConsumerState<EmailRegisterView> with Regi
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AppText(
-                    "E-Posta ile Katıl",
+                    'E-Posta ile Katıl',
                     style: Theme.of(context).textTheme.displaySmall,
                   ),
                   const AppGap.extraBig(),
@@ -110,9 +109,9 @@ class _EmailRegisterViewState extends ConsumerState<EmailRegisterView> with Regi
                     textInputAction: TextInputAction.next,
                     textInputType: TextInputType.name,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    hintText: "Adınız",
+                    hintText: 'Adınız',
                     validator: (name) => !_submitted ? null : nameErrorText(name ?? ''),
-                    onEditingComplete: () => _nameEditingComplete(),
+                    onEditingComplete: _nameEditingComplete,
                   ),
                   const AppGap.semiBig(),
                   AppTextFormField(
@@ -122,9 +121,9 @@ class _EmailRegisterViewState extends ConsumerState<EmailRegisterView> with Regi
                     textInputAction: TextInputAction.next,
                     textInputType: TextInputType.name,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    hintText: "Soyadınız",
+                    hintText: 'Soyadınız',
                     validator: (lastName) => !_submitted ? null : lastNameErrorText(lastName ?? ''),
-                    onEditingComplete: () => _lastNameEditingComplete(),
+                    onEditingComplete: _lastNameEditingComplete,
                   ),
                   const AppGap.semiBig(),
                   AppTextFormField(
@@ -134,9 +133,9 @@ class _EmailRegisterViewState extends ConsumerState<EmailRegisterView> with Regi
                     textInputAction: TextInputAction.done,
                     textInputType: TextInputType.emailAddress,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    hintText: "E-Posta Adresiniz",
+                    hintText: 'E-Posta Adresiniz',
                     validator: (email) => !_submitted ? null : emailErrorText(email ?? ''),
-                    onEditingComplete: () => _emailEditingComplete(),
+                    onEditingComplete: _emailEditingComplete,
                     inputFormatters: <TextInputFormatter>[
                       ValidatorInputFormatter(
                         editingValidator: EmailEditingRegexValidator(),
@@ -145,8 +144,8 @@ class _EmailRegisterViewState extends ConsumerState<EmailRegisterView> with Regi
                   ),
                   const AppGap.extraBig(),
                   AppPrimaryButton(
-                    title: "Sonraki Adım",
-                    onTap: () => _submit(),
+                    title: 'Sonraki Adım',
+                    onTap: _submit,
                   ),
                 ],
               ),

@@ -1,29 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sorioo/common/providers/local_user_provider.dart';
+import 'package:sorioo/core/constants/preferences_keys.dart';
+import 'package:sorioo/core/init/cache_manager.dart';
 
-import '../../core/theme/constants.dart';
-import '../../core/theme/font.dart';
-import '../../core/theme/gap.dart';
-import '../../core/theme/widgets/text/app_text.dart';
+import 'package:sorioo/core/theme/constants.dart';
+import 'package:sorioo/core/theme/font.dart';
+import 'package:sorioo/core/theme/gap.dart';
+import 'package:sorioo/core/theme/widgets/text/app_text.dart';
 
-class LoggedInUserArea extends StatelessWidget {
-  const LoggedInUserArea({super.key, required this.avatarRadius, required this.scale});
+class LoggedInUserArea extends ConsumerWidget {
+  const LoggedInUserArea({required this.avatarRadius, required this.scale, super.key});
 
   final double avatarRadius;
   final double scale;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final localUser = ref.watch(
+      localUserProviderProvider(
+        userId: CacheManager.instance.getStringValue(
+          PreferencesKeys.userId,
+        ),
+      ),
+    );
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
           children: [
-            CircleAvatar(radius: avatarRadius, backgroundImage: Image.asset("assets/images/dummy-profile.png").image),
+            CircleAvatar(radius: avatarRadius, backgroundImage: Image.asset('assets/images/dummy-profile.png').image),
             const AppGap.regular(),
             SizedBox(
               width: 200,
               child: AppText(
-                "Mehmet Şerif, hoş geldin",
+                '${localUser.fullName}, hoş geldin',
                 style: TextStyle(
                   fontFamily: TFonts.primaryBold,
                   fontSize: 20 * scale,

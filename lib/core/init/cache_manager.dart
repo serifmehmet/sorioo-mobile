@@ -1,16 +1,15 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../constants/preferences_keys.dart';
+import 'package:sorioo/core/constants/preferences_keys.dart';
 
 class CacheManager {
+  CacheManager.init() {
+    SharedPreferences.getInstance().then((value) => _preferences = value);
+  }
   static final CacheManager _instance = CacheManager.init();
   SharedPreferences? _preferences;
 
   static CacheManager get instance => _instance;
-
-  CacheManager.init() {
-    SharedPreferences.getInstance().then((value) => _preferences = value);
-  }
 
   static Future preferencesInit() async {
     instance._preferences ??= await SharedPreferences.getInstance();
@@ -36,6 +35,10 @@ class CacheManager {
 
   Future<void> setIntValue(PreferencesKeys key, int value) async {
     await _preferences!.setInt(key.toString(), value);
+  }
+
+  Future<void> deleteStringValue(PreferencesKeys key) async {
+    await _preferences!.remove(key.toString());
   }
 
   String getStringValue(PreferencesKeys key) => _preferences?.getString(key.toString()) ?? '';

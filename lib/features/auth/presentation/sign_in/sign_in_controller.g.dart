@@ -1,26 +1,25 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'email_verify_controller.dart';
+part of 'sign_in_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$emailVerifyControllerHash() =>
-    r'78e0315aab4b3c07ead40189557bec1dbfb899a9';
+String _$singInControllerHash() => r'e83fe0d15f0f0851eadb9cc22736ebee47797039';
 
-/// See also [EmailVerifyController].
-@ProviderFor(EmailVerifyController)
-final emailVerifyControllerProvider =
-    AutoDisposeAsyncNotifierProvider<EmailVerifyController, void>.internal(
-  EmailVerifyController.new,
-  name: r'emailVerifyControllerProvider',
+/// See also [SingInController].
+@ProviderFor(SingInController)
+final singInControllerProvider =
+    AutoDisposeAsyncNotifierProvider<SingInController, void>.internal(
+  SingInController.new,
+  name: r'singInControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$emailVerifyControllerHash,
+      : _$singInControllerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$EmailVerifyController = AutoDisposeAsyncNotifier<void>;
+typedef _$SingInController = AutoDisposeAsyncNotifier<void>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

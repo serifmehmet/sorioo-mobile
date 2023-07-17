@@ -1,9 +1,8 @@
 import 'package:dio/dio.dart';
 
 class ApiException implements Exception {
-  final String? message;
-
   ApiException({required this.message});
+  final String? message;
 
   @override
   String toString() => message ?? 'unknown error';
@@ -20,39 +19,43 @@ class ApiException implements Exception {
 }
 
 class BadRequestException extends ApiException {
-  BadRequestException({String? message}) : super(message: message);
+  BadRequestException({super.message});
 }
 
 class UnauthorizedException extends ApiException {
-  UnauthorizedException({String? message}) : super(message: message);
+  UnauthorizedException({super.message});
 }
 
 class ForbiddenException extends ApiException {
-  ForbiddenException({String? message}) : super(message: message);
+  ForbiddenException({super.message});
 }
 
 class NotFoundException extends ApiException {
-  NotFoundException({String? message}) : super(message: message);
+  NotFoundException({super.message});
 }
 
 class ConflictException extends ApiException {
-  ConflictException({String? message}) : super(message: message);
+  ConflictException({super.message});
 }
 
 class InternalServerErrorException extends ApiException {
-  InternalServerErrorException({String? message}) : super(message: message);
+  InternalServerErrorException({super.message});
+}
+
+class ResponseHasErrorException extends ApiException {
+  ResponseHasErrorException({super.message});
 }
 
 class UnSuccessfulOperationException extends ApiException {
-  UnSuccessfulOperationException({String? message}) : super(message: message);
+  UnSuccessfulOperationException({String message = 'Başarısız işlem'}) : super(message: message);
 }
 
 class BadGatewayException extends ApiException {
-  BadGatewayException({String? message}) : super(message: message);
+  BadGatewayException({super.message});
 }
 
 class ServiceUnavailableException extends ApiException {
-  ServiceUnavailableException({String? message}) : super(message: message);
+  ServiceUnavailableException({super.message});
 }
 
 class ApiErrorHandler {
@@ -73,8 +76,6 @@ class ApiErrorHandler {
           return ConflictException(message: e?.statusMessage);
         case 500:
           return InternalServerErrorException(message: e?.statusMessage);
-        case 501:
-          return UnSuccessfulOperationException(message: e?.statusMessage);
 
         case 502:
           return BadGatewayException(message: e?.statusMessage);

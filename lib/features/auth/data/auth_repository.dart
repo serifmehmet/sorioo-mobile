@@ -1,29 +1,31 @@
 import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:sorioo/common/models/generic_response.dart';
+
+import 'package:sorioo/common/models/status_message_response.dart';
+import 'package:sorioo/core/constants/env.dart';
 import 'package:sorioo/core/http/api_exception.dart';
 import 'package:sorioo/core/http/api_provider.dart';
+import 'package:sorioo/core/http/generic_response.dart';
+import 'package:sorioo/features/auth/domain/auth_response.dart';
 import 'package:sorioo/features/auth/domain/user.dart';
-
-import '../../../core/constants/env.dart';
 
 part 'auth_repository.g.dart';
 
 class AuthRepository {
+  AuthRepository({required this.client});
   final Dio client;
 
-  AuthRepository({required this.client});
-
-  TaskEither<ApiException, GenericResponse> createUser(User user) => TaskEither<ApiException, Response>.tryCatch(
+  ///createUser: Creates a new user and sends confirmation code to users mail address.
+  TaskEither<ApiException, GenericResponse<StatusMessageResponse>> createUser(User user) => TaskEither<ApiException, Response>.tryCatch(
         () => client.post(
-          "${Env.apiLocalDevUrl}/auth/register",
+          '${Env.apiLocalDevUrl}/auth/register',
           data: user.toJson(),
         ),
         (error, stackTrace) => ApiErrorHandler.handleError(error),
       )
           .chainEither(
-            (response) => Either<ApiException, Response>.fromPredicate(
+            (response) => Either<ApiException, Response<dynamic>>.fromPredicate(
               response,
               (r) => r.statusCode == 200 && r.statusCode! < 300,
               (response) => ApiErrorHandler.handleError(response.data),
@@ -34,20 +36,36 @@ class AuthRepository {
           .chainEither(
             (json) => Either<ApiException, Map<String, dynamic>>.safeCast(
               json,
-              (e) => InternalServerErrorException(message: e),
+              (e) => InternalServerErrorException(message: e.toString()),
             ),
           )
+          // .flatMap(
+          //   validateError,
+          // )
           .chainEither(
             (dataObject) => Either.tryCatch(
-              () => GenericResponse.fromJson(dataObject),
+              () => GenericResponse<StatusMessageResponse>.fromJson(
+                dataObject,
+                (Object? statusJson) => StatusMessageResponse.fromJson(
+                  statusJson! as Map<String, dynamic>,
+                ),
+              ),
               (error, stackTrace) => InternalServerErrorException(message: error.toString()),
             ),
           );
 
-  TaskEither<ApiException, GenericResponse> verifyUser(String email, String code) => TaskEither<ApiException, Response>.tryCatch(
+  // TaskEither<ApiException, Map<String, dynamic>> validateError(Map<String, dynamic> json) => json['error'] != null
+  //     ? TaskEither.left(ResponseHasErrorException(message: json['error'].toString()))
+  //     : TaskEither.of(
+  //         json['data'] as Map<String, dynamic>,
+  //       );
+
+  ///verifyUser: To send verify user code to api.
+  TaskEither<ApiException, GenericResponse<StatusMessageResponse>> verifyUser(String email, String code) =>
+      TaskEither<ApiException, Response>.tryCatch(
         () => client.post(
-          "${Env.apiLocalDevUrl}/auth/verify",
-          data: {"email": email, "code": code},
+          '${Env.apiLocalDevUrl}/auth/verify',
+          data: {'email': email, 'code': code},
         ),
         (error, stackTrace) => ApiErrorHandler.handleError(error),
       )
@@ -55,8 +73,10 @@ class AuthRepository {
             (response) => Either<ApiException, Response>.fromPredicate(
               response,
               (r) => r.statusCode == 200 && r.statusCode! < 300,
-              (response) => ApiErrorHandler.handleError(response.data),
-            ).map((a) => a.data),
+              (response) => UnSuccessfulOperationException(message: response.statusMessage!),
+            ).map(
+              (a) => a.data,
+            ),
           )
           .chainEither(
             (json) => Either<ApiException, Map<String, dynamic>>.safeCast(
@@ -66,17 +86,21 @@ class AuthRepository {
           )
           .chainEither(
             (dataObject) => Either.tryCatch(
-              () => GenericResponse.fromJson(dataObject),
-              (error, stackTrace) => InternalServerErrorException(
-                message: error.toString(),
+              () => GenericResponse<StatusMessageResponse>.fromJson(
+                dataObject,
+                (Object? statusJson) => StatusMessageResponse.fromJson(
+                  statusJson! as Map<String, dynamic>,
+                ),
               ),
+              (error, stackTrace) => InternalServerErrorException(message: error.toString()),
             ),
           );
 
-  TaskEither<ApiException, GenericResponse> resendConfirmation(String email) => TaskEither<ApiException, Response>.tryCatch(
+  ///resendConfirmation: ToSend confirm code to User
+  TaskEither<ApiException, GenericResponse<StatusMessageResponse>> resendConfirmation(String email) => TaskEither<ApiException, Response>.tryCatch(
         () => client.post(
-          "${Env.apiLocalDevUrl}/auth/resend-confirmation",
-          data: {"email": email},
+          '${Env.apiLocalDevUrl}/auth/resend-confirmation',
+          data: {'email': email},
         ),
         (error, stackTrace) => ApiErrorHandler.handleError(error),
       )
@@ -84,18 +108,62 @@ class AuthRepository {
             (response) => Either<ApiException, Response>.fromPredicate(
               response,
               (r) => r.statusCode == 200 && r.statusCode! < 300,
-              (response) => ApiErrorHandler.handleError(response.data),
+              (response) => UnSuccessfulOperationException(message: response.statusMessage!),
             ),
+          )
+          .map((a) => a.data)
+          .chainEither(
+            (json) => Either<ApiException, Map<String, dynamic>>.safeCast(
+              json,
+              (e) => UnSuccessfulOperationException(message: e.toString()),
+            ),
+          )
+          .chainEither(
+            (dataObject) => Either.tryCatch(
+              () => GenericResponse<StatusMessageResponse>.fromJson(
+                dataObject,
+                (Object? statusJson) => StatusMessageResponse.fromJson(
+                  statusJson! as Map<String, dynamic>,
+                ),
+              ),
+              (error, stackTrace) => InternalServerErrorException(message: error.toString()),
+            ),
+          );
+
+  ///loginUser: To log user in the system and get the token and the user info
+  TaskEither<ApiException, GenericResponse<AuthResponse>> loginUser(String email, String password) => TaskEither<ApiException, Response>.tryCatch(
+        () => client.post(
+          '${Env.apiLocalDevUrl}/auth/login',
+          data: {'password': password, 'email': email},
+        ),
+        (error, stackTrace) => ApiErrorHandler.handleError(error),
+      )
+          .chainEither(
+            (response) => Either<ApiException, Response<dynamic>>.fromPredicate(
+              response,
+              (r) => r.statusCode == 200 && r.statusCode! < 300,
+              (response) => ApiErrorHandler.handleError(response.statusMessage),
+            ),
+          )
+          .map(
+            (a) => a.data,
           )
           .chainEither(
             (json) => Either<ApiException, Map<String, dynamic>>.safeCast(
               json,
-              (e) => InternalServerErrorException(message: e),
+              (error) => InternalServerErrorException(
+                message: error.toString(),
+              ),
             ),
           )
           .chainEither(
-            (data) => Either.tryCatch(
-              () => GenericResponse.fromJson(data),
+            (dataObject) => Either.tryCatch(
+              () => GenericResponse<AuthResponse>.fromJson(
+                dataObject,
+                (Object? authResponseJson) => AuthResponse.fromJson(
+                  authResponseJson! as Map<String, dynamic>,
+                ),
+              ),
               (error, stackTrace) => InternalServerErrorException(
                 message: error.toString(),
               ),

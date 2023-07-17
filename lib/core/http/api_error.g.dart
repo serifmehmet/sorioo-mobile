@@ -1,23 +1,18 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'generic_response.dart';
+part of 'api_error.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_GenericResponse _$$_GenericResponseFromJson(Map<String, dynamic> json) =>
-    _$_GenericResponse(
-      code: json['code'] as int,
-      status: json['status'] as bool,
+_$_ApiError _$$_ApiErrorFromJson(Map<String, dynamic> json) => _$_ApiError(
+      code: json['code'] as int?,
       message: json['message'] as String,
-      data: json['data'],
     );
 
-Map<String, dynamic> _$$_GenericResponseToJson(_$_GenericResponse instance) =>
+Map<String, dynamic> _$$_ApiErrorToJson(_$_ApiError instance) =>
     <String, dynamic>{
       'code': instance.code,
-      'status': instance.status,
       'message': instance.message,
-      'data': instance.data,
     };
