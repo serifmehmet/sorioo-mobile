@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pinput/pinput.dart';
+import 'package:sorioo/common/extensions/async_value_ui.dart';
 import 'package:sorioo/core/theme/constants.dart';
 import 'package:sorioo/core/theme/gap.dart';
-import 'package:sorioo/core/theme/widgets/button/app_button.dart';
 import 'package:sorioo/core/theme/widgets/text/app_text.dart';
 import 'package:sorioo/features/auth/presentation/register/route_args/email_register_second_page_args.dart';
 import 'package:sorioo/features/auth/presentation/verify/email_verify_controller.dart';
 import 'package:sorioo/routing/app_routes.dart';
 
 class EmailVerificationView extends ConsumerStatefulWidget {
-  const EmailVerificationView({super.key, required this.args});
+  const EmailVerificationView({required this.args, super.key});
 
   final EmailVerifyPageArgs args;
 
@@ -44,8 +44,8 @@ class _EmailVerificationViewState extends ConsumerState<EmailVerificationView> {
       final controller = ref.read(emailVerifyControllerProvider.notifier);
       final response = await controller.verifySubmit(widget.args.email, code);
 
-      if (response) {
-        context.pushReplacementNamed(AppRoutes.login.name);
+      if (response && context.mounted) {
+        GoRouter.of(context).goNamed(AppRoutes.home.name);
       }
     }
   }
@@ -53,66 +53,75 @@ class _EmailVerificationViewState extends ConsumerState<EmailVerificationView> {
   Future<void> _resendVerify() async {
     final controller = ref.read(emailVerifyControllerProvider.notifier);
     final response = await controller.resendConfirmation(widget.args.email);
+
+    if (response) {
+      codeController.clear();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    ref.listen<AsyncValue>(emailVerifyControllerProvider, (_, state) {
+      state.showToastMessageOnError(context);
+    });
+
     final state = ref.watch(emailVerifyControllerProvider);
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        iconTheme: const IconThemeData(color: kTextColor),
-      ),
-      body: Padding(
-        padding: kBigHorPadding,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AppText(
-              "Son bir adım kaldı",
-              style: Theme.of(context).textTheme.displaySmall,
+
+    return state.isLoading
+        ? Center(
+            child: CircularProgressIndicator(color: Theme.of(context).colorScheme.primary),
+          )
+        : Scaffold(
+            appBar: AppBar(
+              elevation: 0,
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              iconTheme: const IconThemeData(color: kTextColor),
             ),
-            const AppGap.small(),
-            AppText(
-              "E-Posta adresinize gönderdiğimiz aktivasyon kodunu aşağıya girerek hesabınızı onaylayabilirsiniz.",
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-            const AppGap.extraBig(),
-            Pinput(
-              defaultPinTheme: defaultPinTheme,
-              focusedPinTheme: defaultPinTheme.copyWith(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Theme.of(context).colorScheme.primary),
-                  borderRadius: kSmallBorderRadius,
-                ),
+            body: Padding(
+              padding: kBigHorPadding,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AppText(
+                    'Son bir adım kaldı',
+                    style: Theme.of(context).textTheme.displaySmall,
+                  ),
+                  const AppGap.small(),
+                  AppText(
+                    '${widget.args.email} adresinize gönderdiğimiz aktivasyon kodunu aşağıya girerek hesabınızı onaylayabilirsiniz.',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  const AppGap.extraBig(),
+                  Pinput(
+                    defaultPinTheme: defaultPinTheme,
+                    focusedPinTheme: defaultPinTheme.copyWith(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Theme.of(context).colorScheme.primary),
+                        borderRadius: kSmallBorderRadius,
+                      ),
+                    ),
+                    submittedPinTheme: defaultPinTheme.copyWith(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                    autofocus: true,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    length: 6,
+                    controller: codeController,
+                    onCompleted: (value) => _submitVerify(),
+                  ),
+                  const AppGap.extraBig(),
+                  TextButton(
+                    onPressed: _resendVerify,
+                    child: AppText(
+                      'Yeniden Gönder',
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                ],
               ),
-              submittedPinTheme: defaultPinTheme.copyWith(
-                  decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primary,
-              )),
-              autofocus: true,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              length: 6,
-              controller: codeController,
             ),
-            const AppGap.extraBig(),
-            AppPrimaryButton(
-              title: "Tamamla",
-              onTap: state.isLoading ? null : () => _submitVerify(),
-              isLoading: state.isLoading,
-            ),
-            const AppGap.big(),
-            TextButton(
-              onPressed: () => _resendVerify(),
-              child: AppText(
-                "Yeniden Gönder",
-                color: Theme.of(context).colorScheme.primary,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+          );
   }
 }

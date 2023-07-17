@@ -4,15 +4,17 @@ import 'package:go_router/go_router.dart';
 import 'package:sorioo/features/auth/presentation/register/email_register_second_step_view.dart';
 import 'package:sorioo/features/auth/presentation/register/route_args/email_register_second_page_args.dart';
 import 'package:sorioo/features/auth/presentation/verify/email_verification_view.dart';
-import '../core/constants/routing/routing_keys.dart';
-import '../core/constants/routing/routing_transitions.dart';
-import '../features/home/presentation/navbar/scaffold_with_bottom_navbar.dart';
-import 'app_routes.dart';
-import 'routes/routers_list.dart';
+import 'package:sorioo/core/constants/preferences_keys.dart';
+import 'package:sorioo/core/constants/routing/routing_keys.dart';
+import 'package:sorioo/core/constants/routing/routing_transitions.dart';
+import 'package:sorioo/core/init/cache_manager.dart';
+import 'package:sorioo/features/home/presentation/navbar/scaffold_with_bottom_navbar.dart';
+import 'package:sorioo/routing/app_routes.dart';
+import 'package:sorioo/routing/routes/routers_list.dart';
 
-import '../features/auth/presentation/login_view.dart';
-import '../features/auth/presentation/register/email_register_view.dart';
-import '../features/auth/presentation/register/register_view.dart';
+import 'package:sorioo/features/auth/presentation/sign_in/login_view.dart';
+import 'package:sorioo/features/auth/presentation/register/email_register_view.dart';
+import 'package:sorioo/features/auth/presentation/register/register_view.dart';
 
 final goRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
@@ -105,10 +107,13 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       routeObserver,
     ],
     redirect: (context, state) {
+      final isLoggedIn = CacheManager.instance.getBoolValue(
+        PreferencesKeys.isLoggedIn,
+      );
+      if (state.location == AppRoutes.profile.path && !isLoggedIn) {
+        return AppRoutes.login.path;
+      } else {}
       return null;
-
-      // final isLoggedIn = CacheManager.instance.getBoolValue(PreferencesKeys.isLoggedIn);
-
       // if (isLoggedIn) {
       //   return null;
       // } else {

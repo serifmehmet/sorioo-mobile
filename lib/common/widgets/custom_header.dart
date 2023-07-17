@@ -3,13 +3,12 @@ import 'package:go_router/go_router.dart';
 import 'package:sorioo/common/widgets/logged_in_user_area.dart';
 import 'package:sorioo/core/constants/preferences_keys.dart';
 import 'package:sorioo/core/init/cache_manager.dart';
+import 'package:sorioo/core/theme/constants.dart';
+import 'package:sorioo/core/theme/font.dart';
+import 'package:sorioo/core/theme/gap.dart';
 import 'package:sorioo/core/theme/widgets/button/app_button.dart';
+import 'package:sorioo/core/theme/widgets/text/app_text.dart';
 import 'package:sorioo/routing/app_routes.dart';
-
-import '../../../../core/theme/constants.dart';
-import '../../../../core/theme/font.dart';
-import '../../../../core/theme/gap.dart';
-import '../../../../core/theme/widgets/text/app_text.dart';
 
 class CustomHeader extends SliverPersistentHeaderDelegate {
   CustomHeader({
@@ -30,7 +29,7 @@ class CustomHeader extends SliverPersistentHeaderDelegate {
     final scale = 1 - shrinkOffset / maxExtent;
     final isReduced = shrinkOffset >= maxExtent * 0.12;
 
-    double avatarRadius = 20.0 * scale;
+    var avatarRadius = 20.0 * scale;
     avatarRadius = avatarRadius > 16 ? avatarRadius : 16.0;
 
     return Container(
@@ -55,7 +54,7 @@ class CustomHeader extends SliverPersistentHeaderDelegate {
               LoggedInUserArea(avatarRadius: avatarRadius, scale: scale),
             ] else ...[
               AppPrimaryButton(
-                title: "Giriş Yap",
+                title: 'Giriş Yap',
                 onTap: () {
                   context.pushNamed(AppRoutes.login.name);
                 },
@@ -64,7 +63,7 @@ class CustomHeader extends SliverPersistentHeaderDelegate {
             if (!isReduced) const AppGap.big(),
             if (!isReduced)
               AppText(
-                "Nasıl yardımcı olabiliriz?",
+                'Nasıl yardımcı olabiliriz?',
                 style: TextStyle(
                   fontFamily: TFonts.primaryBold,
                   fontSize: 40 * scale,

@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../../data/auth_repository.dart';
-import '../../domain/user.dart';
+import 'package:sorioo/features/auth/data/auth_repository.dart';
+import 'package:sorioo/features/auth/domain/user.dart';
 
 part 'email_register_controller.g.dart';
 

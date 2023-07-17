@@ -1,1 +1,8 @@
-enum PreferencesKeys { userId, isLoggedIn, notificationToken, accessToken, refreshToken }
+enum PreferencesKeys {
+  userId,
+  isLoggedIn,
+  notificationToken,
+  accessToken,
+  refreshToken,
+  password,
+}

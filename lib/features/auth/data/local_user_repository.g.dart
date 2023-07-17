@@ -1,26 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'email_verify_controller.dart';
+part of 'local_user_repository.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$emailVerifyControllerHash() =>
-    r'78e0315aab4b3c07ead40189557bec1dbfb899a9';
+String _$localUserRepositoryHash() =>
+    r'980756d725932ae8b022341a12079bdd77635cf7';
 
-/// See also [EmailVerifyController].
-@ProviderFor(EmailVerifyController)
-final emailVerifyControllerProvider =
-    AutoDisposeAsyncNotifierProvider<EmailVerifyController, void>.internal(
-  EmailVerifyController.new,
-  name: r'emailVerifyControllerProvider',
+/// See also [localUserRepository].
+@ProviderFor(localUserRepository)
+final localUserRepositoryProvider =
+    AutoDisposeProvider<LocalUserRepository>.internal(
+  localUserRepository,
+  name: r'localUserRepositoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$emailVerifyControllerHash,
+      : _$localUserRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$EmailVerifyController = AutoDisposeAsyncNotifier<void>;
+typedef LocalUserRepositoryRef = AutoDisposeProviderRef<LocalUserRepository>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

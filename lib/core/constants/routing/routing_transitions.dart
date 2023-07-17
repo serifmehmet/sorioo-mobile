@@ -30,7 +30,6 @@ class BuildPageWithTransition {
     return CustomTransitionPage(
       child: child,
       key: state.pageKey,
-      transitionDuration: const Duration(milliseconds: 300),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         return SlideTransition(
           position: animation.drive(
