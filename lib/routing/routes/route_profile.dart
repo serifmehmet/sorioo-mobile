@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:sorioo/core/constants/routing/routing_transitions.dart';
+import 'package:sorioo/features/profile/presentation/profile_edit_view.dart';
 import 'package:sorioo/features/profile/presentation/profile_view.dart';
 import 'package:sorioo/routing/app_routes.dart';
 
@@ -11,11 +12,27 @@ class RouteProfile {
       return const ProfileView();
     },
     pageBuilder: (context, state) {
-      return BuildPageWithTransition.buildPageWithDefaultTransition(
+      return BuildPageWithTransition.buildPageWithDefaultTransition<dynamic>(
         context: context,
         state: state,
         child: const ProfileView(),
       );
     },
+    routes: [
+      GoRoute(
+        path: AppRoutes.editProfile.path,
+        name: AppRoutes.editProfile.name,
+        builder: (context, state) {
+          return const ProfileEditView();
+        },
+        pageBuilder: (context, state) {
+          return BuildPageWithTransition.buildPageWithSlideFromBottom<dynamic>(
+            context: context,
+            state: state,
+            child: const ProfileEditView(),
+          );
+        },
+      ),
+    ],
   );
 }

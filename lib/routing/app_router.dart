@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sorioo/features/auth/presentation/register/email_register_second_step_view.dart';
-import 'package:sorioo/features/auth/presentation/register/route_args/email_register_second_page_args.dart';
-import 'package:sorioo/features/auth/presentation/verify/email_verification_view.dart';
 import 'package:sorioo/core/constants/preferences_keys.dart';
 import 'package:sorioo/core/constants/routing/routing_keys.dart';
 import 'package:sorioo/core/constants/routing/routing_transitions.dart';
 import 'package:sorioo/core/init/cache_manager.dart';
+import 'package:sorioo/features/auth/presentation/register/email_register_second_step_view.dart';
+import 'package:sorioo/features/auth/presentation/register/email_register_view.dart';
+import 'package:sorioo/features/auth/presentation/register/register_view.dart';
+import 'package:sorioo/features/auth/presentation/register/route_args/email_register_second_page_args.dart';
+import 'package:sorioo/features/auth/presentation/sign_in/login_view.dart';
+import 'package:sorioo/features/auth/presentation/verify/email_verification_view.dart';
 import 'package:sorioo/features/home/presentation/navbar/scaffold_with_bottom_navbar.dart';
 import 'package:sorioo/routing/app_routes.dart';
 import 'package:sorioo/routing/routes/routers_list.dart';
-
-import 'package:sorioo/features/auth/presentation/sign_in/login_view.dart';
-import 'package:sorioo/features/auth/presentation/register/email_register_view.dart';
-import 'package:sorioo/features/auth/presentation/register/register_view.dart';
 
 final goRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
@@ -26,7 +25,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         name: AppRoutes.login.name,
         path: AppRoutes.login.path,
         pageBuilder: (context, state) {
-          return BuildPageWithTransition.buildPageWithSlideFromBottom(
+          return BuildPageWithTransition.buildPageWithSlideFromBottom<dynamic>(
             context: context,
             state: state,
             child: const LoginView(),
@@ -38,7 +37,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         path: AppRoutes.register.path,
         name: AppRoutes.register.name,
         pageBuilder: (context, state) {
-          return BuildPageWithTransition.buildPageWithSlideFromBottom(
+          return BuildPageWithTransition.buildPageWithSlideFromBottom<dynamic>(
             context: context,
             state: state,
             child: const RegisterView(),
@@ -50,7 +49,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         path: AppRoutes.emailRegister.path,
         name: AppRoutes.emailRegister.name,
         pageBuilder: (context, state) {
-          return BuildPageWithTransition.buildPageWithSlideFromBottom(
+          return BuildPageWithTransition.buildPageWithSlideFromBottom<dynamic>(
             context: context,
             state: state,
             child: const EmailRegisterView(),
@@ -62,11 +61,11 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         path: AppRoutes.emailRegisterLastStep.path,
         name: AppRoutes.emailRegisterLastStep.name,
         pageBuilder: (context, state) {
-          return BuildPageWithTransition.buildPageWithSlideFromBottom(
+          return BuildPageWithTransition.buildPageWithSlideFromBottom<dynamic>(
             context: context,
             state: state,
             child: EmailRegisterLastStepView(
-              args: state.extra as EmailRegisterSecondPageArgs,
+              args: state.extra! as EmailRegisterSecondPageArgs,
             ),
           );
         },
@@ -76,11 +75,11 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         path: AppRoutes.emailRegisterVerification.path,
         name: AppRoutes.emailRegisterVerification.name,
         pageBuilder: (context, state) {
-          return BuildPageWithTransition.buildPageWithSlideFromBottom(
+          return BuildPageWithTransition.buildPageWithSlideFromBottom<dynamic>(
             context: context,
             state: state,
             child: EmailVerificationView(
-              args: state.extra as EmailVerifyPageArgs,
+              args: state.extra! as EmailVerifyPageArgs,
             ),
           );
         },
@@ -101,7 +100,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
           return ScaffoldWithNavBar(child: child);
         },
         routes: NavigationRouterList().routeList,
-      )
+      ),
     ],
     observers: [
       routeObserver,

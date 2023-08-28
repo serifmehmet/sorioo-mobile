@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:sorioo/common/models/status_message_response.dart';
@@ -13,8 +14,10 @@ import 'package:sorioo/features/auth/domain/user.dart';
 part 'auth_repository.g.dart';
 
 class AuthRepository {
-  AuthRepository({required this.client});
+  AuthRepository({required this.client, required GoogleSignIn googleSignIn}) : _googleSignIn = googleSignIn;
   final Dio client;
+
+  final GoogleSignIn _googleSignIn;
 
   ///createUser: Creates a new user and sends confirmation code to users mail address.
   TaskEither<ApiException, GenericResponse<StatusMessageResponse>> createUser(User user) => TaskEither<ApiException, Response>.tryCatch(
@@ -169,9 +172,53 @@ class AuthRepository {
               ),
             ),
           );
+
+  TaskEither<ApiException, GenericResponse<AuthResponse>> signInWithGoogle(
+    String idToken,
+    String provider,
+  ) =>
+      TaskEither<ApiException, Response<dynamic>>.tryCatch(
+        () => client.post(
+          '${Env.apiLocalDevUrl}/Auth/google-signin',
+          data: {'idToken': idToken, 'provider': provider},
+        ),
+        (error, stackTrace) => ApiErrorHandler.handleError(error),
+      )
+          .chainEither(
+            (response) => Either<ApiException, Response<dynamic>>.fromPredicate(
+              response,
+              (r) => r.statusCode == 200 && r.statusCode! < 300,
+              (response) => ApiErrorHandler.handleError(response.statusMessage),
+            ),
+          )
+          .map(
+            (g) => g.data,
+          )
+          .chainEither(
+            (json) => Either<ApiException, Map<String, dynamic>>.safeCast(
+              json,
+              (error) => InternalServerErrorException(message: error.toString()),
+            ),
+          )
+          .chainEither(
+            (dataObject) => Either.tryCatch(
+              () => GenericResponse<AuthResponse>.fromJson(
+                dataObject,
+                (Object? authResponseJson) => AuthResponse.fromJson(
+                  authResponseJson! as Map<String, dynamic>,
+                ),
+              ),
+              (error, stackTrace) => InternalServerErrorException(
+                message: error.toString(),
+              ),
+            ),
+          );
 }
 
 @riverpod
 AuthRepository authRepositoryProvider(AuthRepositoryProviderRef ref) {
-  return AuthRepository(client: ref.watch(dioProvider));
+  return AuthRepository(
+    client: ref.watch(dioProvider),
+    googleSignIn: GoogleSignIn(),
+  );
 }

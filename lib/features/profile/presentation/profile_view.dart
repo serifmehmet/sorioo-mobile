@@ -2,13 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconly/iconly.dart';
-import 'package:sorioo/common/providers/local_user_provider.dart';
-import 'package:sorioo/core/constants/preferences_keys.dart';
-import 'package:sorioo/core/init/cache_manager.dart';
+
+import 'package:sorioo/common/providers/nav_notifier.dart';
+
 import 'package:sorioo/core/theme/constants.dart';
 import 'package:sorioo/core/theme/gap.dart';
 import 'package:sorioo/core/theme/widgets/text/app_text.dart';
+
 import 'package:sorioo/features/auth/presentation/account/account_controller.dart';
+
+import 'package:sorioo/features/profile/presentation/widgets/change_user_type_widget.dart';
+import 'package:sorioo/features/profile/presentation/widgets/profile_header_widget.dart';
 import 'package:sorioo/routing/app_routes.dart';
 
 class ProfileView extends ConsumerStatefulWidget {
@@ -20,24 +24,20 @@ class ProfileView extends ConsumerStatefulWidget {
 
 class _ProfileViewState extends ConsumerState<ProfileView> {
   Future<void> _submitLogOut() async {
-    final accountController = ref.read(accountControllerProvider.notifier);
+    final sub = ref.listenManual(accountControllerProvider.notifier, (_, __) {});
 
-    final success = await accountController.logOut();
+    final success = await sub.read().logOut();
+
+    sub.close();
 
     if (success && context.mounted) {
-      await context.pushNamed(AppRoutes.home.name);
+      ref.read(navProvider.notifier).onIndexChanged(0);
+      GoRouter.of(context).goNamed(AppRoutes.home.name);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final user = ref.watch(
-      localUserProviderProvider(
-        userId: CacheManager.instance.getStringValue(
-          PreferencesKeys.userId,
-        ),
-      ),
-    );
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -49,29 +49,22 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
             padding: kBigPadding,
             child: Column(
               children: [
+                const ProfileHeaderWidget(),
+                const AppGap.semiBig(),
+                const ChangeUserTypeWidget(),
+                const AppGap.semiBig(),
                 Container(
-                  padding: kSemiBigPadding,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary,
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
+                  color: Colors.black12,
+                  child: ListTile(
+                    leading: const Icon(IconlyBold.edit),
+                    trailing: const Icon(IconlyBold.arrow_right_2),
+                    title: AppText(
+                      'Profili Düzenle',
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      AppText(
-                        user.fullName,
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                      const AppGap.small(),
-                      AppText(
-                        user.email,
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                    ],
+                    onTap: () => GoRouter.of(context).pushNamed(
+                      AppRoutes.editProfile.name,
+                    ),
                   ),
                 ),
                 Container(

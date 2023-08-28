@@ -11,7 +11,7 @@ class RouteMessage {
       return const MessageView();
     },
     pageBuilder: (context, state) {
-      return BuildPageWithTransition.buildPageWithDefaultTransition(
+      return BuildPageWithTransition.buildPageWithDefaultTransition<dynamic>(
         context: context,
         state: state,
         child: const MessageView(),

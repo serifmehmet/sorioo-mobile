@@ -9,6 +9,11 @@ const kErrorColor = Color(0xFFF03738);
 
 const kDefaultHorPadding = EdgeInsets.symmetric(horizontal: 12);
 const kBigHorPadding = EdgeInsets.symmetric(horizontal: 30);
+
+const EdgeInsets kSemiSmallVertPadding = EdgeInsets.symmetric(vertical: 8);
+const EdgeInsets kSmallVertPadding = EdgeInsets.symmetric(vertical: 6);
+const EdgeInsets kSemiBigVertPadding = EdgeInsets.symmetric(vertical: 20);
+
 const EdgeInsets kSemiSmallPadding = EdgeInsets.all(8);
 const EdgeInsets kBigPadding = EdgeInsets.all(30);
 const kSemiBigPadding = EdgeInsets.all(20);

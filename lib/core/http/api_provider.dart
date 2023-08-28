@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sorioo/core/constants/env.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 part 'api_provider.g.dart';
 
@@ -9,18 +9,18 @@ enum ContentType { urlEncoded, json }
 
 @riverpod
 Dio dio(DioRef ref) {
-  late Dio dio = Dio();
+  late final dio = Dio();
   dio.options.sendTimeout = const Duration(seconds: 5);
-  dio.options.connectTimeout = const Duration(seconds: 5);
+  // dio.options.connectTimeout = const Duration(seconds: 5);
   dio.options.receiveTimeout = const Duration(seconds: 5);
   dio.options.baseUrl = Env.apiUrl;
-  dio.interceptors.add(PrettyDioLogger(
-    requestHeader: true,
-    requestBody: true,
-    responseBody: true,
-    responseHeader: false,
-    compact: false,
-  ));
+  dio.interceptors.add(
+    PrettyDioLogger(
+      requestHeader: true,
+      requestBody: true,
+      compact: false,
+    ),
+  );
   // dio.interceptors.add(
   //   InterceptorsWrapper(
   //     onRequest: (options, handler) {

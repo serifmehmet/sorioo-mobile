@@ -11,6 +11,7 @@ _$_AuthResponse _$$_AuthResponseFromJson(Map<String, dynamic> json) =>
       token: json['token'] as String,
       refreshToken: json['refreshToken'] as String,
       user: User.fromJson(json['user'] as Map<String, dynamic>),
+      userRoles: $enumDecodeNullable(_$UserRolesEnumMap, json['userRole']),
     );
 
 Map<String, dynamic> _$$_AuthResponseToJson(_$_AuthResponse instance) =>
@@ -18,4 +19,10 @@ Map<String, dynamic> _$$_AuthResponseToJson(_$_AuthResponse instance) =>
       'token': instance.token,
       'refreshToken': instance.refreshToken,
       'user': instance.user,
+      'userRole': _$UserRolesEnumMap[instance.userRoles],
     };
+
+const _$UserRolesEnumMap = {
+  UserRoles.buyer: 'BUYER',
+  UserRoles.seller: 'SELLER',
+};

@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../common/widgets/category_card.dart';
-import '../../../common/widgets/custom_header.dart';
-import '../../../core/theme/gap.dart';
-import '../../category/application/category_controller.dart';
+import 'package:sorioo/common/widgets/category_card.dart';
+import 'package:sorioo/common/widgets/custom_header.dart';
+import 'package:sorioo/core/theme/gap.dart';
+import 'package:sorioo/features/category/application/category_controller.dart';
 
 class HomeView extends StatefulWidget {
-  const HomeView({Key? key}) : super(key: key);
+  const HomeView({super.key});
 
   @override
   State<HomeView> createState() => _HomeViewState();
 }
 
 class _HomeViewState extends State<HomeView> {
-  var top = 0.0;
+  double top = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +41,9 @@ class _HomeViewState extends State<HomeView> {
             ),
             sliver: Consumer(
               builder: (context, ref, child) {
-                var categoryController = ref.watch(categoryControllerProvider);
+                final categoryController = ref.watch(
+                  categoryControllerProvider,
+                );
                 return categoryController.map(
                   data: (data) {
                     return SliverGrid.builder(
@@ -60,8 +62,14 @@ class _HomeViewState extends State<HomeView> {
                       itemCount: data.value.length,
                     );
                   },
-                  error: (s) => const SliverToBoxAdapter(child: Center(child: Text("error"))),
-                  loading: (s) => const SliverToBoxAdapter(child: CircularProgressIndicator()),
+                  error: (s) => const SliverToBoxAdapter(
+                    child: Center(
+                      child: Text('error'),
+                    ),
+                  ),
+                  loading: (s) => const SliverToBoxAdapter(
+                    child: CircularProgressIndicator(),
+                  ),
                 );
               },
             ),

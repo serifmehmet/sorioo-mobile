@@ -18,7 +18,7 @@ class LoggedInUserArea extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final localUser = ref.watch(
-      localUserProviderProvider(
+      localUserProvider(
         userId: CacheManager.instance.getStringValue(
           PreferencesKeys.userId,
         ),

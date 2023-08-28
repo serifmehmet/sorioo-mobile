@@ -65,8 +65,7 @@ class _EmailRegisterLastStepViewState extends ConsumerState<EmailRegisterLastSte
         userName: userName,
         password: password,
         email: widget.args.email,
-        firstName: widget.args.name,
-        lastName: widget.args.lastName,
+        fullName: widget.args.fullName,
       );
       final success = await controller.submit(user);
       if (success && context.mounted) {

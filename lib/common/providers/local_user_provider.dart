@@ -6,7 +6,7 @@ import 'package:sorioo/features/auth/domain/local/local_user.dart';
 part 'local_user_provider.g.dart';
 
 @Riverpod()
-LocalUser localUserProvider(LocalUserProviderRef ref, {required String userId}) {
+LocalUser localUser(LocalUserRef ref, {required String userId}) {
   final localUser = ref
       .watch(
         localUserRepositoryProvider,

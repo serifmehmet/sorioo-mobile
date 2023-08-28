@@ -11,7 +11,7 @@ class RouteCategory {
       return const CategoryView();
     },
     pageBuilder: (context, state) {
-      return BuildPageWithTransition.buildPageWithDefaultTransition(
+      return BuildPageWithTransition.buildPageWithDefaultTransition<dynamic>(
         context: context,
         state: state,
         child: const CategoryView(),

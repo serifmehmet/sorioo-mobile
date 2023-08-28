@@ -19,12 +19,12 @@ class LocalUserAdapter extends TypeAdapter<LocalUser> {
     return LocalUser(
       fields[0] as String,
       fields[1] as String,
-      fields[2] as String,
-      fields[4] as String,
-      fields[7] as String,
       fields[3] as String,
-      fields[6] as String,
+      fields[2] as String,
       fields[5] as String,
+      fields[4] as String,
+      password: fields[6] as String?,
+      isSeller: fields[7] as bool?,
     );
   }
 
@@ -35,19 +35,19 @@ class LocalUserAdapter extends TypeAdapter<LocalUser> {
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.firstName)
+      ..write(obj.fullName)
       ..writeByte(2)
-      ..write(obj.lastName)
-      ..writeByte(3)
       ..write(obj.userName)
-      ..writeByte(4)
+      ..writeByte(3)
       ..write(obj.email)
-      ..writeByte(5)
+      ..writeByte(4)
       ..write(obj.token)
-      ..writeByte(6)
+      ..writeByte(5)
       ..write(obj.refreshToken)
+      ..writeByte(6)
+      ..write(obj.password)
       ..writeByte(7)
-      ..write(obj.password);
+      ..write(obj.isSeller);
   }
 
   @override

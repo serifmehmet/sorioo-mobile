@@ -6,7 +6,7 @@ part of 'local_user_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$localUserProviderHash() => r'24865bcc3326087b9cbf9f3d1c1d2637c7df0aee';
+String _$localUserHash() => r'9fc4f71cbec9f84b2f0030d8ddb4a9ea8cac35e6';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,29 +29,29 @@ class _SystemHash {
   }
 }
 
-typedef LocalUserProviderRef = AutoDisposeProviderRef<LocalUser>;
+typedef LocalUserRef = AutoDisposeProviderRef<LocalUser>;
 
-/// See also [localUserProvider].
-@ProviderFor(localUserProvider)
-const localUserProviderProvider = LocalUserProviderFamily();
+/// See also [localUser].
+@ProviderFor(localUser)
+const localUserProvider = LocalUserFamily();
 
-/// See also [localUserProvider].
-class LocalUserProviderFamily extends Family<LocalUser> {
-  /// See also [localUserProvider].
-  const LocalUserProviderFamily();
+/// See also [localUser].
+class LocalUserFamily extends Family<LocalUser> {
+  /// See also [localUser].
+  const LocalUserFamily();
 
-  /// See also [localUserProvider].
-  LocalUserProviderProvider call({
+  /// See also [localUser].
+  LocalUserProvider call({
     required String userId,
   }) {
-    return LocalUserProviderProvider(
+    return LocalUserProvider(
       userId: userId,
     );
   }
 
   @override
-  LocalUserProviderProvider getProviderOverride(
-    covariant LocalUserProviderProvider provider,
+  LocalUserProvider getProviderOverride(
+    covariant LocalUserProvider provider,
   ) {
     return call(
       userId: provider.userId,
@@ -70,35 +70,34 @@ class LocalUserProviderFamily extends Family<LocalUser> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'localUserProviderProvider';
+  String? get name => r'localUserProvider';
 }
 
-/// See also [localUserProvider].
-class LocalUserProviderProvider extends AutoDisposeProvider<LocalUser> {
-  /// See also [localUserProvider].
-  LocalUserProviderProvider({
+/// See also [localUser].
+class LocalUserProvider extends AutoDisposeProvider<LocalUser> {
+  /// See also [localUser].
+  LocalUserProvider({
     required this.userId,
   }) : super.internal(
-          (ref) => localUserProvider(
+          (ref) => localUser(
             ref,
             userId: userId,
           ),
-          from: localUserProviderProvider,
-          name: r'localUserProviderProvider',
+          from: localUserProvider,
+          name: r'localUserProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$localUserProviderHash,
-          dependencies: LocalUserProviderFamily._dependencies,
-          allTransitiveDependencies:
-              LocalUserProviderFamily._allTransitiveDependencies,
+                  : _$localUserHash,
+          dependencies: LocalUserFamily._dependencies,
+          allTransitiveDependencies: LocalUserFamily._allTransitiveDependencies,
         );
 
   final String userId;
 
   @override
   bool operator ==(Object other) {
-    return other is LocalUserProviderProvider && other.userId == userId;
+    return other is LocalUserProvider && other.userId == userId;
   }
 
   @override
@@ -109,4 +108,5 @@ class LocalUserProviderProvider extends AutoDisposeProvider<LocalUser> {
     return _SystemHash.finish(hash);
   }
 }
-// ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
