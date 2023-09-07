@@ -17,12 +17,13 @@ class LocalUserAdapter extends TypeAdapter<LocalUser> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return LocalUser(
-      fields[0] as String,
-      fields[1] as String,
-      fields[3] as String,
-      fields[2] as String,
-      fields[5] as String,
-      fields[4] as String,
+      id: fields[0] as String,
+      fullName: fields[1] as String,
+      email: fields[3] as String,
+      userName: fields[2] as String,
+      refreshToken: fields[5] as String,
+      googleProfilePictureUrl: fields[8] as String?,
+      token: fields[4] as String,
       password: fields[6] as String?,
       isSeller: fields[7] as bool?,
     );
@@ -31,7 +32,7 @@ class LocalUserAdapter extends TypeAdapter<LocalUser> {
   @override
   void write(BinaryWriter writer, LocalUser obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -47,7 +48,9 @@ class LocalUserAdapter extends TypeAdapter<LocalUser> {
       ..writeByte(6)
       ..write(obj.password)
       ..writeByte(7)
-      ..write(obj.isSeller);
+      ..write(obj.isSeller)
+      ..writeByte(8)
+      ..write(obj.googleProfilePictureUrl);
   }
 
   @override

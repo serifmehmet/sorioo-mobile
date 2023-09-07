@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'bootstrap.dart';
-import 'core/theme/custom_theme.dart';
-import 'routing/app_router.dart';
+import 'package:sorioo/bootstrap.dart';
+import 'package:sorioo/core/theme/custom_theme.dart';
+import 'package:sorioo/routing/app_router.dart';
 
-Future main() async {
+Future<dynamic> main() async {
   runApp(
     UncontrolledProviderScope(container: await bootstrap(), child: const SoriooApp()),
   );

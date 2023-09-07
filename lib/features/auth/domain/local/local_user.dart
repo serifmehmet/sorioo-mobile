@@ -5,16 +5,19 @@ part 'local_user.g.dart';
 
 @HiveType(typeId: 1)
 class LocalUser extends HiveObject {
-  LocalUser(
-    this.id,
-    this.fullName,
-    this.email,
-    this.userName,
-    this.refreshToken,
-    this.token, {
+  LocalUser({
+    this.id = '',
+    this.fullName = '',
+    this.email = '',
+    this.userName = '',
+    this.refreshToken = '',
+    this.googleProfilePictureUrl,
+    this.token = '',
     this.password = '',
     this.isSeller = false,
   });
+
+  factory LocalUser.empty() => LocalUser();
 
   @HiveField(0)
   String id;
@@ -39,4 +42,7 @@ class LocalUser extends HiveObject {
 
   @HiveField(7)
   bool? isSeller;
+
+  @HiveField(8)
+  String? googleProfilePictureUrl;
 }

@@ -12,6 +12,7 @@ import 'package:sorioo/features/auth/presentation/register/route_args/email_regi
 import 'package:sorioo/features/auth/presentation/sign_in/login_view.dart';
 import 'package:sorioo/features/auth/presentation/verify/email_verification_view.dart';
 import 'package:sorioo/features/home/presentation/navbar/scaffold_with_bottom_navbar.dart';
+import 'package:sorioo/features/seller/presentation/seller_profile/seller_profile_view.dart';
 import 'package:sorioo/routing/app_routes.dart';
 import 'package:sorioo/routing/routes/routers_list.dart';
 
@@ -85,7 +86,21 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         },
         parentNavigatorKey: RoutingKeys.rootNavigatorKey,
       ),
-
+      GoRoute(
+        path: AppRoutes.sellerProfile.path,
+        name: AppRoutes.sellerProfile.name,
+        builder: (context, state) {
+          return const SellerProfileView();
+        },
+        pageBuilder: (context, state) {
+          return BuildPageWithTransition.buildPageWithSlideFromBottom<dynamic>(
+            context: context,
+            state: state,
+            child: const SellerProfileView(),
+          );
+        },
+        parentNavigatorKey: RoutingKeys.rootNavigatorKey,
+      ),
       // GoRoute(
       //   name: AppRoutes.home.name,
       //   path: AppRoutes.home.path,

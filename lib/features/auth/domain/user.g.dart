@@ -13,6 +13,7 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
       fullName: json['fullName'] as String?,
       password: json['password'] as String?,
       userRole: json['userRole'] as String?,
+      googleProfilePictureUrl: json['googleProfilePictureUrl'] as String?,
     );
 
 Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
@@ -22,4 +23,5 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'fullName': instance.fullName,
       'password': instance.password,
       'userRole': instance.userRole,
+      'googleProfilePictureUrl': instance.googleProfilePictureUrl,
     };

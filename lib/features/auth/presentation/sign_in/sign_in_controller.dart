@@ -33,13 +33,13 @@ class SingInController extends _$SingInController {
             )
             .addNewLoggedInUser(
               LocalUser(
-                success.data!.user.id!,
-                success.data!.user.fullName!,
-                email,
+                id: success.data!.user.id!,
+                fullName: success.data!.user.fullName!,
+                email: email,
                 password: password,
-                success.data!.user.userName!,
-                success.data!.refreshToken,
-                success.data!.token,
+                userName: success.data!.user.userName!,
+                refreshToken: success.data!.refreshToken,
+                token: success.data!.token,
                 isSeller: success.data!.userRoles!.isSeller,
               ),
             );

@@ -12,6 +12,7 @@ class User with _$User {
     String? fullName,
     String? password,
     String? userRole,
+    String? googleProfilePictureUrl,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

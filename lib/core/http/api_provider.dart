@@ -1,7 +1,15 @@
 import 'package:dio/dio.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:sorioo/common/models/status_message_response.dart';
+import 'package:sorioo/common/providers/local_user_provider.dart';
 import 'package:sorioo/core/constants/env.dart';
+import 'package:sorioo/core/constants/preferences_keys.dart';
+import 'package:sorioo/core/http/generic_response.dart';
+import 'package:sorioo/core/init/cache_manager.dart';
+import 'package:sorioo/features/auth/data/auth_repository.dart';
+import 'package:sorioo/features/auth/domain/refresh_token_result.dart';
 
 part 'api_provider.g.dart';
 
@@ -10,10 +18,10 @@ enum ContentType { urlEncoded, json }
 @riverpod
 Dio dio(DioRef ref) {
   late final dio = Dio();
+  dio.options.baseUrl = Env.apiLocalDevUrl;
   dio.options.sendTimeout = const Duration(seconds: 5);
   // dio.options.connectTimeout = const Duration(seconds: 5);
   dio.options.receiveTimeout = const Duration(seconds: 5);
-  dio.options.baseUrl = Env.apiUrl;
   dio.interceptors.add(
     PrettyDioLogger(
       requestHeader: true,
@@ -21,28 +29,77 @@ Dio dio(DioRef ref) {
       compact: false,
     ),
   );
-  // dio.interceptors.add(
-  //   InterceptorsWrapper(
-  //     onRequest: (options, handler) {
-  //       final jwtToken = CacheManager.instance.getStringValue(PreferencesKeys.accessToken);
+  dio.interceptors.add(
+    InterceptorsWrapper(
+      onRequest: (options, handler) async {
+        final isLoggedIn = CacheManager.instance.getBoolValue(
+          PreferencesKeys.isLoggedIn,
+        );
 
-  //       if (jwtToken.isNotEmpty) options.headers["Authorization"] = 'Bearer $jwtToken';
+        if (isLoggedIn) {
+          final loggedInuser = ref.watch(
+            localUserServiceProvider,
+          );
 
-  //       handler.next(options);
-  //     },
-  //     onError: (e, handler) {
-  //       if (e.response?.statusCode == 401) {
-  //         //refresh token mechanism
+          if (loggedInuser.token.isNotEmpty) {
+            options.headers['Authorization'] = 'Bearer ${loggedInuser.token}';
+          }
+        }
 
-  //       }
+        options.headers['Content-Type'] = 'application/json';
+        return handler.next(options);
+      },
+      onError: (e, handler) async {
+        if (e.response?.statusCode == 401) {
+          final loggedInuser = ref.watch(
+            localUserServiceProvider,
+          );
 
-  //       handler.next(e);
-  //     },
-  //   ),
-  // );
+          final localUserService = ref.read(localUserServiceProvider.notifier);
+
+          try {
+            final result = await dio.post(
+              '/Auth/refresh-token',
+              data: {
+                'accessToken': loggedInuser.token,
+                'refreshToken': loggedInuser.refreshToken,
+              },
+            );
+
+            if (result.statusCode == 200) {
+              final refreshTokenObject = result.data as Map<String, dynamic>;
+
+              final genericObject = GenericResponse<RefreshTokenResult>.fromJson(
+                refreshTokenObject,
+                (Object? tokenObject) => RefreshTokenResult.fromJson(
+                  tokenObject! as Map<String, dynamic>,
+                ),
+              );
+
+              dio.options.headers['Authorization'] = 'Bearer ${genericObject.data!.accessToken}';
+
+              localUserService.updateLocalUserTokens(
+                loggedInuser.id,
+                genericObject.data!.accessToken,
+                genericObject.data!.refreshToken,
+              );
+
+              return handler.resolve(
+                await dio.fetch(e.requestOptions),
+              );
+            }
+          } catch (e) {}
+        }
+
+        return handler.next(e);
+      },
+    ),
+  );
 
   return dio;
 }
+
+
 
 // class ApiProvider {
 //   ApiProvider(this._ref) {

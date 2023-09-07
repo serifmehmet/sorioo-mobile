@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="dev.sorioo.sorioo">
+    
    <application
-        android:label="sorioo"
+        android:label="Sorioo"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity

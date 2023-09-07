@@ -10,14 +10,10 @@ class LocalUserRepository {
   late Box<LocalUser> _hive;
   late LocalUser _box;
 
-  LocalUser getLoggedUser(String id) {
+  LocalUser getLoggedUser() {
     _hive = Hive.box<LocalUser>(localUserBoxName);
 
-    return _hive.values
-        .where(
-          (lu) => lu.id == id,
-        )
-        .first;
+    return _hive.values.first;
   }
 
   LocalUser addNewLoggedInUser(LocalUser localUser) {
@@ -32,6 +28,30 @@ class LocalUserRepository {
     _hive.deleteAt(
       _hive.values.toList().indexWhere((lu) => lu.id == id),
     );
+  }
+
+  LocalUser updateLocalUserRole(String id) {
+    _hive = Hive.box<LocalUser>(localUserBoxName);
+    final localUser = _hive.values.where((lu) => lu.id == id).first..isSeller = true;
+
+    _hive.put(localUser.key, localUser);
+
+    return localUser;
+  }
+
+  LocalUser updateLocalUserTokens(
+    String id,
+    String accessToken,
+    String refreshToken,
+  ) {
+    _hive = Hive.box<LocalUser>(localUserBoxName);
+    final localUser = _hive.values.where((lu) => lu.id == id).first
+      ..token = accessToken
+      ..refreshToken = refreshToken;
+
+    _hive.put(localUser.key, localUser);
+
+    return localUser;
   }
 }
 

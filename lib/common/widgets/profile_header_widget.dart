@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sorioo/common/providers/local_user_provider.dart';
-import 'package:sorioo/core/constants/preferences_keys.dart';
-import 'package:sorioo/core/init/cache_manager.dart';
 import 'package:sorioo/core/theme/constants.dart';
 import 'package:sorioo/core/theme/gap.dart';
 import 'package:sorioo/core/theme/widgets/text/app_text.dart';
@@ -12,11 +10,8 @@ class ProfileHeaderWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userId = CacheManager.instance.getStringValue(PreferencesKeys.userId);
     final user = ref.watch(
-      localUserProvider(
-        userId: userId.isEmpty ? '' : userId,
-      ),
+      localUserServiceProvider,
     );
     return Container(
       padding: kSemiBigPadding,
@@ -28,17 +23,27 @@ class ProfileHeaderWidget extends ConsumerWidget {
           topRight: Radius.circular(20),
         ),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
         children: [
-          AppText(
-            user.fullName,
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
-          const AppGap.small(),
-          AppText(
-            user.email,
-            style: Theme.of(context).textTheme.bodyMedium,
+          if (user.googleProfilePictureUrl!.isNotEmpty)
+            CircleAvatar(
+              radius: 40,
+              backgroundImage: Image.network(user.googleProfilePictureUrl!).image,
+            ),
+          const AppGap.semiBig(),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AppText(
+                user.fullName,
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              const AppGap.small(),
+              AppText(
+                user.email,
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+            ],
           ),
         ],
       ),

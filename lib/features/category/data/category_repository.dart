@@ -14,7 +14,7 @@ class CategoryRepository {
   final Dio client;
 
   TaskEither<ApiException, List<Category>> fetchCategories() => TaskEither<ApiException, Response>.tryCatch(
-        () => client.get('${Env.apiLocalDevUrl}/Category/all'),
+        () => client.get('/Category/all'),
         (object, stackTrace) => ApiErrorHandler.handleError(object),
       )
           .chainEither(

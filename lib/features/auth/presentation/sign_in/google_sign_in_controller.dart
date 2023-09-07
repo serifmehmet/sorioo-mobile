@@ -21,7 +21,7 @@ class GoogleSignInController extends _$GoogleSignInController {
   Future<bool> googleSignIn(String idToken) async {
     final authRepository = ref.watch(authRepositoryProviderProvider);
 
-    const AsyncLoading();
+    const AsyncLoading<dynamic>();
 
     final authResult = authRepository.signInWithGoogle(
       idToken,
@@ -41,12 +41,13 @@ class GoogleSignInController extends _$GoogleSignInController {
             )
             .addNewLoggedInUser(
               LocalUser(
-                signInResult.data!.user.id!,
-                signInResult.data!.user.fullName!,
-                signInResult.data!.user.email!,
-                signInResult.data!.user.userName!,
-                signInResult.data!.refreshToken,
-                signInResult.data!.token,
+                id: signInResult.data!.user.id!,
+                fullName: signInResult.data!.user.fullName!,
+                email: signInResult.data!.user.email!,
+                userName: signInResult.data!.user.userName!,
+                refreshToken: signInResult.data!.refreshToken,
+                token: signInResult.data!.token,
+                googleProfilePictureUrl: signInResult.data!.user.googleProfilePictureUrl,
                 isSeller: signInResult.data!.userRoles!.isSeller,
               ),
             );

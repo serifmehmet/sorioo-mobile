@@ -1,26 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'local_user_provider.dart';
+part of 'user_type_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$localUserServiceHash() => r'ea47c13f956aad5a0ac8c622b28c8d6236633c84';
+String _$userTypeControllerHash() =>
+    r'850c3bc62d1bb0daaee5a02cf980a35d87b8549a';
 
-/// See also [LocalUserService].
-@ProviderFor(LocalUserService)
-final localUserServiceProvider =
-    AutoDisposeNotifierProvider<LocalUserService, LocalUser>.internal(
-  LocalUserService.new,
-  name: r'localUserServiceProvider',
+/// See also [UserTypeController].
+@ProviderFor(UserTypeController)
+final userTypeControllerProvider =
+    AutoDisposeAsyncNotifierProvider<UserTypeController, void>.internal(
+  UserTypeController.new,
+  name: r'userTypeControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$localUserServiceHash,
+      : _$userTypeControllerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$LocalUserService = AutoDisposeNotifier<LocalUser>;
+typedef _$UserTypeController = AutoDisposeAsyncNotifier<void>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
