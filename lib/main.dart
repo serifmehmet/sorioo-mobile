@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:sorioo/bootstrap.dart';
+import 'package:sorioo/common/widgets/app_behavior.dart';
 import 'package:sorioo/core/theme/custom_theme.dart';
 import 'package:sorioo/routing/app_router.dart';
 
@@ -19,6 +20,9 @@ class SoriooApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final goRouter = ref.watch(goRouterProvider);
     return MaterialApp.router(
+      builder: (context, child) {
+        return ScrollConfiguration(behavior: AppBehavior(), child: child!);
+      },
       routerDelegate: goRouter.routerDelegate,
       routeInformationParser: goRouter.routeInformationParser,
       routeInformationProvider: goRouter.routeInformationProvider,

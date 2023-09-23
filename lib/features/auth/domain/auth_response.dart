@@ -11,6 +11,7 @@ class AuthResponse with _$AuthResponse {
     required String token,
     required String refreshToken,
     required User user,
+    String? sellerId,
     @JsonKey(name: 'userRole') UserRoles? userRoles,
   }) = _AuthResponse;
 

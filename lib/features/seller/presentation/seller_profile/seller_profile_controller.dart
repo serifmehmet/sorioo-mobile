@@ -1,20 +1,23 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sorioo/core/constants/preferences_keys.dart';
+import 'package:sorioo/core/http/generic_response.dart';
 import 'package:sorioo/core/init/cache_manager.dart';
 import 'package:sorioo/features/seller/data/seller_repository.dart';
+import 'package:sorioo/features/seller/domain/dto/update_seller_dto.dart';
+import 'package:sorioo/features/seller/domain/response/single_seller_response_dto.dart';
 import 'package:sorioo/features/seller/domain/seller.dart';
 
 part 'seller_profile_controller.g.dart';
 
 @riverpod
 class SellerProfileController extends _$SellerProfileController {
-  Future<Seller?> _getSellerInfo() async {
+  Future<SingleSellerResponseDto?> _getSellerInfo() async {
     final userId = CacheManager.instance.getStringValue(PreferencesKeys.userId);
 
     final repository = ref.watch(sellerRepositoryProvider);
-    const AsyncValue<dynamic>.loading();
+
     final sellerTask = repository.getSingleSeller(userId);
-    Seller? sellerResponse;
+    SingleSellerResponseDto? sellerResponse;
     (await sellerTask.run()).match(
       (error) => AsyncError<dynamic>(error, StackTrace.current),
       (seller) {
@@ -26,7 +29,34 @@ class SellerProfileController extends _$SellerProfileController {
   }
 
   @override
-  FutureOr<Seller?> build() {
+  FutureOr<SingleSellerResponseDto?> build() {
     return _getSellerInfo();
+  }
+
+  Future<void> updateSellerInfo(UpdateSellerDto updateSellerDto) async {
+    final repository = ref.watch(sellerRepositoryProvider);
+    state = const AsyncValue.loading();
+    final updateSellerTask = await repository.updateSingleSeller(updateSellerDto).run();
+    updateSellerTask
+      ..mapLeft((error) {
+        state = AsyncError(error, StackTrace.current);
+      })
+      ..map((seller) {
+        state = AsyncValue.data(seller.data);
+      });
+    // state = (await updateSellerTask.run()).match(
+    //   (l) => AsyncValue.error(l, StackTrace.current),
+    //   (seller) {
+    //     return _getSellerInfo();
+    //   },
+    // );
+    // SingleSellerResponseDto? updatedSeller;
+
+    // state = (await updateSellerTask.run()).match(
+    //   (error) {
+    //     return AsyncError(error, StackTrace.current);
+    //   },
+    //   (s) => AsyncValue.data(s.data),
+    // );
   }
 }

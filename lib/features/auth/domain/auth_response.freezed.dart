@@ -23,6 +23,7 @@ mixin _$AuthResponse {
   String get token => throw _privateConstructorUsedError;
   String get refreshToken => throw _privateConstructorUsedError;
   User get user => throw _privateConstructorUsedError;
+  String? get sellerId => throw _privateConstructorUsedError;
   @JsonKey(name: 'userRole')
   UserRoles? get userRoles => throw _privateConstructorUsedError;
 
@@ -42,6 +43,7 @@ abstract class $AuthResponseCopyWith<$Res> {
       {String token,
       String refreshToken,
       User user,
+      String? sellerId,
       @JsonKey(name: 'userRole') UserRoles? userRoles});
 
   $UserCopyWith<$Res> get user;
@@ -63,6 +65,7 @@ class _$AuthResponseCopyWithImpl<$Res, $Val extends AuthResponse>
     Object? token = null,
     Object? refreshToken = null,
     Object? user = null,
+    Object? sellerId = freezed,
     Object? userRoles = freezed,
   }) {
     return _then(_value.copyWith(
@@ -78,6 +81,10 @@ class _$AuthResponseCopyWithImpl<$Res, $Val extends AuthResponse>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
+      sellerId: freezed == sellerId
+          ? _value.sellerId
+          : sellerId // ignore: cast_nullable_to_non_nullable
+              as String?,
       userRoles: freezed == userRoles
           ? _value.userRoles
           : userRoles // ignore: cast_nullable_to_non_nullable
@@ -106,6 +113,7 @@ abstract class _$$_AuthResponseCopyWith<$Res>
       {String token,
       String refreshToken,
       User user,
+      String? sellerId,
       @JsonKey(name: 'userRole') UserRoles? userRoles});
 
   @override
@@ -126,6 +134,7 @@ class __$$_AuthResponseCopyWithImpl<$Res>
     Object? token = null,
     Object? refreshToken = null,
     Object? user = null,
+    Object? sellerId = freezed,
     Object? userRoles = freezed,
   }) {
     return _then(_$_AuthResponse(
@@ -141,6 +150,10 @@ class __$$_AuthResponseCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
+      sellerId: freezed == sellerId
+          ? _value.sellerId
+          : sellerId // ignore: cast_nullable_to_non_nullable
+              as String?,
       userRoles: freezed == userRoles
           ? _value.userRoles
           : userRoles // ignore: cast_nullable_to_non_nullable
@@ -156,6 +169,7 @@ class _$_AuthResponse implements _AuthResponse {
       {required this.token,
       required this.refreshToken,
       required this.user,
+      this.sellerId,
       @JsonKey(name: 'userRole') this.userRoles});
 
   factory _$_AuthResponse.fromJson(Map<String, dynamic> json) =>
@@ -168,12 +182,14 @@ class _$_AuthResponse implements _AuthResponse {
   @override
   final User user;
   @override
+  final String? sellerId;
+  @override
   @JsonKey(name: 'userRole')
   final UserRoles? userRoles;
 
   @override
   String toString() {
-    return 'AuthResponse(token: $token, refreshToken: $refreshToken, user: $user, userRoles: $userRoles)';
+    return 'AuthResponse(token: $token, refreshToken: $refreshToken, user: $user, sellerId: $sellerId, userRoles: $userRoles)';
   }
 
   @override
@@ -185,6 +201,8 @@ class _$_AuthResponse implements _AuthResponse {
             (identical(other.refreshToken, refreshToken) ||
                 other.refreshToken == refreshToken) &&
             (identical(other.user, user) || other.user == user) &&
+            (identical(other.sellerId, sellerId) ||
+                other.sellerId == sellerId) &&
             (identical(other.userRoles, userRoles) ||
                 other.userRoles == userRoles));
   }
@@ -192,7 +210,7 @@ class _$_AuthResponse implements _AuthResponse {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, token, refreshToken, user, userRoles);
+      Object.hash(runtimeType, token, refreshToken, user, sellerId, userRoles);
 
   @JsonKey(ignore: true)
   @override
@@ -213,6 +231,7 @@ abstract class _AuthResponse implements AuthResponse {
       {required final String token,
       required final String refreshToken,
       required final User user,
+      final String? sellerId,
       @JsonKey(name: 'userRole') final UserRoles? userRoles}) = _$_AuthResponse;
 
   factory _AuthResponse.fromJson(Map<String, dynamic> json) =
@@ -224,6 +243,8 @@ abstract class _AuthResponse implements AuthResponse {
   String get refreshToken;
   @override
   User get user;
+  @override
+  String? get sellerId;
   @override
   @JsonKey(name: 'userRole')
   UserRoles? get userRoles;

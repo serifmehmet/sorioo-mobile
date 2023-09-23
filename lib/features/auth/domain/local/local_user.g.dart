@@ -26,13 +26,14 @@ class LocalUserAdapter extends TypeAdapter<LocalUser> {
       token: fields[4] as String,
       password: fields[6] as String?,
       isSeller: fields[7] as bool?,
+      sellerId: fields[9] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, LocalUser obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -50,7 +51,9 @@ class LocalUserAdapter extends TypeAdapter<LocalUser> {
       ..writeByte(7)
       ..write(obj.isSeller)
       ..writeByte(8)
-      ..write(obj.googleProfilePictureUrl);
+      ..write(obj.googleProfilePictureUrl)
+      ..writeByte(9)
+      ..write(obj.sellerId);
   }
 
   @override

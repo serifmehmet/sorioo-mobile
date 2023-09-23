@@ -49,6 +49,7 @@ class GoogleSignInController extends _$GoogleSignInController {
                 token: signInResult.data!.token,
                 googleProfilePictureUrl: signInResult.data!.user.googleProfilePictureUrl,
                 isSeller: signInResult.data!.userRoles!.isSeller,
+                sellerId: signInResult.data!.sellerId,
               ),
             );
 

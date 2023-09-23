@@ -82,10 +82,10 @@ class ApiErrorHandler {
         case 503:
           return ServiceUnavailableException(message: e?.statusMessage);
         default:
-          return ApiException(message: e?.statusMessage);
+          return ApiException(message: 'asdadadada');
       }
     } else {
-      return ApiException(message: error.toString());
+      return ApiException(message: 'Acaip bir hata var');
     }
   }
 }

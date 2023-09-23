@@ -15,6 +15,7 @@ class LocalUser extends HiveObject {
     this.token = '',
     this.password = '',
     this.isSeller = false,
+    this.sellerId = '',
   });
 
   factory LocalUser.empty() => LocalUser();
@@ -45,4 +46,7 @@ class LocalUser extends HiveObject {
 
   @HiveField(8)
   String? googleProfilePictureUrl;
+
+  @HiveField(9)
+  String? sellerId;
 }

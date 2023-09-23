@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 const kPrimaryColor = Color(0xFF33B786);
 const kTextColor = Color(0xFF2B3443);
 const kButtonColor = Color(0xFFE74F5B);
+const kDisabledContainerColor = Color(0xFFd9dbdd);
 const kSecondaryColor = Color(0xFF37B9C6);
 const kWarninngColor = Color(0xFFF3BB1C);
 const kErrorColor = Color(0xFFF03738);
+
+const kColorWhite = Color(0xFFFFFFFF);
+const kColorBLack = Color(0xFF000000);
 
 const kDefaultHorPadding = EdgeInsets.symmetric(horizontal: 12);
 const kBigHorPadding = EdgeInsets.symmetric(horizontal: 30);

@@ -18,6 +18,10 @@ _$_Seller _$$_SellerFromJson(Map<String, dynamic> json) => _$_Seller(
       sellerImage: json['sellerImage'] == null
           ? null
           : Image.fromJson(json['sellerImage'] as Map<String, dynamic>),
+      sellerMainCategory: json['sellerMainCategory'] == null
+          ? null
+          : Category.fromJson(
+              json['sellerMainCategory'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_SellerToJson(_$_Seller instance) => <String, dynamic>{
@@ -28,4 +32,5 @@ Map<String, dynamic> _$$_SellerToJson(_$_Seller instance) => <String, dynamic>{
       'graduation': instance.graduation,
       'sellerBio': instance.sellerBio,
       'sellerImage': instance.sellerImage,
+      'sellerMainCategory': instance.sellerMainCategory,
     };

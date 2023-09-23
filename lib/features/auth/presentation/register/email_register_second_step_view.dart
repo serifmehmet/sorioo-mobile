@@ -100,7 +100,7 @@ class _EmailRegisterLastStepViewState extends ConsumerState<EmailRegisterLastSte
 
   @override
   Widget build(BuildContext context) {
-    ref.listen<AsyncValue>(
+    ref.listen(
       emailRegisterControllerProvider,
       (_, state) => state.showAlertDialogOnError(context),
     );
@@ -113,7 +113,6 @@ class _EmailRegisterLastStepViewState extends ConsumerState<EmailRegisterLastSte
         ),
       ),
       body: SingleChildScrollView(
-        physics: const NeverScrollableScrollPhysics(),
         child: Padding(
           padding: kBigHorPadding,
           child: Form(
@@ -160,7 +159,8 @@ class _EmailRegisterLastStepViewState extends ConsumerState<EmailRegisterLastSte
                   textInputType: TextInputType.text,
                   hintText: 'Şifre Tekrar',
                   obscureText: true,
-                  validator: (passwordRetry) => !_submitted ? null : passwordAllErrorText(password, passwordRetry ?? ''),
+                  validator: (passwordRetry) =>
+                      !_submitted ? null : passwordAllErrorText(password, passwordRetry ?? ''),
                   controller: passwordRetryController,
                   onEditingComplete: _passwordRetryEditingComplete,
                   autovalidateMode: AutovalidateMode.onUserInteraction,

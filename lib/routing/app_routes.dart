@@ -14,10 +14,14 @@ enum AppRoutes {
   home(name: 'home', path: '/home'),
   category(name: 'category', path: '/category'),
   profile(name: 'profile', path: '/profile'),
-  sellerProfile(name: 'sellerProfile', path: '/sellerProfile'),
+
   editProfile(name: 'editProfile', path: 'editProfile'),
 
+  sellerProfile(name: 'sellerProfile', path: '/sellerProfile'),
   editSellerProfile(name: 'editSellerProfile', path: 'editSellerProfile'),
+  sellerAccountInfo(name: 'sellerAccountInfo', path: 'sellerAccountInfo'),
+  sellerBankInfo(name: 'sellerBankInfo', path: 'sellerBankInfo'),
+
   message(name: 'message', path: '/message');
 
   const AppRoutes({

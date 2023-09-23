@@ -27,6 +27,7 @@ mixin _$Seller {
   String? get graduation => throw _privateConstructorUsedError;
   String? get sellerBio => throw _privateConstructorUsedError;
   Image? get sellerImage => throw _privateConstructorUsedError;
+  Category? get sellerMainCategory => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,10 +46,12 @@ abstract class $SellerCopyWith<$Res> {
       String? industry,
       String? graduation,
       String? sellerBio,
-      Image? sellerImage});
+      Image? sellerImage,
+      Category? sellerMainCategory});
 
   $UserCopyWith<$Res>? get user;
   $ImageCopyWith<$Res>? get sellerImage;
+  $CategoryCopyWith<$Res>? get sellerMainCategory;
 }
 
 /// @nodoc
@@ -71,6 +74,7 @@ class _$SellerCopyWithImpl<$Res, $Val extends Seller>
     Object? graduation = freezed,
     Object? sellerBio = freezed,
     Object? sellerImage = freezed,
+    Object? sellerMainCategory = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -101,6 +105,10 @@ class _$SellerCopyWithImpl<$Res, $Val extends Seller>
           ? _value.sellerImage
           : sellerImage // ignore: cast_nullable_to_non_nullable
               as Image?,
+      sellerMainCategory: freezed == sellerMainCategory
+          ? _value.sellerMainCategory
+          : sellerMainCategory // ignore: cast_nullable_to_non_nullable
+              as Category?,
     ) as $Val);
   }
 
@@ -127,6 +135,18 @@ class _$SellerCopyWithImpl<$Res, $Val extends Seller>
       return _then(_value.copyWith(sellerImage: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CategoryCopyWith<$Res>? get sellerMainCategory {
+    if (_value.sellerMainCategory == null) {
+      return null;
+    }
+
+    return $CategoryCopyWith<$Res>(_value.sellerMainCategory!, (value) {
+      return _then(_value.copyWith(sellerMainCategory: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -142,12 +162,15 @@ abstract class _$$_SellerCopyWith<$Res> implements $SellerCopyWith<$Res> {
       String? industry,
       String? graduation,
       String? sellerBio,
-      Image? sellerImage});
+      Image? sellerImage,
+      Category? sellerMainCategory});
 
   @override
   $UserCopyWith<$Res>? get user;
   @override
   $ImageCopyWith<$Res>? get sellerImage;
+  @override
+  $CategoryCopyWith<$Res>? get sellerMainCategory;
 }
 
 /// @nodoc
@@ -167,6 +190,7 @@ class __$$_SellerCopyWithImpl<$Res>
     Object? graduation = freezed,
     Object? sellerBio = freezed,
     Object? sellerImage = freezed,
+    Object? sellerMainCategory = freezed,
   }) {
     return _then(_$_Seller(
       id: freezed == id
@@ -197,6 +221,10 @@ class __$$_SellerCopyWithImpl<$Res>
           ? _value.sellerImage
           : sellerImage // ignore: cast_nullable_to_non_nullable
               as Image?,
+      sellerMainCategory: freezed == sellerMainCategory
+          ? _value.sellerMainCategory
+          : sellerMainCategory // ignore: cast_nullable_to_non_nullable
+              as Category?,
     ));
   }
 }
@@ -211,7 +239,8 @@ class _$_Seller implements _Seller {
       this.industry,
       this.graduation,
       this.sellerBio,
-      this.sellerImage});
+      this.sellerImage,
+      this.sellerMainCategory});
 
   factory _$_Seller.fromJson(Map<String, dynamic> json) =>
       _$$_SellerFromJson(json);
@@ -230,10 +259,12 @@ class _$_Seller implements _Seller {
   final String? sellerBio;
   @override
   final Image? sellerImage;
+  @override
+  final Category? sellerMainCategory;
 
   @override
   String toString() {
-    return 'Seller(id: $id, user: $user, speciality: $speciality, industry: $industry, graduation: $graduation, sellerBio: $sellerBio, sellerImage: $sellerImage)';
+    return 'Seller(id: $id, user: $user, speciality: $speciality, industry: $industry, graduation: $graduation, sellerBio: $sellerBio, sellerImage: $sellerImage, sellerMainCategory: $sellerMainCategory)';
   }
 
   @override
@@ -252,13 +283,15 @@ class _$_Seller implements _Seller {
             (identical(other.sellerBio, sellerBio) ||
                 other.sellerBio == sellerBio) &&
             (identical(other.sellerImage, sellerImage) ||
-                other.sellerImage == sellerImage));
+                other.sellerImage == sellerImage) &&
+            (identical(other.sellerMainCategory, sellerMainCategory) ||
+                other.sellerMainCategory == sellerMainCategory));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, user, speciality, industry,
-      graduation, sellerBio, sellerImage);
+      graduation, sellerBio, sellerImage, sellerMainCategory);
 
   @JsonKey(ignore: true)
   @override
@@ -282,7 +315,8 @@ abstract class _Seller implements Seller {
       final String? industry,
       final String? graduation,
       final String? sellerBio,
-      final Image? sellerImage}) = _$_Seller;
+      final Image? sellerImage,
+      final Category? sellerMainCategory}) = _$_Seller;
 
   factory _Seller.fromJson(Map<String, dynamic> json) = _$_Seller.fromJson;
 
@@ -300,6 +334,8 @@ abstract class _Seller implements Seller {
   String? get sellerBio;
   @override
   Image? get sellerImage;
+  @override
+  Category? get sellerMainCategory;
   @override
   @JsonKey(ignore: true)
   _$$_SellerCopyWith<_$_Seller> get copyWith =>

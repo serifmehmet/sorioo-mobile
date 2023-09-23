@@ -19,9 +19,9 @@ enum ContentType { urlEncoded, json }
 Dio dio(DioRef ref) {
   late final dio = Dio();
   dio.options.baseUrl = Env.apiLocalDevUrl;
-  dio.options.sendTimeout = const Duration(seconds: 5);
+  dio.options.sendTimeout = const Duration(seconds: 45);
   // dio.options.connectTimeout = const Duration(seconds: 5);
-  dio.options.receiveTimeout = const Duration(seconds: 5);
+  dio.options.receiveTimeout = const Duration(seconds: 45);
   dio.interceptors.add(
     PrettyDioLogger(
       requestHeader: true,

@@ -20,21 +20,21 @@ class RouteProfile {
         child: const ProfileView(),
       );
     },
-    routes: [
-      GoRoute(
-        path: AppRoutes.editSellerProfile.path,
-        name: AppRoutes.editSellerProfile.name,
-        builder: (context, state) {
-          return const SellerProfileEditView();
-        },
-        pageBuilder: (context, state) {
-          return BuildPageWithTransition.buildPageWithSlideFromBottom<dynamic>(
-            context: context,
-            state: state,
-            child: const SellerProfileEditView(),
-          );
-        },
-      ),
-    ],
+    // routes: [
+    //   GoRoute(
+    //     path: AppRoutes.editSellerProfile.path,
+    //     name: AppRoutes.editSellerProfile.name,
+    //     builder: (context, state) {
+    //       return const SellerProfileEditView();
+    //     },
+    //     pageBuilder: (context, state) {
+    //       return BuildPageWithTransition.buildPageWithSlideFromBottom<dynamic>(
+    //         context: context,
+    //         state: state,
+    //         child: const SellerProfileEditView(),
+    //       );
+    //     },
+    //   ),
+    // ],
   );
 }

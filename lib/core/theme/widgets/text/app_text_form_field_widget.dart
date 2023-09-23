@@ -5,24 +5,25 @@ import 'package:sorioo/core/theme/constants.dart';
 
 class AppTextFormField extends StatefulWidget {
   const AppTextFormField({
-    Key? key,
-    this.controller,
     required this.enabled,
     required this.autofocus,
     required this.textInputAction,
     required this.textInputType,
+    required this.hintText,
+    super.key,
+    this.controller,
     this.autovalidateMode,
     this.onFieldSubmitted,
     this.onChanged,
     this.onEditingComplete,
-    required this.hintText,
     this.prefixIcon,
     this.focusNode,
     this.validator,
     this.obscureText = false,
     this.readOnly = false,
     this.inputFormatters = const [],
-  }) : super(key: key);
+    this.maxLines = 0,
+  });
 
   final TextEditingController? controller;
   final bool enabled;
@@ -41,6 +42,7 @@ class AppTextFormField extends StatefulWidget {
   final String? Function(String?)? validator;
   final bool? obscureText;
   final bool? readOnly;
+  final int maxLines;
   @override
   State<AppTextFormField> createState() => _AppTextFormFieldState();
 }
@@ -73,7 +75,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
         fillColor: focusNode.hasFocus ? AppColors.trGreen : AppColors.greySC50,
         focusColor: AppColors.trGreen,
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Theme.of(context).colorScheme.primary, width: 1.0),
+          borderSide: BorderSide(color: Theme.of(context).colorScheme.primary),
           borderRadius: kRegularBorderRadius,
         ),
         filled: true,
@@ -85,11 +87,11 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: kRegularBorderRadius,
-          borderSide: BorderSide(color: Theme.of(context).colorScheme.error, width: 1),
+          borderSide: BorderSide(color: Theme.of(context).colorScheme.error),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: kRegularBorderRadius,
-          borderSide: BorderSide(color: Theme.of(context).colorScheme.error, width: 1),
+          borderSide: BorderSide(color: Theme.of(context).colorScheme.error),
         ),
       ),
       onFieldSubmitted: widget.onFieldSubmitted,
@@ -99,6 +101,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
       onChanged: widget.onChanged,
       readOnly: widget.readOnly!,
       inputFormatters: widget.inputFormatters,
+      // maxLines: widget.maxLines,
     );
   }
 }

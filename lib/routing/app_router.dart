@@ -12,6 +12,11 @@ import 'package:sorioo/features/auth/presentation/register/route_args/email_regi
 import 'package:sorioo/features/auth/presentation/sign_in/login_view.dart';
 import 'package:sorioo/features/auth/presentation/verify/email_verification_view.dart';
 import 'package:sorioo/features/home/presentation/navbar/scaffold_with_bottom_navbar.dart';
+import 'package:sorioo/features/seller/presentation/seller_account_info/seller_account_info_view.dart';
+import 'package:sorioo/features/seller/presentation/seller_bank_info/route_args/seller_bank_info_list_page_args.dart';
+import 'package:sorioo/features/seller/presentation/seller_bank_info/seller_bank_info_view.dart';
+import 'package:sorioo/features/seller/presentation/seller_profile/route_args/seller_profile_edit_page_args.dart';
+import 'package:sorioo/features/seller/presentation/seller_profile/seller_profile_edit_view.dart';
 import 'package:sorioo/features/seller/presentation/seller_profile/seller_profile_view.dart';
 import 'package:sorioo/routing/app_routes.dart';
 import 'package:sorioo/routing/routes/routers_list.dart';
@@ -100,15 +105,51 @@ final goRouterProvider = Provider<GoRouter>((ref) {
           );
         },
         parentNavigatorKey: RoutingKeys.rootNavigatorKey,
+        routes: [
+          GoRoute(
+            path: AppRoutes.editSellerProfile.path,
+            name: AppRoutes.editSellerProfile.name,
+            parentNavigatorKey: RoutingKeys.rootNavigatorKey,
+            pageBuilder: (context, state) {
+              return BuildPageWithTransition.buildPageWithSlideFromBottom<dynamic>(
+                context: context,
+                state: state,
+                child: SellerProfileEditView(
+                  args: state.extra! as SellerProfileEditPageArgs,
+                ),
+              );
+            },
+          ),
+          GoRoute(
+            path: AppRoutes.sellerAccountInfo.path,
+            name: AppRoutes.sellerAccountInfo.name,
+            parentNavigatorKey: RoutingKeys.rootNavigatorKey,
+            pageBuilder: (context, state) {
+              return BuildPageWithTransition.buildPageWithSlideFromBottom<dynamic>(
+                context: context,
+                state: state,
+                child: const SellerAccounInfoView(),
+              );
+            },
+            routes: [
+              GoRoute(
+                path: AppRoutes.sellerBankInfo.path,
+                name: AppRoutes.sellerBankInfo.name,
+                parentNavigatorKey: RoutingKeys.rootNavigatorKey,
+                pageBuilder: (context, state) {
+                  return BuildPageWithTransition.buildPageWithSlideFromBottom<dynamic>(
+                    context: context,
+                    state: state,
+                    child: SellerBankInfoView(
+                      args: state.extra! as SellerBankInfoListPageArgs,
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        ],
       ),
-      // GoRoute(
-      //   name: AppRoutes.home.name,
-      //   path: AppRoutes.home.path,
-      //   pageBuilder: (context, state) => MaterialPage(
-      //     key: state.pageKey,
-      //     child: const HomeView(),
-      //   ),
-      // )
       ShellRoute(
         navigatorKey: RoutingKeys.shellNavigatorKey,
         builder: (context, state, child) {

@@ -77,7 +77,6 @@ class _EmailRegisterViewState extends ConsumerState<EmailRegisterView> with Regi
         iconTheme: const IconThemeData(color: kTextColor),
       ),
       body: SingleChildScrollView(
-        physics: const NeverScrollableScrollPhysics(),
         child: Padding(
           padding: kBigHorPadding,
           child: FocusScope(
