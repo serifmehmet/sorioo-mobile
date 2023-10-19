@@ -14,7 +14,20 @@ enum AppRoutes {
   home(name: 'home', path: '/home'),
   category(name: 'category', path: '/category'),
   profile(name: 'profile', path: '/profile'),
-  message(name: 'message', path: '/message');
+
+  editProfile(name: 'editProfile', path: 'editProfile'),
+
+  sellerProfile(name: 'sellerProfile', path: '/sellerProfile'),
+  editSellerProfile(name: 'editSellerProfile', path: 'editSellerProfile'),
+  sellerAccountInfo(name: 'sellerAccountInfo', path: 'sellerAccountInfo'),
+  sellerBankInfo(name: 'sellerBankInfo', path: 'sellerBankInfo'),
+  sellerAdverts(name: 'sellerAdverts', path: 'sellerAdverts'),
+  sellerAdvertsCreate(name: 'sellerAdvertsCreate', path: 'sellerAdverts/sellerAdvertsCreate'),
+  sellerAdvertsSubCategory(name: 'sellerAdvertsSubCategory', path: 'sellerAdverts/sellerAdvertsSubCategory'),
+  createSellerBankInfo(name: 'createSellerBankInfo', path: 'createSellerBankInfo'),
+
+  chat(name: 'chat', path: '/chat'),
+  chatDetail(name: 'chatDetail', path: '/chatDetail');
 
   const AppRoutes({
     required this.name,

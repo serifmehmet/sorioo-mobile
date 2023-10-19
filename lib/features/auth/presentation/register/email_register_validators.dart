@@ -36,45 +36,45 @@ mixin RegisterValidators {
   }
 
   String? emailErrorText(String email) {
-    final bool showErrorText = !canSubmitEmail(email);
+    final showErrorText = !canSubmitEmail(email);
 
-    final String errorText = email.isEmpty ? 'E-Posta adresi boş bırakılamaz' : 'Geçersiz e-posta adresi';
+    final errorText = email.isEmpty ? 'E-Posta adresi boş bırakılamaz' : 'Geçersiz e-posta adresi';
     return showErrorText ? errorText : null;
   }
 
   String? passwordAllErrorText(String password, String passwordRetry) {
-    final bool showErrorText = !canSubmitPasswordAll(password, passwordRetry);
+    final showErrorText = !canSubmitPasswordAll(password, passwordRetry);
 
-    const String errorText = "İlk şifre ile ikinci aynı değil.";
+    const errorText = 'İlk şifre ile ikinci aynı değil.';
 
     return showErrorText ? errorText : null;
   }
 
   String? passwordErrorText(String password) {
-    final bool showErrorText = !canSubmitFirstPassword(password);
+    final showErrorText = !canSubmitFirstPassword(password);
 
-    final String errorText = password.isEmpty ? "Şifre alanı boş bırakılamaz" : "Şifre uzunluğu 8 karakterden az olamaz.";
+    final errorText = password.isEmpty ? 'Şifre alanı boş bırakılamaz' : 'Şifre uzunluğu 8 karakterden az olamaz.';
     return showErrorText ? errorText : null;
   }
 
   String? nameErrorText(String name) {
-    final bool showErrorText = !canSubmitName(name);
+    final showErrorText = !canSubmitName(name);
 
-    const String errorText = 'İsim alanı boş bırakılamaz.';
+    const errorText = 'İsim alanı boş bırakılamaz.';
 
     return showErrorText ? errorText : null;
   }
 
   String? lastNameErrorText(String lastName) {
-    final bool showErrorText = !canSubmitLastName(lastName);
+    final showErrorText = !canSubmitLastName(lastName);
 
     return showErrorText ? 'Soyadı alanı boş bırakılamaz' : null;
   }
 
   String? userNameErrorText(String userName) {
-    final bool showErrorText = !canSubmitUserName(userName);
+    final showErrorText = !canSubmitUserName(userName);
 
-    const String errorText = 'Kullanıcı adı alanı boş bırakılamaz.';
+    const errorText = 'Kullanıcı adı alanı boş bırakılamaz.';
 
     return showErrorText ? errorText : null;
   }

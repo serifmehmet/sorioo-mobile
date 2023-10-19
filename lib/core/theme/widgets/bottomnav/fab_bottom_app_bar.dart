@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sorioo/common/providers/nav_notifier.dart';
 import 'package:sorioo/core/theme/gap.dart';
 
 class FABBottomAppBarItem {
@@ -8,9 +10,8 @@ class FABBottomAppBarItem {
   String text;
 }
 
-class FABBottomAppBar extends StatefulWidget {
+class FABBottomAppBar extends ConsumerStatefulWidget {
   const FABBottomAppBar({
-    super.key,
     required this.items,
     required this.height,
     required this.iconSize,
@@ -18,6 +19,7 @@ class FABBottomAppBar extends StatefulWidget {
     required this.color,
     required this.selectedColor,
     required this.onTabSelected,
+    super.key,
   }) : assert(items.length == 2 || items.length == 4);
 
   final List<FABBottomAppBarItem> items;
@@ -30,10 +32,10 @@ class FABBottomAppBar extends StatefulWidget {
   final ValueChanged<int> onTabSelected;
 
   @override
-  State<FABBottomAppBar> createState() => _FABBottomAppBarState();
+  ConsumerState<FABBottomAppBar> createState() => _FABBottomAppBarState();
 }
 
-class _FABBottomAppBarState extends State<FABBottomAppBar> {
+class _FABBottomAppBarState extends ConsumerState<FABBottomAppBar> {
   int _selectedIndex = 0;
 
   _updateIndex(int index) {
@@ -45,11 +47,15 @@ class _FABBottomAppBarState extends State<FABBottomAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> items = List.generate(widget.items.length, (index) {
+    final navIndex = ref.watch(navProvider);
+    final items = List<Widget>.generate(widget.items.length, (index) {
       return _buildTabItem(
         item: widget.items[index],
         index: index,
-        onPressed: _updateIndex,
+        onPressed: (value) {
+          widget.onTabSelected(value);
+          ref.read(navProvider.notifier).onIndexChanged(value);
+        },
       );
     });
 
@@ -61,7 +67,6 @@ class _FABBottomAppBarState extends State<FABBottomAppBar> {
     return BottomAppBar(
       color: widget.backgroundColor,
       child: Row(
-        mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: items,
       ),
@@ -73,21 +78,22 @@ class _FABBottomAppBarState extends State<FABBottomAppBar> {
     required int index,
     required ValueChanged<int> onPressed,
   }) {
-    Color color = _selectedIndex == index ? widget.selectedColor : widget.color;
+    final color = _selectedIndex == index ? widget.selectedColor : widget.color;
     return Expanded(
       child: SizedBox(
-          height: widget.height,
-          child: Material(
-            type: MaterialType.transparency,
-            child: InkWell(
-              onTap: () => onPressed(index),
-              child: Icon(
-                item.iconData,
-                color: color,
-                size: widget.iconSize,
-              ),
+        height: widget.height,
+        child: Material(
+          type: MaterialType.transparency,
+          child: InkWell(
+            onTap: () => onPressed(index),
+            child: Icon(
+              item.iconData,
+              color: color,
+              size: widget.iconSize,
             ),
-          )),
+          ),
+        ),
+      ),
     );
   }
 }

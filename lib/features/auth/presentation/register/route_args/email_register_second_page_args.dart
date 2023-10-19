@@ -1,13 +1,10 @@
 class EmailRegisterSecondPageArgs {
-  final String email;
-  final String name;
-  final String lastName;
-
   EmailRegisterSecondPageArgs({
     required this.email,
-    required this.name,
-    required this.lastName,
+    required this.fullName,
   });
+  final String email;
+  final String fullName;
 }
 
 class EmailVerifyPageArgs {

@@ -23,9 +23,10 @@ mixin _$User {
   String? get id => throw _privateConstructorUsedError;
   String? get userName => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
-  String? get firstName => throw _privateConstructorUsedError;
-  String? get lastName => throw _privateConstructorUsedError;
+  String? get fullName => throw _privateConstructorUsedError;
   String? get password => throw _privateConstructorUsedError;
+  String? get userRole => throw _privateConstructorUsedError;
+  String? get googleProfilePictureUrl => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,9 +42,10 @@ abstract class $UserCopyWith<$Res> {
       {String? id,
       String? userName,
       String? email,
-      String? firstName,
-      String? lastName,
-      String? password});
+      String? fullName,
+      String? password,
+      String? userRole,
+      String? googleProfilePictureUrl});
 }
 
 /// @nodoc
@@ -62,9 +64,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? id = freezed,
     Object? userName = freezed,
     Object? email = freezed,
-    Object? firstName = freezed,
-    Object? lastName = freezed,
+    Object? fullName = freezed,
     Object? password = freezed,
+    Object? userRole = freezed,
+    Object? googleProfilePictureUrl = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -79,17 +82,21 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      firstName: freezed == firstName
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      lastName: freezed == lastName
-          ? _value.lastName
-          : lastName // ignore: cast_nullable_to_non_nullable
+      fullName: freezed == fullName
+          ? _value.fullName
+          : fullName // ignore: cast_nullable_to_non_nullable
               as String?,
       password: freezed == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
+              as String?,
+      userRole: freezed == userRole
+          ? _value.userRole
+          : userRole // ignore: cast_nullable_to_non_nullable
+              as String?,
+      googleProfilePictureUrl: freezed == googleProfilePictureUrl
+          ? _value.googleProfilePictureUrl
+          : googleProfilePictureUrl // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -105,9 +112,10 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       {String? id,
       String? userName,
       String? email,
-      String? firstName,
-      String? lastName,
-      String? password});
+      String? fullName,
+      String? password,
+      String? userRole,
+      String? googleProfilePictureUrl});
 }
 
 /// @nodoc
@@ -122,9 +130,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? id = freezed,
     Object? userName = freezed,
     Object? email = freezed,
-    Object? firstName = freezed,
-    Object? lastName = freezed,
+    Object? fullName = freezed,
     Object? password = freezed,
+    Object? userRole = freezed,
+    Object? googleProfilePictureUrl = freezed,
   }) {
     return _then(_$_User(
       id: freezed == id
@@ -139,17 +148,21 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      firstName: freezed == firstName
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      lastName: freezed == lastName
-          ? _value.lastName
-          : lastName // ignore: cast_nullable_to_non_nullable
+      fullName: freezed == fullName
+          ? _value.fullName
+          : fullName // ignore: cast_nullable_to_non_nullable
               as String?,
       password: freezed == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
+              as String?,
+      userRole: freezed == userRole
+          ? _value.userRole
+          : userRole // ignore: cast_nullable_to_non_nullable
+              as String?,
+      googleProfilePictureUrl: freezed == googleProfilePictureUrl
+          ? _value.googleProfilePictureUrl
+          : googleProfilePictureUrl // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -162,9 +175,10 @@ class _$_User implements _User {
       {this.id,
       this.userName,
       this.email,
-      this.firstName,
-      this.lastName,
-      this.password});
+      this.fullName,
+      this.password,
+      this.userRole,
+      this.googleProfilePictureUrl});
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
 
@@ -175,15 +189,17 @@ class _$_User implements _User {
   @override
   final String? email;
   @override
-  final String? firstName;
-  @override
-  final String? lastName;
+  final String? fullName;
   @override
   final String? password;
+  @override
+  final String? userRole;
+  @override
+  final String? googleProfilePictureUrl;
 
   @override
   String toString() {
-    return 'User(id: $id, userName: $userName, email: $email, firstName: $firstName, lastName: $lastName, password: $password)';
+    return 'User(id: $id, userName: $userName, email: $email, fullName: $fullName, password: $password, userRole: $userRole, googleProfilePictureUrl: $googleProfilePictureUrl)';
   }
 
   @override
@@ -195,18 +211,21 @@ class _$_User implements _User {
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
             (identical(other.email, email) || other.email == email) &&
-            (identical(other.firstName, firstName) ||
-                other.firstName == firstName) &&
-            (identical(other.lastName, lastName) ||
-                other.lastName == lastName) &&
+            (identical(other.fullName, fullName) ||
+                other.fullName == fullName) &&
             (identical(other.password, password) ||
-                other.password == password));
+                other.password == password) &&
+            (identical(other.userRole, userRole) ||
+                other.userRole == userRole) &&
+            (identical(
+                    other.googleProfilePictureUrl, googleProfilePictureUrl) ||
+                other.googleProfilePictureUrl == googleProfilePictureUrl));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, userName, email, firstName, lastName, password);
+  int get hashCode => Object.hash(runtimeType, id, userName, email, fullName,
+      password, userRole, googleProfilePictureUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -227,9 +246,10 @@ abstract class _User implements User {
       {final String? id,
       final String? userName,
       final String? email,
-      final String? firstName,
-      final String? lastName,
-      final String? password}) = _$_User;
+      final String? fullName,
+      final String? password,
+      final String? userRole,
+      final String? googleProfilePictureUrl}) = _$_User;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
@@ -240,11 +260,13 @@ abstract class _User implements User {
   @override
   String? get email;
   @override
-  String? get firstName;
-  @override
-  String? get lastName;
+  String? get fullName;
   @override
   String? get password;
+  @override
+  String? get userRole;
+  @override
+  String? get googleProfilePictureUrl;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

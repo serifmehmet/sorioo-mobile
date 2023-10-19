@@ -17,37 +17,43 @@ class LocalUserAdapter extends TypeAdapter<LocalUser> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return LocalUser(
-      fields[0] as String,
-      fields[1] as String,
-      fields[2] as String,
-      fields[4] as String,
-      fields[7] as String,
-      fields[3] as String,
-      fields[6] as String,
-      fields[5] as String,
+      id: fields[0] as String,
+      fullName: fields[1] as String,
+      email: fields[3] as String,
+      userName: fields[2] as String,
+      refreshToken: fields[5] as String,
+      googleProfilePictureUrl: fields[8] as String?,
+      token: fields[4] as String,
+      password: fields[6] as String?,
+      isSeller: fields[7] as bool?,
+      sellerId: fields[9] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, LocalUser obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.firstName)
+      ..write(obj.fullName)
       ..writeByte(2)
-      ..write(obj.lastName)
-      ..writeByte(3)
       ..write(obj.userName)
-      ..writeByte(4)
+      ..writeByte(3)
       ..write(obj.email)
-      ..writeByte(5)
+      ..writeByte(4)
       ..write(obj.token)
-      ..writeByte(6)
+      ..writeByte(5)
       ..write(obj.refreshToken)
+      ..writeByte(6)
+      ..write(obj.password)
       ..writeByte(7)
-      ..write(obj.password);
+      ..write(obj.isSeller)
+      ..writeByte(8)
+      ..write(obj.googleProfilePictureUrl)
+      ..writeByte(9)
+      ..write(obj.sellerId);
   }
 
   @override

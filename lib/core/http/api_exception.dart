@@ -1,8 +1,9 @@
 import 'package:dio/dio.dart';
 
 class ApiException implements Exception {
-  ApiException({required this.message});
+  ApiException({required this.message, this.code});
   final String? message;
+  final int? code;
 
   @override
   String toString() => message ?? 'unknown error';
@@ -31,7 +32,7 @@ class ForbiddenException extends ApiException {
 }
 
 class NotFoundException extends ApiException {
-  NotFoundException({super.message});
+  NotFoundException({super.message, super.code});
 }
 
 class ConflictException extends ApiException {
@@ -60,7 +61,6 @@ class ServiceUnavailableException extends ApiException {
 
 class ApiErrorHandler {
   static ApiException handleError(error) {
-    // I usually use Dio package for networking. If you use Http, you have to change here to HttpError
     if (error is DioException) {
       final e = error.response;
       switch (e?.statusCode) {
@@ -82,10 +82,10 @@ class ApiErrorHandler {
         case 503:
           return ServiceUnavailableException(message: e?.statusMessage);
         default:
-          return ApiException(message: e?.statusMessage);
+          return ApiException(message: 'asdadadada');
       }
     } else {
-      return ApiException(message: error.toString());
+      return ApiException(message: 'Acaip bir hata var');
     }
   }
 }

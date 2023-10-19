@@ -6,7 +6,7 @@ class CustomTheme {
   static ThemeData get appTheme {
     return ThemeData(
       primaryColor: kPrimaryColor,
-      scaffoldBackgroundColor: const Color(0xffFFFFFF),
+      scaffoldBackgroundColor: const Color(0xffF5F5F5),
       colorScheme: const ColorScheme.light(
         primary: kPrimaryColor,
         secondary: kSecondaryColor,

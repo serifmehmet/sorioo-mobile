@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:iconly/iconly.dart';
 import 'package:sorioo/common/extensions/async_value_ui.dart';
+import 'package:sorioo/core/constants/env.dart';
 
 import 'package:sorioo/core/theme/colors.dart';
 import 'package:sorioo/core/theme/constants.dart';
@@ -12,6 +14,7 @@ import 'package:sorioo/core/theme/widgets/button/app_button.dart';
 import 'package:sorioo/core/theme/widgets/text/app_text.dart';
 import 'package:sorioo/core/theme/widgets/text/app_text_form_field_widget.dart';
 import 'package:sorioo/core/validation/string_validators.dart';
+import 'package:sorioo/features/auth/presentation/sign_in/google_sign_in_controller.dart';
 import 'package:sorioo/features/auth/presentation/sign_in/sign_in_controller.dart';
 import 'package:sorioo/features/auth/presentation/sign_in/sign_in_validators.dart';
 import 'package:sorioo/routing/app_routes.dart';
@@ -35,6 +38,11 @@ class _LoginViewState extends ConsumerState<LoginView> with SignInValidators {
   final _node = FocusScopeNode();
 
   bool _submitted = false;
+
+  final googleSignIn = GoogleSignIn(
+    clientId: Env.googleClientId,
+    serverClientId: Env.googleServerClientId,
+  );
 
   @override
   void dispose() {
@@ -69,6 +77,26 @@ class _LoginViewState extends ConsumerState<LoginView> with SignInValidators {
 
       if (success && context.mounted) {
         GoRouter.of(context).goNamed(AppRoutes.home.name);
+      }
+    }
+  }
+
+  Future<void> _submitGoogleSignIn() async {
+    final googleUser = await googleSignIn.signIn();
+    if (googleUser != null) {
+      final googleAuth = await googleUser.authentication;
+
+      if (googleAuth.idToken != null) {
+        final googleController = ref.read(
+          googleSignInControllerProvider.notifier,
+        );
+        final success = await googleController.googleSignIn(
+          googleAuth.idToken!,
+        );
+
+        if (success && context.mounted) {
+          GoRouter.of(context).goNamed(AppRoutes.home.name);
+        }
       }
     }
   }
@@ -132,7 +160,7 @@ class _LoginViewState extends ConsumerState<LoginView> with SignInValidators {
                     inputFormatters: <TextInputFormatter>[
                       ValidatorInputFormatter(
                         editingValidator: EmailEditingRegexValidator(),
-                      )
+                      ),
                     ],
                   ),
                   const AppGap.regular(),
@@ -163,9 +191,12 @@ class _LoginViewState extends ConsumerState<LoginView> with SignInValidators {
                     isLoading: state.isLoading,
                   ),
                   const AppGap.extraBig(),
-                  AppText(
-                    'Google ile Giriş Yap',
-                    color: Theme.of(context).colorScheme.secondary,
+                  TextButton(
+                    onPressed: _submitGoogleSignIn,
+                    child: AppText(
+                      'Google ile Giriş Yap',
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
                   ),
                   const AppGap.extraBig(),
                   Align(

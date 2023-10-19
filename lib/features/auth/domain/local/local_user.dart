@@ -1,43 +1,52 @@
 import 'package:hive/hive.dart';
+import 'package:sorioo/core/constants/user_roles.dart';
 
 part 'local_user.g.dart';
 
 @HiveType(typeId: 1)
 class LocalUser extends HiveObject {
-  LocalUser(
-    this.id,
-    this.firstName,
-    this.lastName,
-    this.email,
-    this.password,
-    this.userName,
-    this.refreshToken,
-    this.token,
-  );
+  LocalUser({
+    this.id = '',
+    this.fullName = '',
+    this.email = '',
+    this.userName = '',
+    this.refreshToken = '',
+    this.googleProfilePictureUrl,
+    this.token = '',
+    this.password = '',
+    this.isSeller = false,
+    this.sellerId = '',
+  });
 
-  String get fullName => '$firstName $lastName';
+  factory LocalUser.empty() => LocalUser();
 
   @HiveField(0)
   String id;
 
   @HiveField(1)
-  String firstName;
+  String fullName;
 
   @HiveField(2)
-  String lastName;
-
-  @HiveField(3)
   String userName;
 
-  @HiveField(4)
+  @HiveField(3)
   String email;
 
-  @HiveField(5)
+  @HiveField(4)
   String token;
 
-  @HiveField(6)
+  @HiveField(5)
   String refreshToken;
 
+  @HiveField(6)
+  String? password;
+
   @HiveField(7)
-  String password;
+  bool? isSeller;
+
+  @HiveField(8)
+  String? googleProfilePictureUrl;
+
+  @HiveField(9)
+  String? sellerId;
 }

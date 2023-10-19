@@ -21,14 +21,12 @@ class EmailRegisterView extends ConsumerStatefulWidget {
 class _EmailRegisterViewState extends ConsumerState<EmailRegisterView> with RegisterValidators {
   final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
-  final nameController = TextEditingController();
-  final lastNameController = TextEditingController();
+  final fullNameController = TextEditingController();
 
   final _node = FocusScopeNode();
 
   String get email => emailController.text;
-  String get name => nameController.text;
-  String get lastName => lastNameController.text;
+  String get fullName => fullNameController.text;
 
   var _submitted = false;
 
@@ -36,8 +34,7 @@ class _EmailRegisterViewState extends ConsumerState<EmailRegisterView> with Regi
   void dispose() {
     _node.dispose();
     emailController.dispose();
-    nameController.dispose();
-    lastNameController.dispose();
+    fullNameController.dispose();
 
     super.dispose();
   }
@@ -53,21 +50,14 @@ class _EmailRegisterViewState extends ConsumerState<EmailRegisterView> with Regi
       context.navigator.pushRegisterSecondStep(
         EmailRegisterSecondPageArgs(
           email: email,
-          name: name,
-          lastName: lastName,
+          fullName: fullName,
         ),
       );
     }
   }
 
   void _nameEditingComplete() {
-    if (canSubmitName(name)) {
-      _node.nextFocus();
-    }
-  }
-
-  void _lastNameEditingComplete() {
-    if (canSubmitLastName(lastName)) {
+    if (canSubmitName(fullName)) {
       _node.nextFocus();
     }
   }
@@ -87,7 +77,6 @@ class _EmailRegisterViewState extends ConsumerState<EmailRegisterView> with Regi
         iconTheme: const IconThemeData(color: kTextColor),
       ),
       body: SingleChildScrollView(
-        physics: const NeverScrollableScrollPhysics(),
         child: Padding(
           padding: kBigHorPadding,
           child: FocusScope(
@@ -105,26 +94,15 @@ class _EmailRegisterViewState extends ConsumerState<EmailRegisterView> with Regi
                   AppTextFormField(
                     enabled: true,
                     autofocus: false,
-                    controller: nameController,
+                    controller: fullNameController,
                     textInputAction: TextInputAction.next,
                     textInputType: TextInputType.name,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    hintText: 'Adınız',
+                    hintText: 'Adınız - Soyadınız',
                     validator: (name) => !_submitted ? null : nameErrorText(name ?? ''),
                     onEditingComplete: _nameEditingComplete,
                   ),
                   const AppGap.semiBig(),
-                  AppTextFormField(
-                    enabled: true,
-                    autofocus: false,
-                    controller: lastNameController,
-                    textInputAction: TextInputAction.next,
-                    textInputType: TextInputType.name,
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    hintText: 'Soyadınız',
-                    validator: (lastName) => !_submitted ? null : lastNameErrorText(lastName ?? ''),
-                    onEditingComplete: _lastNameEditingComplete,
-                  ),
                   const AppGap.semiBig(),
                   AppTextFormField(
                     enabled: true,

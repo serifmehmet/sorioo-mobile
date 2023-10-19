@@ -1,5 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sorioo/core/constants/preferences_keys.dart';
+import 'package:sorioo/core/constants/user_roles.dart';
 import 'package:sorioo/core/init/cache_manager.dart';
 import 'package:sorioo/features/auth/data/auth_repository.dart';
 import 'package:sorioo/features/auth/data/local_user_repository.dart';
@@ -32,14 +33,14 @@ class SingInController extends _$SingInController {
             )
             .addNewLoggedInUser(
               LocalUser(
-                success.data!.user.id!,
-                success.data!.user.firstName!,
-                success.data!.user.lastName!,
-                email,
-                password,
-                success.data!.user.userName!,
-                success.data!.refreshToken,
-                success.data!.token,
+                id: success.data!.user.id!,
+                fullName: success.data!.user.fullName!,
+                email: email,
+                password: password,
+                userName: success.data!.user.userName!,
+                refreshToken: success.data!.refreshToken,
+                token: success.data!.token,
+                isSeller: success.data!.userRoles!.isSeller,
               ),
             );
         CacheManager.instance.setStringValue(

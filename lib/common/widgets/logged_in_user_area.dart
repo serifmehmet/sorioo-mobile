@@ -18,18 +18,17 @@ class LoggedInUserArea extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final localUser = ref.watch(
-      localUserProviderProvider(
-        userId: CacheManager.instance.getStringValue(
-          PreferencesKeys.userId,
-        ),
-      ),
+      localUserServiceProvider,
     );
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
           children: [
-            CircleAvatar(radius: avatarRadius, backgroundImage: Image.asset('assets/images/dummy-profile.png').image),
+            CircleAvatar(
+              radius: avatarRadius,
+              backgroundImage: Image.network(localUser.googleProfilePictureUrl!).image,
+            ),
             const AppGap.regular(),
             SizedBox(
               width: 200,
