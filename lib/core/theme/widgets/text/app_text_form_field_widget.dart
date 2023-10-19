@@ -22,7 +22,9 @@ class AppTextFormField extends StatefulWidget {
     this.obscureText = false,
     this.readOnly = false,
     this.inputFormatters = const [],
-    this.maxLines = 0,
+    this.maxLines,
+    this.minLines,
+    this.expands = false,
   });
 
   final TextEditingController? controller;
@@ -42,7 +44,9 @@ class AppTextFormField extends StatefulWidget {
   final String? Function(String?)? validator;
   final bool? obscureText;
   final bool? readOnly;
-  final int maxLines;
+  final int? maxLines;
+  final int? minLines;
+  final bool? expands;
   @override
   State<AppTextFormField> createState() => _AppTextFormFieldState();
 }
@@ -69,9 +73,13 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
       textInputAction: widget.textInputAction,
       keyboardType: widget.textInputType,
       autovalidateMode: widget.autovalidateMode,
+      maxLines: widget.maxLines,
+      expands: widget.expands!,
       decoration: InputDecoration(
         hintText: widget.hintText,
-        hintStyle: Theme.of(context).textTheme.bodyMedium,
+        hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              color: kAppGray,
+            ),
         fillColor: focusNode.hasFocus ? AppColors.trGreen : AppColors.greySC50,
         focusColor: AppColors.trGreen,
         focusedBorder: OutlineInputBorder(

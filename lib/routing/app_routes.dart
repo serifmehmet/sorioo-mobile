@@ -21,8 +21,13 @@ enum AppRoutes {
   editSellerProfile(name: 'editSellerProfile', path: 'editSellerProfile'),
   sellerAccountInfo(name: 'sellerAccountInfo', path: 'sellerAccountInfo'),
   sellerBankInfo(name: 'sellerBankInfo', path: 'sellerBankInfo'),
+  sellerAdverts(name: 'sellerAdverts', path: 'sellerAdverts'),
+  sellerAdvertsCreate(name: 'sellerAdvertsCreate', path: 'sellerAdverts/sellerAdvertsCreate'),
+  sellerAdvertsSubCategory(name: 'sellerAdvertsSubCategory', path: 'sellerAdverts/sellerAdvertsSubCategory'),
+  createSellerBankInfo(name: 'createSellerBankInfo', path: 'createSellerBankInfo'),
 
-  message(name: 'message', path: '/message');
+  chat(name: 'chat', path: '/chat'),
+  chatDetail(name: 'chatDetail', path: '/chatDetail');
 
   const AppRoutes({
     required this.name,

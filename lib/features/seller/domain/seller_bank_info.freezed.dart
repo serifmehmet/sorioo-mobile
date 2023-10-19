@@ -22,9 +22,12 @@ SellerBankInfo _$SellerBankInfoFromJson(Map<String, dynamic> json) {
 mixin _$SellerBankInfo {
   String? get id => throw _privateConstructorUsedError;
   String? get sellerId => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
+  String? get firstName => throw _privateConstructorUsedError;
+  String? get lastName => throw _privateConstructorUsedError;
   String? get bankName => throw _privateConstructorUsedError;
   String? get iban => throw _privateConstructorUsedError;
+  String? get identityNumber => throw _privateConstructorUsedError;
+  String? get billingAddress => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,9 +44,12 @@ abstract class $SellerBankInfoCopyWith<$Res> {
   $Res call(
       {String? id,
       String? sellerId,
-      String? name,
+      String? firstName,
+      String? lastName,
       String? bankName,
-      String? iban});
+      String? iban,
+      String? identityNumber,
+      String? billingAddress});
 }
 
 /// @nodoc
@@ -61,9 +67,12 @@ class _$SellerBankInfoCopyWithImpl<$Res, $Val extends SellerBankInfo>
   $Res call({
     Object? id = freezed,
     Object? sellerId = freezed,
-    Object? name = freezed,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
     Object? bankName = freezed,
     Object? iban = freezed,
+    Object? identityNumber = freezed,
+    Object? billingAddress = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -74,9 +83,13 @@ class _$SellerBankInfoCopyWithImpl<$Res, $Val extends SellerBankInfo>
           ? _value.sellerId
           : sellerId // ignore: cast_nullable_to_non_nullable
               as String?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      firstName: freezed == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastName: freezed == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
               as String?,
       bankName: freezed == bankName
           ? _value.bankName
@@ -85,6 +98,14 @@ class _$SellerBankInfoCopyWithImpl<$Res, $Val extends SellerBankInfo>
       iban: freezed == iban
           ? _value.iban
           : iban // ignore: cast_nullable_to_non_nullable
+              as String?,
+      identityNumber: freezed == identityNumber
+          ? _value.identityNumber
+          : identityNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      billingAddress: freezed == billingAddress
+          ? _value.billingAddress
+          : billingAddress // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -101,9 +122,12 @@ abstract class _$$_SellerBankInfoCopyWith<$Res>
   $Res call(
       {String? id,
       String? sellerId,
-      String? name,
+      String? firstName,
+      String? lastName,
       String? bankName,
-      String? iban});
+      String? iban,
+      String? identityNumber,
+      String? billingAddress});
 }
 
 /// @nodoc
@@ -119,9 +143,12 @@ class __$$_SellerBankInfoCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? sellerId = freezed,
-    Object? name = freezed,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
     Object? bankName = freezed,
     Object? iban = freezed,
+    Object? identityNumber = freezed,
+    Object? billingAddress = freezed,
   }) {
     return _then(_$_SellerBankInfo(
       id: freezed == id
@@ -132,9 +159,13 @@ class __$$_SellerBankInfoCopyWithImpl<$Res>
           ? _value.sellerId
           : sellerId // ignore: cast_nullable_to_non_nullable
               as String?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      firstName: freezed == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastName: freezed == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
               as String?,
       bankName: freezed == bankName
           ? _value.bankName
@@ -144,6 +175,14 @@ class __$$_SellerBankInfoCopyWithImpl<$Res>
           ? _value.iban
           : iban // ignore: cast_nullable_to_non_nullable
               as String?,
+      identityNumber: freezed == identityNumber
+          ? _value.identityNumber
+          : identityNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      billingAddress: freezed == billingAddress
+          ? _value.billingAddress
+          : billingAddress // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -152,7 +191,14 @@ class __$$_SellerBankInfoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_SellerBankInfo implements _SellerBankInfo {
   _$_SellerBankInfo(
-      {this.id, this.sellerId, this.name, this.bankName, this.iban});
+      {this.id,
+      this.sellerId,
+      this.firstName,
+      this.lastName,
+      this.bankName,
+      this.iban,
+      this.identityNumber,
+      this.billingAddress});
 
   factory _$_SellerBankInfo.fromJson(Map<String, dynamic> json) =>
       _$$_SellerBankInfoFromJson(json);
@@ -162,15 +208,21 @@ class _$_SellerBankInfo implements _SellerBankInfo {
   @override
   final String? sellerId;
   @override
-  final String? name;
+  final String? firstName;
+  @override
+  final String? lastName;
   @override
   final String? bankName;
   @override
   final String? iban;
+  @override
+  final String? identityNumber;
+  @override
+  final String? billingAddress;
 
   @override
   String toString() {
-    return 'SellerBankInfo(id: $id, sellerId: $sellerId, name: $name, bankName: $bankName, iban: $iban)';
+    return 'SellerBankInfo(id: $id, sellerId: $sellerId, firstName: $firstName, lastName: $lastName, bankName: $bankName, iban: $iban, identityNumber: $identityNumber, billingAddress: $billingAddress)';
   }
 
   @override
@@ -181,16 +233,23 @@ class _$_SellerBankInfo implements _SellerBankInfo {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.sellerId, sellerId) ||
                 other.sellerId == sellerId) &&
-            (identical(other.name, name) || other.name == name) &&
+            (identical(other.firstName, firstName) ||
+                other.firstName == firstName) &&
+            (identical(other.lastName, lastName) ||
+                other.lastName == lastName) &&
             (identical(other.bankName, bankName) ||
                 other.bankName == bankName) &&
-            (identical(other.iban, iban) || other.iban == iban));
+            (identical(other.iban, iban) || other.iban == iban) &&
+            (identical(other.identityNumber, identityNumber) ||
+                other.identityNumber == identityNumber) &&
+            (identical(other.billingAddress, billingAddress) ||
+                other.billingAddress == billingAddress));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, sellerId, name, bankName, iban);
+  int get hashCode => Object.hash(runtimeType, id, sellerId, firstName,
+      lastName, bankName, iban, identityNumber, billingAddress);
 
   @JsonKey(ignore: true)
   @override
@@ -210,9 +269,12 @@ abstract class _SellerBankInfo implements SellerBankInfo {
   factory _SellerBankInfo(
       {final String? id,
       final String? sellerId,
-      final String? name,
+      final String? firstName,
+      final String? lastName,
       final String? bankName,
-      final String? iban}) = _$_SellerBankInfo;
+      final String? iban,
+      final String? identityNumber,
+      final String? billingAddress}) = _$_SellerBankInfo;
 
   factory _SellerBankInfo.fromJson(Map<String, dynamic> json) =
       _$_SellerBankInfo.fromJson;
@@ -222,11 +284,17 @@ abstract class _SellerBankInfo implements SellerBankInfo {
   @override
   String? get sellerId;
   @override
-  String? get name;
+  String? get firstName;
+  @override
+  String? get lastName;
   @override
   String? get bankName;
   @override
   String? get iban;
+  @override
+  String? get identityNumber;
+  @override
+  String? get billingAddress;
   @override
   @JsonKey(ignore: true)
   _$$_SellerBankInfoCopyWith<_$_SellerBankInfo> get copyWith =>

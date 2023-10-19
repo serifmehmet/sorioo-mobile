@@ -18,7 +18,7 @@ class NavbarScreens {
       'icon': IconlyLight.category,
       'screen': CategoryView(),
     },
-    '/message': {
+    '/chat': {
       'label': '',
       'icon': IconlyLight.message,
       'screen': MessageView(),

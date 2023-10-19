@@ -78,7 +78,7 @@ class _SellerViewState extends ConsumerState<SellerView> {
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   onTap: () => GoRouter.of(context).pushNamed(
-                    AppRoutes.editProfile.name,
+                    AppRoutes.sellerAdverts.name,
                   ),
                 ),
               ),

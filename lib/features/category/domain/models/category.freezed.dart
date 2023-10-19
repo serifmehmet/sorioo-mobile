@@ -22,8 +22,8 @@ Category _$CategoryFromJson(Map<String, dynamic> json) {
 mixin _$Category {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
   int get status => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
   String? get catColor => throw _privateConstructorUsedError;
   Image? get categoryImage => throw _privateConstructorUsedError;
 
@@ -41,8 +41,8 @@ abstract class $CategoryCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      String? description,
       int status,
+      String? description,
       String? catColor,
       Image? categoryImage});
 
@@ -64,8 +64,8 @@ class _$CategoryCopyWithImpl<$Res, $Val extends Category>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? description = freezed,
     Object? status = null,
+    Object? description = freezed,
     Object? catColor = freezed,
     Object? categoryImage = freezed,
   }) {
@@ -78,14 +78,14 @@ class _$CategoryCopyWithImpl<$Res, $Val extends Category>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as int,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
       catColor: freezed == catColor
           ? _value.catColor
           : catColor // ignore: cast_nullable_to_non_nullable
@@ -120,8 +120,8 @@ abstract class _$$_CategoryCopyWith<$Res> implements $CategoryCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      String? description,
       int status,
+      String? description,
       String? catColor,
       Image? categoryImage});
 
@@ -142,8 +142,8 @@ class __$$_CategoryCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? description = freezed,
     Object? status = null,
+    Object? description = freezed,
     Object? catColor = freezed,
     Object? categoryImage = freezed,
   }) {
@@ -156,14 +156,14 @@ class __$$_CategoryCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as int,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
       catColor: freezed == catColor
           ? _value.catColor
           : catColor // ignore: cast_nullable_to_non_nullable
@@ -182,8 +182,8 @@ class _$_Category implements _Category {
   const _$_Category(
       {required this.id,
       required this.name,
-      this.description,
       required this.status,
+      this.description,
       this.catColor,
       this.categoryImage});
 
@@ -195,9 +195,9 @@ class _$_Category implements _Category {
   @override
   final String name;
   @override
-  final String? description;
-  @override
   final int status;
+  @override
+  final String? description;
   @override
   final String? catColor;
   @override
@@ -205,7 +205,7 @@ class _$_Category implements _Category {
 
   @override
   String toString() {
-    return 'Category(id: $id, name: $name, description: $description, status: $status, catColor: $catColor, categoryImage: $categoryImage)';
+    return 'Category(id: $id, name: $name, status: $status, description: $description, catColor: $catColor, categoryImage: $categoryImage)';
   }
 
   @override
@@ -215,9 +215,9 @@ class _$_Category implements _Category {
             other is _$_Category &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.status, status) || other.status == status) &&
             (identical(other.description, description) ||
                 other.description == description) &&
-            (identical(other.status, status) || other.status == status) &&
             (identical(other.catColor, catColor) ||
                 other.catColor == catColor) &&
             (identical(other.categoryImage, categoryImage) ||
@@ -227,7 +227,7 @@ class _$_Category implements _Category {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, name, description, status, catColor, categoryImage);
+      runtimeType, id, name, status, description, catColor, categoryImage);
 
   @JsonKey(ignore: true)
   @override
@@ -247,8 +247,8 @@ abstract class _Category implements Category {
   const factory _Category(
       {required final String id,
       required final String name,
-      final String? description,
       required final int status,
+      final String? description,
       final String? catColor,
       final Image? categoryImage}) = _$_Category;
 
@@ -259,9 +259,9 @@ abstract class _Category implements Category {
   @override
   String get name;
   @override
-  String? get description;
-  @override
   int get status;
+  @override
+  String? get description;
   @override
   String? get catColor;
   @override

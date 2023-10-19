@@ -8,12 +8,17 @@ class SellerBankInfo with _$SellerBankInfo {
   factory SellerBankInfo({
     String? id,
     String? sellerId,
-    String? name,
+    String? firstName,
+    String? lastName,
     String? bankName,
     String? iban,
+    String? identityNumber,
+    String? billingAddress,
   }) = _SellerBankInfo;
 
   factory SellerBankInfo.fromJson(Map<String, dynamic> json) => _$SellerBankInfoFromJson(json);
+
+  factory SellerBankInfo.empty() => SellerBankInfo();
 }
 
 List<SellerBankInfo> sellerBankInfoListFromJson(List<dynamic> data) => List<SellerBankInfo>.from(

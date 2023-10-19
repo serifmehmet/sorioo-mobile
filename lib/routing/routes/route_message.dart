@@ -1,12 +1,13 @@
 import 'package:go_router/go_router.dart';
 import 'package:sorioo/core/constants/routing/routing_transitions.dart';
+import 'package:sorioo/features/chat/presentation/chat_view.dart';
 import 'package:sorioo/features/message/presentation/message_view.dart';
 import 'package:sorioo/routing/app_routes.dart';
 
 class RouteMessage {
   final GoRoute routeMessage = GoRoute(
-    path: AppRoutes.message.path,
-    name: AppRoutes.message.name,
+    path: AppRoutes.chat.path,
+    name: AppRoutes.chat.name,
     builder: (context, state) {
       return const MessageView();
     },
@@ -14,7 +15,7 @@ class RouteMessage {
       return BuildPageWithTransition.buildPageWithDefaultTransition<dynamic>(
         context: context,
         state: state,
-        child: const MessageView(),
+        child: const ChatView(),
       );
     },
   );
