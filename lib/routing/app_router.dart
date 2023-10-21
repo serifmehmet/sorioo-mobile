@@ -31,8 +31,9 @@ final goRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
     navigatorKey: RoutingKeys.rootNavigatorKey,
     debugLogDiagnostics: true,
-    initialLocation: AppRoutes.category.path,
+    initialLocation: AppRoutes.home.path,
     routes: <RouteBase>[
+      //login
       GoRoute(
         name: AppRoutes.login.name,
         path: AppRoutes.login.path,
@@ -45,6 +46,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         },
         parentNavigatorKey: RoutingKeys.rootNavigatorKey,
       ),
+      //register
       GoRoute(
         path: AppRoutes.register.path,
         name: AppRoutes.register.name,
@@ -57,6 +59,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         },
         parentNavigatorKey: RoutingKeys.rootNavigatorKey,
       ),
+      //emailRegister
       GoRoute(
         path: AppRoutes.emailRegister.path,
         name: AppRoutes.emailRegister.name,
@@ -69,6 +72,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         },
         parentNavigatorKey: RoutingKeys.rootNavigatorKey,
       ),
+      //emailRegisterLastStep
       GoRoute(
         path: AppRoutes.emailRegisterLastStep.path,
         name: AppRoutes.emailRegisterLastStep.name,
@@ -83,6 +87,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         },
         parentNavigatorKey: RoutingKeys.rootNavigatorKey,
       ),
+      //emailRegisterVerification
       GoRoute(
         path: AppRoutes.emailRegisterVerification.path,
         name: AppRoutes.emailRegisterVerification.name,
@@ -97,6 +102,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         },
         parentNavigatorKey: RoutingKeys.rootNavigatorKey,
       ),
+      //sellerprofile
       GoRoute(
         path: AppRoutes.sellerProfile.path,
         name: AppRoutes.sellerProfile.name,
@@ -168,6 +174,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
               ),
             ],
           ),
+          //sellerAdverts
           GoRoute(
             path: AppRoutes.sellerAdverts.path,
             name: AppRoutes.sellerAdverts.name,
@@ -208,6 +215,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
           ),
         ],
       ),
+      //chatDetail
       GoRoute(
         path: AppRoutes.chatDetail.path,
         name: AppRoutes.chatDetail.name,
@@ -220,10 +228,13 @@ final goRouterProvider = Provider<GoRouter>((ref) {
           );
         },
       ),
+      // TODO: Implement StatefulShellRoute
       ShellRoute(
         navigatorKey: RoutingKeys.shellNavigatorKey,
         builder: (context, state, child) {
-          return ScaffoldWithNavBar(child: child);
+          return ScaffoldWithNavBar(
+            child: child,
+          );
         },
         routes: NavigationRouterList().routeList,
       ),
@@ -247,5 +258,13 @@ final goRouterProvider = Provider<GoRouter>((ref) {
     },
   );
 });
+
+// bool hasAppBar(String location) {
+//   switch (location) {
+//     case 'subCategory':
+//       break;
+//     default:
+//   }
+// }
 
 final RouteObserver<ModalRoute<void>> routeObserver = RouteObserver<ModalRoute<void>>();

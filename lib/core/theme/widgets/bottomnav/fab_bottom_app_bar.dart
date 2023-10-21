@@ -20,7 +20,7 @@ class FABBottomAppBar extends ConsumerStatefulWidget {
     required this.selectedColor,
     required this.onTabSelected,
     super.key,
-  }) : assert(items.length == 2 || items.length == 4);
+  }) : assert(items.length == 2 || items.length == 5);
 
   final List<FABBottomAppBarItem> items;
 

@@ -21,7 +21,8 @@ class AuthRepository {
   final GoogleSignIn _googleSignIn;
 
   ///createUser: Creates a new user and sends confirmation code to users mail address.
-  TaskEither<ApiException, GenericResponse<StatusMessageResponse>> createUser(User user) => TaskEither<ApiException, Response>.tryCatch(
+  TaskEither<ApiException, GenericResponse<StatusMessageResponse>> createUser(User user) =>
+      TaskEither<ApiException, Response>.tryCatch(
         () => client.post(
           '/auth/register',
           data: user.toJson(),
@@ -101,7 +102,8 @@ class AuthRepository {
           );
 
   ///resendConfirmation: ToSend confirm code to User
-  TaskEither<ApiException, GenericResponse<StatusMessageResponse>> resendConfirmation(String email) => TaskEither<ApiException, Response>.tryCatch(
+  TaskEither<ApiException, GenericResponse<StatusMessageResponse>> resendConfirmation(String email) =>
+      TaskEither<ApiException, Response>.tryCatch(
         () => client.post(
           '/auth/resend-confirmation',
           data: {'email': email},
@@ -135,7 +137,8 @@ class AuthRepository {
           );
 
   ///loginUser: To log user in the system and get the token and the user info
-  TaskEither<ApiException, GenericResponse<AuthResponse>> loginUser(String email, String password) => TaskEither<ApiException, Response>.tryCatch(
+  TaskEither<ApiException, GenericResponse<AuthResponse>> loginUser(String email, String password) =>
+      TaskEither<ApiException, Response>.tryCatch(
         () => client.post(
           '/auth/login',
           data: {'password': password, 'email': email},
@@ -183,7 +186,7 @@ class AuthRepository {
           '/Auth/google-signin',
           data: {'idToken': idToken, 'provider': provider},
         ),
-        (error, stackTrace) => ApiErrorHandler.handleError(error),
+        (error, stackTrace) => ApiException(message: error.toString()),
       )
           .chainEither(
             (response) => Either<ApiException, Response<dynamic>>.fromPredicate(

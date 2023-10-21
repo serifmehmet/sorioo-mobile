@@ -22,7 +22,7 @@ class AppTextFormField extends StatefulWidget {
     this.obscureText = false,
     this.readOnly = false,
     this.inputFormatters = const [],
-    this.maxLines,
+    this.maxLines = 1,
     this.minLines,
     this.expands = false,
   });
