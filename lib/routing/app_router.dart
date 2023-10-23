@@ -8,7 +8,7 @@ import 'package:sorioo/core/init/cache_manager.dart';
 import 'package:sorioo/features/advert/presentation/advert_list_view.dart';
 import 'package:sorioo/features/advert/presentation/create_advert/create_advert_view.dart';
 import 'package:sorioo/features/advert/presentation/create_advert/steps_views/select_subcategory_view.dart';
-import 'package:sorioo/features/advert/presentation/route_args/create_advert_args.dart';
+// import 'package:sorioo/features/advert/presentation/route_args/create_advert_args.dart';
 import 'package:sorioo/features/auth/presentation/register/email_register_second_step_view.dart';
 import 'package:sorioo/features/auth/presentation/register/email_register_view.dart';
 import 'package:sorioo/features/auth/presentation/register/register_view.dart';
@@ -25,7 +25,12 @@ import 'package:sorioo/features/seller/presentation/seller_profile/route_args/se
 import 'package:sorioo/features/seller/presentation/seller_profile/seller_profile_edit_view.dart';
 import 'package:sorioo/features/seller/presentation/seller_profile/seller_profile_view.dart';
 import 'package:sorioo/routing/app_routes.dart';
-import 'package:sorioo/routing/routes/routers_list.dart';
+import 'package:sorioo/routing/routes/route_category.dart';
+import 'package:sorioo/routing/routes/route_message.dart';
+import 'package:sorioo/routing/routes/route_profile.dart';
+import 'package:sorioo/routing/routes/route_sorioo.dart';
+import 'package:sorioo/routing/routes/router_home.dart';
+// import 'package:sorioo/routing/routes/routers_list.dart';
 
 final goRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
@@ -229,14 +234,45 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         },
       ),
       // TODO: Implement StatefulShellRoute
-      ShellRoute(
-        navigatorKey: RoutingKeys.shellNavigatorKey,
-        builder: (context, state, child) {
+      StatefulShellRoute.indexedStack(
+        // navigatorKey: RoutingKeys.shellNavigatorKey,
+        builder: (
+          BuildContext context,
+          GoRouterState state,
+          StatefulNavigationShell navigationShell,
+        ) {
           return ScaffoldWithNavBar(
-            child: child,
+            navigationShell: navigationShell,
           );
         },
-        routes: NavigationRouterList().routeList,
+        branches: <StatefulShellBranch>[
+          StatefulShellBranch(
+            routes: <RouteBase>[
+              RouterHome().routeHome,
+            ],
+          ),
+          StatefulShellBranch(
+            routes: <RouteBase>[
+              RouteCategory().routeCategory,
+            ],
+          ),
+          StatefulShellBranch(
+            routes: <RouteBase>[
+              RouteSorioo().routeSorioo,
+            ],
+          ),
+          StatefulShellBranch(
+            routes: <RouteBase>[
+              RouteMessage().routeMessage,
+            ],
+          ),
+          StatefulShellBranch(
+            routes: <RouteBase>[
+              RouteProfile().routeProfile,
+            ],
+          ),
+        ],
+        // routes: NavigationRouterList().routeList,
       ),
     ],
     observers: [

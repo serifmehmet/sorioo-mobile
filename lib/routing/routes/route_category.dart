@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:sorioo/core/constants/routing/routing_transitions.dart';
 import 'package:sorioo/features/category/presentation/category_list_view.dart';
+import 'package:sorioo/features/category/presentation/route_args/sub_category_args.dart';
 import 'package:sorioo/features/category/presentation/sub_category_list_view.dart';
 
 import 'package:sorioo/routing/app_routes.dart';
@@ -27,7 +28,9 @@ class RouteCategory {
           return BuildPageWithTransition.buildPageWithSlideFromBottom<dynamic>(
             context: context,
             state: state,
-            child: const SubCategoryListView(),
+            child: SubCategoryListView(
+              args: state.extra! as SubCategoryArgs,
+            ),
           );
         },
       ),

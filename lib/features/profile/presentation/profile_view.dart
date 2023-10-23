@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:iconly/iconly.dart';
 
 import 'package:sorioo/common/providers/local_user_provider.dart';
+import 'package:sorioo/common/widgets/preferred_app_bar_widget.dart';
+import 'package:sorioo/core/theme/constants.dart';
 
 import 'package:sorioo/features/profile/presentation/buyer_profile_view.dart';
 
@@ -21,13 +24,9 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
       localUserServiceProvider,
     );
 
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-        ),
-        body: localUser.isSeller! ? const SellerView() : const BuyerProfileView(),
-      ),
+    return Scaffold(
+      appBar: const PreferredAppBarWidget(),
+      body: localUser.isSeller! ? const SellerView() : const BuyerProfileView(),
     );
   }
 }
