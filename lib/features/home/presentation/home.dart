@@ -27,9 +27,9 @@ class _HomeViewState extends State<HomeView> {
     final categories = CategoryLocalCopy.categoryList();
     return Scaffold(
       appBar: const PreferredAppBarWidget(),
-      body: Padding(
-        padding: kSemiBigPadding,
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: kSemiBigPadding,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -46,6 +46,7 @@ class _HomeViewState extends State<HomeView> {
               const AppGap.semiBig(),
               GridView.builder(
                 shrinkWrap: true,
+                physics: const ScrollPhysics(),
                 gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                   maxCrossAxisExtent: 200,
                   mainAxisSpacing: 10,

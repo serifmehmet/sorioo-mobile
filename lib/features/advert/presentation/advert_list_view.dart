@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sorioo/core/theme/constants.dart';
+import 'package:sorioo/core/theme/gap.dart';
 import 'package:sorioo/core/theme/widgets/button/app_button.dart';
 import 'package:sorioo/core/theme/widgets/text/app_text.dart';
 import 'package:sorioo/features/advert/presentation/advert_controller.dart';
@@ -24,13 +25,20 @@ class AdvertListView extends ConsumerWidget {
           error: (error, stackTrace) => Column(
             children: [
               Expanded(
-                child: Center(
-                  child: AppText(
-                    error.toString(),
-                    style: const TextStyle(
-                      color: kTextColor,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/images/no-data.png',
+                      width: 200,
                     ),
-                  ),
+                    const AppGap.semiBig(),
+                    AppText(
+                      error.toString(),
+                      style: Theme.of(context).textTheme.displaySmall,
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
                 ),
               ),
               Container(

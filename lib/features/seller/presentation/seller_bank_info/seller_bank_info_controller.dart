@@ -32,7 +32,7 @@ class SellerBankInfoController extends _$SellerBankInfoController {
 }
 
 @riverpod
-FutureOr<SellerBankInfo?> fetchSellerBankInfo(FetchSellerBankInfoRef ref) async {
+Future<SellerBankInfo> fetchSellerBankInfo(FetchSellerBankInfoRef ref) async {
   final localUser = ref.watch(localUserServiceProvider);
   final repository = ref.watch(sellerBankInfoRepositoryProvider);
 
@@ -42,26 +42,33 @@ FutureOr<SellerBankInfo?> fetchSellerBankInfo(FetchSellerBankInfoRef ref) async 
       )
       .run();
   // var sellerBankInfo = SellerBankInfo.empty();
-  sellerBankInfoTask
-    ..mapLeft((error) {
-      if (error.code == 201) {
-        throw ApiException(
-          message: 'Hesabınıza ait banka bilgisi bulunamadı!',
-        );
-      } else {
-        return null;
-      }
-    })
-    ..map(
-      (sBankInfo) {
-        // AsyncValue.data(sBankInfo.data);
 
-        return sBankInfo.data!;
-      },
-    );
-  // final response = await repository.getSellerBankInfo(localUser.sellerId!);
-  // if (response!.data != null) {
-  //   return response.data;
-  // }
-  return null;
+  return sellerBankInfoTask.fold(
+    (error) => throw ApiException(
+      message: 'Hesabınıza ait banka bilgisi bulunamadı!',
+    ),
+    (sellerBankInfo) => sellerBankInfo.data!,
+  );
+  // sellerBankInfoTask
+  //   ..mapLeft((error) {
+  //     if (error.code == 201) {
+  //       throw ApiException(
+  //         message: 'Hesabınıza ait banka bilgisi bulunamadı!',
+  //       );
+  //     } else {
+  //       return null;
+  //     }
+  //   })
+  //   ..map(
+  //     (sBankInfo) {
+  //       // AsyncValue.data(sBankInfo.data);
+
+  //       return sBankInfo.data!;
+  //     },
+  //   );
+  // // final response = await repository.getSellerBankInfo(localUser.sellerId!);
+  // // if (response!.data != null) {
+  // //   return response.data;
+  // // }
+  // return null;
 }
