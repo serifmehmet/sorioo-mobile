@@ -1,6 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sorioo/core/constants/preferences_keys.dart';
 import 'package:sorioo/core/constants/user_roles.dart';
+import 'package:sorioo/core/http/api_exception.dart';
 import 'package:sorioo/core/init/cache_manager.dart';
 import 'package:sorioo/features/auth/data/auth_repository.dart';
 import 'package:sorioo/features/auth/data/local_user_repository.dart';
@@ -29,7 +30,7 @@ class GoogleSignInController extends _$GoogleSignInController {
     );
 
     (await authResult.run()).match(
-      (error) => AsyncError(error, StackTrace.current),
+      (error) => throw ApiException(message: error.message, code: error.code),
       (signInResult) {
         if (signInResult.error != null) {
           AsyncError(signInResult.error!.message, StackTrace.current);

@@ -25,11 +25,14 @@ class ProfileHeaderWidget extends ConsumerWidget {
       ),
       child: Row(
         children: [
-          if (user.googleProfilePictureUrl!.isNotEmpty)
-            CircleAvatar(
-              radius: 40,
-              backgroundImage: Image.network(user.googleProfilePictureUrl!).image,
-            ),
+          CircleAvatar(
+            radius: 40,
+            backgroundImage: user.googleProfilePictureUrl != null
+                ? Image.network(user.googleProfilePictureUrl!).image
+                : Image.asset(
+                    'assets/images/default-avatar.png',
+                  ).image,
+          ),
           const AppGap.semiBig(),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -12,8 +12,10 @@ abstract class Env {
   static final apiLocalDevVsCodeUrl = _Env.apiLocalDevVsCodeUrl;
   @EnviedField(varName: 'API_REMOTE_URL', obfuscate: true)
   static final apiRemoteUrl = _Env.apiRemoteUrl;
-  @EnviedField(varName: 'GOOGLE_CLIENT_ID', obfuscate: true)
-  static final googleClientId = _Env.googleClientId;
+  @EnviedField(varName: 'GOOGLE_ANDROID_CLIENT_ID', obfuscate: true)
+  static final googleAndroidClientId = _Env.googleAndroidClientId;
+  @EnviedField(varName: 'GOOGLE_IOS_CLIENT_ID', obfuscate: true)
+  static final googleIosClientId = _Env.googleIosClientId;
   @EnviedField(varName: 'GOOGLE_SERVER_CLIENT_ID', obfuscate: true)
   static final googleServerClientId = _Env.googleServerClientId;
 }

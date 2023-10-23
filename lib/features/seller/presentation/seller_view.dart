@@ -32,70 +32,68 @@ class _SellerViewState extends ConsumerState<SellerView> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: SingleChildScrollView(
-        physics: const NeverScrollableScrollPhysics(),
-        child: Padding(
-          padding: kBigPadding,
-          child: Column(
-            children: [
-              const ProfileHeaderWidget(),
-              ColoredBox(
-                color: Colors.black12,
-                child: ListTile(
-                  leading: const Icon(IconlyBold.edit),
-                  trailing: const Icon(IconlyBold.arrow_right_2),
-                  title: AppText(
-                    'Profilim',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                  onTap: () => GoRouter.of(context).pushNamed(
-                    AppRoutes.sellerProfile.name,
-                  ),
+    return SingleChildScrollView(
+      physics: const NeverScrollableScrollPhysics(),
+      child: Padding(
+        padding: kBigPadding,
+        child: Column(
+          children: [
+            const ProfileHeaderWidget(),
+            ColoredBox(
+              color: Colors.black12,
+              child: ListTile(
+                leading: const Icon(IconlyBold.edit),
+                trailing: const Icon(IconlyBold.arrow_right_2),
+                title: AppText(
+                  'Profilim',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                onTap: () => GoRouter.of(context).pushNamed(
+                  AppRoutes.sellerProfile.name,
                 ),
               ),
-              ColoredBox(
-                color: Colors.black12,
-                child: ListTile(
-                  leading: const Icon(IconlyBold.setting),
-                  trailing: const Icon(IconlyBold.arrow_right_2),
-                  title: AppText(
-                    'Hesap Bilgilerim',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                  onTap: () => GoRouter.of(context).pushNamed(
-                    AppRoutes.sellerAccountInfo.name,
-                  ),
+            ),
+            ColoredBox(
+              color: Colors.black12,
+              child: ListTile(
+                leading: const Icon(IconlyBold.setting),
+                trailing: const Icon(IconlyBold.arrow_right_2),
+                title: AppText(
+                  'Hesap Bilgilerim',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                onTap: () => GoRouter.of(context).pushNamed(
+                  AppRoutes.sellerAccountInfo.name,
                 ),
               ),
-              ColoredBox(
-                color: Colors.black12,
-                child: ListTile(
-                  leading: const Icon(IconlyBold.document),
-                  trailing: const Icon(IconlyBold.arrow_right_2),
-                  title: AppText(
-                    'İlanlarım',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                  onTap: () => GoRouter.of(context).pushNamed(
-                    AppRoutes.sellerAdverts.name,
-                  ),
+            ),
+            ColoredBox(
+              color: Colors.black12,
+              child: ListTile(
+                leading: const Icon(IconlyBold.document),
+                trailing: const Icon(IconlyBold.arrow_right_2),
+                title: AppText(
+                  'İlanlarım',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                onTap: () => GoRouter.of(context).pushNamed(
+                  AppRoutes.sellerAdverts.name,
                 ),
               ),
-              Container(
-                color: Colors.black12,
-                child: ListTile(
-                  leading: const Icon(IconlyBold.logout),
-                  trailing: const Icon(IconlyBold.arrow_right_2),
-                  title: AppText(
-                    'Oturumu Kapat',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                  onTap: _submitLogOut,
+            ),
+            Container(
+              color: Colors.black12,
+              child: ListTile(
+                leading: const Icon(IconlyBold.logout),
+                trailing: const Icon(IconlyBold.arrow_right_2),
+                title: AppText(
+                  'Oturumu Kapat',
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
+                onTap: _submitLogOut,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

@@ -7,8 +7,7 @@ part of 'basic_advert_item_dto.dart';
 // **************************************************************************
 
 _$_BasicAdvertItemDto _$$_BasicAdvertItemDtoFromJson(
-  Map<String, dynamic> json,
-) =>
+        Map<String, dynamic> json) =>
     _$_BasicAdvertItemDto(
       id: json['id'] as String,
       title: json['title'] as String,
@@ -16,8 +15,7 @@ _$_BasicAdvertItemDto _$$_BasicAdvertItemDtoFromJson(
     );
 
 Map<String, dynamic> _$$_BasicAdvertItemDtoToJson(
-  _$_BasicAdvertItemDto instance,
-) =>
+        _$_BasicAdvertItemDto instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,

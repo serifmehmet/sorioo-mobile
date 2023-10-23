@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -5,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:iconly/iconly.dart';
 import 'package:sorioo/common/extensions/async_value_ui.dart';
+import 'package:sorioo/common/widgets/alert_dialogs.dart';
 import 'package:sorioo/core/constants/env.dart';
 
 import 'package:sorioo/core/theme/colors.dart';
@@ -39,9 +43,8 @@ class _LoginViewState extends ConsumerState<LoginView> with SignInValidators {
 
   bool _submitted = false;
 
-  final googleSignIn = GoogleSignIn(
-    clientId: Env.googleClientId,
-    serverClientId: Env.googleServerClientId,
+  GoogleSignIn googleSignIn = GoogleSignIn(
+    scopes: ['email'],
   );
 
   @override
@@ -82,21 +85,35 @@ class _LoginViewState extends ConsumerState<LoginView> with SignInValidators {
   }
 
   Future<void> _submitGoogleSignIn() async {
+    if (kIsWeb || Platform.isAndroid) {
+      googleSignIn = GoogleSignIn(
+        scopes: ['email'],
+        clientId: Env.googleServerClientId,
+      );
+    }
+
+    if (Platform.isIOS) {
+      googleSignIn = GoogleSignIn(
+        clientId: Env.googleIosClientId,
+        scopes: [
+          'email',
+        ],
+      );
+    }
     final googleUser = await googleSignIn.signIn();
-    if (googleUser != null) {
-      final googleAuth = await googleUser.authentication;
 
-      if (googleAuth.idToken != null) {
-        final googleController = ref.read(
-          googleSignInControllerProvider.notifier,
-        );
-        final success = await googleController.googleSignIn(
-          googleAuth.idToken!,
-        );
+    final googleAuth = await googleUser!.authentication;
 
-        if (success && context.mounted) {
-          GoRouter.of(context).goNamed(AppRoutes.home.name);
-        }
+    if (googleAuth.idToken != null) {
+      final googleController = ref.read(
+        singInControllerProvider.notifier,
+      );
+      final success = await googleController.googleSignIn(
+        googleAuth.idToken!,
+      );
+
+      if (success && context.mounted) {
+        GoRouter.of(context).goNamed(AppRoutes.home.name);
       }
     }
   }
@@ -109,118 +126,120 @@ class _LoginViewState extends ConsumerState<LoginView> with SignInValidators {
       singInControllerProvider,
       (_, state) => state.showToastMessageOnError(context),
     );
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        iconTheme: const IconThemeData(color: kTextColor),
-        backgroundColor: Colors.white,
-      ),
-      body: SingleChildScrollView(
-        physics: const NeverScrollableScrollPhysics(),
-        child: Padding(
-          padding: kDefaultHorPadding,
-          child: FocusScope(
-            node: _node,
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const AppGap.extraBig(),
-                  Center(
-                    child: Image.asset(
-                      'assets/images/sorioo-logo.png',
-                      width: 200,
-                    ),
-                  ),
-                  const AppGap.big(),
-                  Text(
-                    'Hesabınıza Giriş Yapın',
-                    style: Theme.of(context).textTheme.displaySmall,
-                  ),
-                  const AppGap.extraBig(),
-                  AppTextFormField(
-                    enabled: true,
-                    autofocus: false,
-                    textInputAction: TextInputAction.next,
-                    textInputType: TextInputType.emailAddress,
-                    hintText: 'E-Posta Adresiniz',
-                    prefixIcon: const Icon(
-                      IconlyLight.user,
-                      color: AppColors.greySC700,
-                    ),
-                    controller: emailController,
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (email) => !_submitted
-                        ? null
-                        : emailErrorText(
-                            email!,
-                          ),
-                    onEditingComplete: emailEditingCompleted,
-                    inputFormatters: <TextInputFormatter>[
-                      ValidatorInputFormatter(
-                        editingValidator: EmailEditingRegexValidator(),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          iconTheme: const IconThemeData(color: kTextColor),
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        ),
+        body: SingleChildScrollView(
+          physics: const NeverScrollableScrollPhysics(),
+          child: Padding(
+            padding: kDefaultHorPadding,
+            child: FocusScope(
+              node: _node,
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const AppGap.extraBig(),
+                    Center(
+                      child: Image.asset(
+                        'assets/images/sorioo-logo.png',
+                        width: 200,
                       ),
-                    ],
-                  ),
-                  const AppGap.regular(),
-                  AppTextFormField(
-                    enabled: true,
-                    autofocus: false,
-                    textInputAction: TextInputAction.done,
-                    textInputType: TextInputType.text,
-                    obscureText: true,
-                    hintText: 'Şifreniz',
-                    prefixIcon: const Icon(
-                      IconlyLight.user,
-                      color: AppColors.greySC700,
                     ),
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    controller: passwordController,
-                    validator: (password) => !_submitted
-                        ? null
-                        : passwordErrorText(
-                            password!,
-                          ),
-                    onEditingComplete: passwordEditingComplete,
-                  ),
-                  const AppGap.regular(),
-                  AppPrimaryButton(
-                    title: 'Giriş Yap',
-                    onTap: _submit,
-                    isLoading: state.isLoading,
-                  ),
-                  const AppGap.extraBig(),
-                  TextButton(
-                    onPressed: _submitGoogleSignIn,
-                    child: AppText(
-                      'Google ile Giriş Yap',
-                      color: Theme.of(context).colorScheme.secondary,
+                    const AppGap.big(),
+                    Text(
+                      'Hesabınıza Giriş Yapın',
+                      style: Theme.of(context).textTheme.displaySmall,
                     ),
-                  ),
-                  const AppGap.extraBig(),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const AppText(
-                          'Hesabın yok mu?',
-                          color: AppColors.greySC500,
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            context.pushNamed(AppRoutes.register.name);
-                          },
-                          child: AppText(
-                            'Kayıt ol',
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
+                    const AppGap.extraBig(),
+                    AppTextFormField(
+                      enabled: true,
+                      autofocus: false,
+                      textInputAction: TextInputAction.next,
+                      textInputType: TextInputType.emailAddress,
+                      hintText: 'E-Posta Adresiniz',
+                      prefixIcon: const Icon(
+                        IconlyLight.user,
+                        color: AppColors.greySC700,
+                      ),
+                      controller: emailController,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (email) => !_submitted
+                          ? null
+                          : emailErrorText(
+                              email!,
+                            ),
+                      onEditingComplete: emailEditingCompleted,
+                      inputFormatters: <TextInputFormatter>[
+                        ValidatorInputFormatter(
+                          editingValidator: EmailEditingRegexValidator(),
                         ),
                       ],
                     ),
-                  ),
-                ],
+                    const AppGap.regular(),
+                    AppTextFormField(
+                      enabled: true,
+                      autofocus: false,
+                      textInputAction: TextInputAction.done,
+                      textInputType: TextInputType.text,
+                      obscureText: true,
+                      hintText: 'Şifreniz',
+                      prefixIcon: const Icon(
+                        IconlyLight.user,
+                        color: AppColors.greySC700,
+                      ),
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      controller: passwordController,
+                      validator: (password) => !_submitted
+                          ? null
+                          : passwordErrorText(
+                              password!,
+                            ),
+                      onEditingComplete: passwordEditingComplete,
+                    ),
+                    const AppGap.regular(),
+                    AppPrimaryButton(
+                      title: 'Giriş Yap',
+                      onTap: _submit,
+                      isLoading: state.isLoading,
+                    ),
+                    const AppGap.extraBig(),
+                    TextButton(
+                      onPressed: _submitGoogleSignIn,
+                      child: AppText(
+                        'Google ile Giriş Yap',
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
+                    const AppGap.extraBig(),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const AppText(
+                            'Hesabın yok mu?',
+                            color: AppColors.greySC500,
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              context.pushNamed(AppRoutes.register.name);
+                            },
+                            child: AppText(
+                              'Kayıt ol',
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:iconly/iconly.dart';
+import 'package:sorioo/common/models/category_local_copy.dart';
 
 import 'package:sorioo/common/widgets/category_card.dart';
-import 'package:sorioo/common/widgets/custom_header.dart';
+import 'package:sorioo/common/widgets/preferred_app_bar_widget.dart';
+import 'package:sorioo/core/theme/constants.dart';
 import 'package:sorioo/core/theme/gap.dart';
-import 'package:sorioo/features/category/application/category_controller.dart';
+import 'package:sorioo/core/theme/widgets/text/app_text.dart';
+import 'package:sorioo/features/category/domain/models/category.dart';
+import 'package:sorioo/features/home/presentation/widgets/ask_area_widget.dart';
+import 'package:sorioo/features/home/presentation/widgets/header_area_widget.dart';
+import 'package:sorioo/routing/app_routes.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -17,64 +24,49 @@ class _HomeViewState extends State<HomeView> {
   double top = 0;
   @override
   Widget build(BuildContext context) {
+    final categories = CategoryLocalCopy.categoryList();
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            toolbarHeight: 10,
-          ),
-          SliverPersistentHeader(
-            pinned: true,
-            delegate: CustomHeader(
-              collapsedHeight: kToolbarHeight + 20,
-              expandedHeight: 250,
-            ),
-          ),
-          const SliverToBoxAdapter(
-            child: AppGap.big(),
-          ),
-          SliverPadding(
-            padding: const EdgeInsets.only(
-              left: 10,
-              right: 10,
-            ),
-            sliver: Consumer(
-              builder: (context, ref, child) {
-                final categoryController = ref.watch(
-                  categoryControllerProvider,
-                );
-                return categoryController.map(
-                  data: (data) {
-                    return SliverGrid.builder(
-                      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                        mainAxisExtent: 200,
-                        maxCrossAxisExtent: 220,
-                        childAspectRatio: 3 / 2,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
-                      ),
-                      itemBuilder: (context, index) {
-                        return CategoryCard(
-                          category: data.value[index],
-                        );
-                      },
-                      itemCount: data.value.length,
-                    );
-                  },
-                  error: (s) => const SliverToBoxAdapter(
-                    child: Center(
-                      child: Text('error'),
+      appBar: const PreferredAppBarWidget(),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: kSemiBigPadding,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const HeaderAreaWidget(),
+              const AppGap.semiBig(),
+              const AskAreaWidget(),
+              const AppGap.big(),
+              AppText(
+                'Kategoriler',
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      fontStyle: FontStyle.italic,
                     ),
-                  ),
-                  loading: (s) => const SliverToBoxAdapter(
-                    child: CircularProgressIndicator(),
-                  ),
-                );
-              },
-            ),
+              ),
+              const AppGap.semiBig(),
+              GridView.builder(
+                shrinkWrap: true,
+                physics: const ScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 200,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                ),
+                itemBuilder: (item, index) {
+                  return InkWell(
+                    onTap: () => GoRouter.of(context).pushNamed(
+                      AppRoutes.subCategoryList.name,
+                    ),
+                    child: CategoryCard(
+                      category: categories[index],
+                    ),
+                  );
+                },
+                itemCount: categories.length,
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

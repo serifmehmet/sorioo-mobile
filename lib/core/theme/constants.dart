@@ -20,6 +20,10 @@ const EdgeInsets kSemiSmallVertPadding = EdgeInsets.symmetric(vertical: 8);
 const EdgeInsets kSmallVertPadding = EdgeInsets.symmetric(vertical: 6);
 const EdgeInsets kSemiBigVertPadding = EdgeInsets.symmetric(vertical: 20);
 
+const EdgeInsets kSemiSmallHorPadding = EdgeInsets.symmetric(horizontal: 8);
+const EdgeInsets kSmallHorPadding = EdgeInsets.symmetric(horizontal: 6);
+const EdgeInsets kSemiBigHorPadding = EdgeInsets.symmetric(horizontal: 20);
+
 const EdgeInsets kSmallPadding = EdgeInsets.all(5);
 const EdgeInsets kSemiSmallPadding = EdgeInsets.all(8);
 const EdgeInsets kBigPadding = EdgeInsets.all(30);

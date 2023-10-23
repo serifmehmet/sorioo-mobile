@@ -12,11 +12,16 @@ enum AppRoutes {
   forgotPassword(name: 'forgotPassword', path: '/forgotPassword'),
 
   home(name: 'home', path: '/home'),
+  //category feature
   category(name: 'category', path: '/category'),
+  subCategoryList(name: 'subCategoryList', path: 'subCategoryList'),
+
+  sorioo(name: 'sorioo', path: '/sorioo'),
   profile(name: 'profile', path: '/profile'),
 
   editProfile(name: 'editProfile', path: 'editProfile'),
 
+  //sellerFeature
   sellerProfile(name: 'sellerProfile', path: '/sellerProfile'),
   editSellerProfile(name: 'editSellerProfile', path: 'editSellerProfile'),
   sellerAccountInfo(name: 'sellerAccountInfo', path: 'sellerAccountInfo'),
@@ -26,6 +31,7 @@ enum AppRoutes {
   sellerAdvertsSubCategory(name: 'sellerAdvertsSubCategory', path: 'sellerAdverts/sellerAdvertsSubCategory'),
   createSellerBankInfo(name: 'createSellerBankInfo', path: 'createSellerBankInfo'),
 
+  //chat feature
   chat(name: 'chat', path: '/chat'),
   chatDetail(name: 'chatDetail', path: '/chatDetail');
 

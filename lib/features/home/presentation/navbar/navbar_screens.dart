@@ -1,5 +1,6 @@
 import 'package:iconly/iconly.dart';
-import 'package:sorioo/features/category/presentation/category_view.dart';
+import 'package:sorioo/features/category/presentation/category_list_view.dart';
+
 import 'package:sorioo/features/home/presentation/home.dart';
 import 'package:sorioo/features/message/presentation/message_view.dart';
 import 'package:sorioo/features/profile/presentation/profile_view.dart';
@@ -16,7 +17,12 @@ class NavbarScreens {
     '/category': {
       'label': '',
       'icon': IconlyLight.category,
-      'screen': CategoryView(),
+      'screen': CategoryListView(),
+    },
+    '/sorioo': {
+      'label': '',
+      'icon': IconlyLight.category,
+      'screen': CategoryListView(),
     },
     '/chat': {
       'label': '',

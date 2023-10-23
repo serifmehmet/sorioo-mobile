@@ -25,51 +25,26 @@ class SellerBankInfoView extends ConsumerWidget {
           elevation: 0,
           title: const AppText('Banka Bilgilerim'),
         ),
-        body: sellerBankInfoState.maybeWhen(
-          orElse: () => Padding(
-            padding: kSemiBigPadding,
-            child: Column(
-              children: [
-                Image.asset('assets/images/no-data-found.png'),
-                Center(
-                  child: AppText(
-                    'Henüz banka bilgilerinizi girmemişsiniz, lütfen banka bilgisi giriniz!',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headlineSmall,
-                  ),
+        body: sellerBankInfoState.when(
+          error: (error, stackTrace) => Column(
+            children: [
+              Image.asset('assets/images/no-data-found.png'),
+              Center(
+                child: AppText(
+                  'Henüz banka bilgilerinizi girmemişsiniz, lütfen banka bilgisi giriniz!',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.headlineSmall,
                 ),
-                const Spacer(),
-                AppPrimaryButton(
-                  title: 'Yeni Ekle',
-                  onTap: () => GoRouter.of(context).pushNamed(
-                    AppRoutes.createSellerBankInfo.name,
-                  ),
+              ),
+              const Spacer(),
+              AppPrimaryButton(
+                title: 'Yeni Ekle',
+                onTap: () => GoRouter.of(context).pushNamed(
+                  AppRoutes.createSellerBankInfo.name,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          // error: (error, stackTrace) => Padding(
-          //   padding: kSemiBigPadding,
-          //   child: Column(
-          //     children: [
-          //       Image.asset('assets/images/no-data-found.png'),
-          //       Center(
-          //         child: AppText(
-          //           error.toString(),
-          //           textAlign: TextAlign.center,
-          //           style: Theme.of(context).textTheme.headlineSmall,
-          //         ),
-          //       ),
-          //       const Spacer(),
-          //       AppPrimaryButton(
-          //         title: 'Yeni Ekle',
-          //         onTap: () => GoRouter.of(context).pushNamed(
-          //           AppRoutes.createSellerBankInfo.name,
-          //         ),
-          //       ),
-          //     ],
-          //   ),
-          // ),
           loading: () => const Center(
             child: CircularProgressIndicator(),
           ),
