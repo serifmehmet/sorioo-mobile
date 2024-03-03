@@ -27,8 +27,8 @@ class ProfileHeaderWidget extends ConsumerWidget {
         children: [
           CircleAvatar(
             radius: 40,
-            backgroundImage: user.googleProfilePictureUrl != null
-                ? Image.network(user.googleProfilePictureUrl!).image
+            backgroundImage: user.profilePictureUrl!.isNotEmpty
+                ? Image.network(user.profilePictureUrl!).image
                 : Image.asset(
                     'assets/images/default-avatar.png',
                   ).image,

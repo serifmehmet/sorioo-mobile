@@ -25,6 +25,10 @@ class AppTextFormField extends StatefulWidget {
     this.maxLines = 1,
     this.minLines,
     this.expands = false,
+    this.hasBorder = false,
+    this.floatingLabelBehavior = FloatingLabelBehavior.never,
+    this.suffixText = '',
+    this.prefixText = '',
   });
 
   final TextEditingController? controller;
@@ -47,6 +51,11 @@ class AppTextFormField extends StatefulWidget {
   final int? maxLines;
   final int? minLines;
   final bool? expands;
+
+  final bool? hasBorder;
+  final FloatingLabelBehavior? floatingLabelBehavior;
+  final String? suffixText;
+  final String? prefixText;
   @override
   State<AppTextFormField> createState() => _AppTextFormFieldState();
 }
@@ -75,7 +84,9 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
       autovalidateMode: widget.autovalidateMode,
       maxLines: widget.maxLines,
       expands: widget.expands!,
+
       decoration: InputDecoration(
+        floatingLabelBehavior: widget.floatingLabelBehavior,
         hintText: widget.hintText,
         hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
               color: kAppGray,
@@ -89,9 +100,14 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
         filled: true,
         prefixIcon: widget.prefixIcon,
         prefixIconColor: focusNode.hasFocus ? AppColors.greySC900 : AppColors.greySC50,
-        enabledBorder: const OutlineInputBorder(
+        enabledBorder: OutlineInputBorder(
           borderRadius: kRegularBorderRadius,
-          borderSide: BorderSide.none,
+          borderSide: widget.hasBorder! ? const BorderSide(color: kTextColor) : BorderSide.none,
+        ),
+        disabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(
+            color: AppColors.greySC500,
+          ),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: kRegularBorderRadius,
@@ -101,7 +117,14 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
           borderRadius: kRegularBorderRadius,
           borderSide: BorderSide(color: Theme.of(context).colorScheme.error),
         ),
+        suffixText: widget.suffixText,
+        prefixText: widget.prefixText,
+        prefixStyle: const TextStyle(
+          fontSize: 20,
+          fontFamilyFallback: ['Arial'],
+        ),
       ),
+
       onFieldSubmitted: widget.onFieldSubmitted,
       onEditingComplete: widget.onEditingComplete,
       validator: widget.validator,

@@ -17,6 +17,9 @@ import 'package:sorioo/features/auth/presentation/sign_in/login_view.dart';
 import 'package:sorioo/features/auth/presentation/verify/email_verification_view.dart';
 import 'package:sorioo/features/chat/presentation/chat_detail_view.dart';
 import 'package:sorioo/features/home/presentation/navbar/scaffold_with_bottom_navbar.dart';
+import 'package:sorioo/features/profile/presentation/buyer_profile_edit_view.dart';
+import 'package:sorioo/features/profile/presentation/buyer_profile_view.dart';
+import 'package:sorioo/features/profile/presentation/route_args/buyer_profile_edit_args.dart';
 import 'package:sorioo/features/seller/presentation/seller_account_info/seller_account_info_view.dart';
 import 'package:sorioo/features/seller/presentation/seller_bank_info/route_args/seller_bank_info_list_page_args.dart';
 import 'package:sorioo/features/seller/presentation/seller_bank_info/seller_bank_info_create_view.dart';
@@ -107,6 +110,36 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         },
         parentNavigatorKey: RoutingKeys.rootNavigatorKey,
       ),
+      // buyerProfile
+      GoRoute(
+        path: AppRoutes.buyerProfile.path,
+        name: AppRoutes.buyerProfile.name,
+        parentNavigatorKey: RoutingKeys.rootNavigatorKey,
+        pageBuilder: (context, state) {
+          return BuildPageWithTransition.buildPageWithSlideFromBottom<dynamic>(
+            context: context,
+            state: state,
+            child: const BuyerProfileView(),
+          );
+        },
+        routes: [
+          GoRoute(
+            path: AppRoutes.editBuyerProfile.path,
+            name: AppRoutes.editBuyerProfile.name,
+            parentNavigatorKey: RoutingKeys.rootNavigatorKey,
+            pageBuilder: (context, state) {
+              return BuildPageWithTransition.buildPageWithSlideFromBottom<dynamic>(
+                context: context,
+                state: state,
+                child: BuyerProfileEditView(
+                  args: state.extra! as BuyerProfileEditArgs,
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+
       //sellerprofile
       GoRoute(
         path: AppRoutes.sellerProfile.path,
@@ -185,7 +218,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
             name: AppRoutes.sellerAdverts.name,
             parentNavigatorKey: RoutingKeys.rootNavigatorKey,
             pageBuilder: (context, state) {
-              return BuildPageWithTransition.buildPageWithSlideFromBottom(
+              return BuildPageWithTransition.buildPageWithSlideFromBottom<dynamic>(
                 context: context,
                 state: state,
                 child: const AdvertListView(),
@@ -209,7 +242,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                 name: AppRoutes.sellerAdvertsSubCategory.name,
                 parentNavigatorKey: RoutingKeys.rootNavigatorKey,
                 pageBuilder: (context, state) {
-                  return BuildPageWithTransition.buildPageWithSlideFromBottom(
+                  return BuildPageWithTransition.buildPageWithSlideFromBottom<dynamic>(
                     context: context,
                     state: state,
                     child: const SelectSubCategoryView(),

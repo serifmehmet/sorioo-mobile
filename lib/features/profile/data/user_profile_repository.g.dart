@@ -6,23 +6,23 @@ part of 'user_profile_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$userProfileRepositoryProviderHash() =>
-    r'88f154070ef9395ca3771f74fa0c0665a9437b56';
+String _$userProfileRepositoryHash() =>
+    r'9fe522c04b13e4dd4784a65e5819716c70d4ed1a';
 
-/// See also [userProfileRepositoryProvider].
-@ProviderFor(userProfileRepositoryProvider)
-final userProfileRepositoryProviderProvider =
+/// See also [userProfileRepository].
+@ProviderFor(userProfileRepository)
+final userProfileRepositoryProvider =
     AutoDisposeProvider<UserProfileRepository>.internal(
-  userProfileRepositoryProvider,
-  name: r'userProfileRepositoryProviderProvider',
+  userProfileRepository,
+  name: r'userProfileRepositoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$userProfileRepositoryProviderHash,
+      : _$userProfileRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef UserProfileRepositoryProviderRef
+typedef UserProfileRepositoryRef
     = AutoDisposeProviderRef<UserProfileRepository>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member

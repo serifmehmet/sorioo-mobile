@@ -7,12 +7,12 @@ part of 'seller_bank_info_controller.dart';
 // **************************************************************************
 
 String _$fetchSellerBankInfoHash() =>
-    r'8004369d930608504246adc93540854a16493b15';
+    r'7321ec51f62a60de5781371c39a8a9104fe57775';
 
 /// See also [fetchSellerBankInfo].
 @ProviderFor(fetchSellerBankInfo)
 final fetchSellerBankInfoProvider =
-    AutoDisposeFutureProvider<SellerBankInfo?>.internal(
+    AutoDisposeFutureProvider<SellerBankInfo>.internal(
   fetchSellerBankInfo,
   name: r'fetchSellerBankInfoProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -22,7 +22,7 @@ final fetchSellerBankInfoProvider =
   allTransitiveDependencies: null,
 );
 
-typedef FetchSellerBankInfoRef = AutoDisposeFutureProviderRef<SellerBankInfo?>;
+typedef FetchSellerBankInfoRef = AutoDisposeFutureProviderRef<SellerBankInfo>;
 String _$sellerBankInfoControllerHash() =>
     r'07042317096f4b46f873ec51fcb073750cae4dca';
 

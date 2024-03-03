@@ -1,4 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:sorioo/common/providers/local_user_provider.dart';
 
 import 'package:sorioo/core/constants/preferences_keys.dart';
 import 'package:sorioo/core/init/cache_manager.dart';
@@ -25,8 +26,11 @@ class AccountController extends _$AccountController {
 
     final newState = await AsyncValue.guard(() async {
       ref.watch(localUserRepositoryProvider).removeLoggedInUser(
-            CacheManager.instance.getStringValue(PreferencesKeys.userId),
+            CacheManager.instance.getStringValue(
+              PreferencesKeys.userId,
+            ),
           );
+
       await CacheManager.instance.setBoolValue(
         PreferencesKeys.isLoggedIn,
         false,

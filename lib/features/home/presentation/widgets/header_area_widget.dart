@@ -3,8 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sorioo/common/providers/local_user_provider.dart';
-import 'package:sorioo/core/constants/preferences_keys.dart';
-import 'package:sorioo/core/init/cache_manager.dart';
+// import 'package:sorioo/core/constants/preferences_keys.dart';
+// import 'package:sorioo/core/init/cache_manager.dart';
 import 'package:sorioo/core/theme/font.dart';
 import 'package:sorioo/core/theme/gap.dart';
 import 'package:sorioo/core/theme/widgets/text/app_text.dart';
@@ -14,18 +14,13 @@ class HeaderAreaWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final loggedIn = CacheManager.instance.getBoolValue(PreferencesKeys.isLoggedIn);
-
+    final localUserService = ref.watch(localUserServiceProvider);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (loggedIn) ...[
+        if (localUserService.isInBox) ...[
           AppText(
-            'Merhaba, ${ref.watch(
-              localUserServiceProvider.select(
-                (value) => value.fullName,
-              ),
-            )}',
+            'Merhaba, ${localUserService.fullName}',
             style: Theme.of(context).textTheme.displaySmall!.copyWith(
                   fontStyle: FontStyle.italic,
                   fontSize: 28,

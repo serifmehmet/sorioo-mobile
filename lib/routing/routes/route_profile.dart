@@ -22,8 +22,8 @@ class RouteProfile {
     },
     // routes: [
     //   GoRoute(
-    //     path: AppRoutes.editSellerProfile.path,
-    //     name: AppRoutes.editSellerProfile.name,
+    //     path: AppRoutes.editProfile.path,
+    //     name: AppRoutes.editProfile.name,
     //     builder: (context, state) {
     //       return const SellerProfileEditView();
     //     },

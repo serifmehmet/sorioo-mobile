@@ -5,11 +5,16 @@ import 'package:go_router/go_router.dart';
 import 'package:sorioo/core/theme/constants.dart';
 
 import 'package:sorioo/core/theme/widgets/text/app_text.dart';
+import 'package:sorioo/features/advert/domain/advert.dart';
+import 'package:sorioo/features/advert/presentation/advert_controller.dart';
 import 'package:sorioo/features/advert/presentation/create_advert/create_advert_controller.dart';
 import 'package:sorioo/features/advert/presentation/create_advert/selected_values_widget.dart';
+import 'package:sorioo/features/advert/presentation/create_advert/steps_views/generate_packages_view.dart';
 import 'package:sorioo/features/advert/presentation/create_advert/steps_views/get_advert_info_view.dart';
 import 'package:sorioo/features/advert/presentation/create_advert/steps_views/select_category_view.dart';
 import 'package:sorioo/features/advert/presentation/create_advert/steps_views/select_subcategory_view.dart';
+
+part '../mixins/create_advert_view_mixin.dart';
 
 class CreateAdvertView extends ConsumerStatefulWidget {
   const CreateAdvertView({super.key});
@@ -18,24 +23,7 @@ class CreateAdvertView extends ConsumerStatefulWidget {
   ConsumerState<CreateAdvertView> createState() => _CreateAdvertViewState();
 }
 
-class _CreateAdvertViewState extends ConsumerState<CreateAdvertView> {
-  int _index = 0;
-  late PageController _pageController;
-
-  @override
-  void initState() {
-    _pageController = PageController();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
-  }
-
-  void changeIsValidated() => ref.read(createAdvertControllerProvider.notifier).changeValidationState(false);
-
+class _CreateAdvertViewState extends ConsumerState<CreateAdvertView> with _CreateAdvertViewMixin {
   @override
   Widget build(BuildContext context) {
     final isValidatedState = ref.watch(createAdvertControllerProvider.select((value) => value.isValidated));
@@ -60,11 +48,7 @@ class _CreateAdvertViewState extends ConsumerState<CreateAdvertView> {
               child: PageView(
                 controller: _pageController,
                 physics: const NeverScrollableScrollPhysics(),
-                children: const [
-                  SelectCategoryView(),
-                  SelectSubCategoryView(),
-                  GetAdvertInfoView(),
-                ],
+                children: pages,
                 onPageChanged: (index) {
                   setState(() {
                     _index = index;
@@ -104,17 +88,8 @@ class _CreateAdvertViewState extends ConsumerState<CreateAdvertView> {
                         child: const AppText('Bir Önceki Adım'),
                       ),
                     ElevatedButton(
-                      onPressed: isValidatedState!
-                          ? () {
-                              _pageController.nextPage(
-                                duration: const Duration(milliseconds: 300),
-                                curve: Curves.ease,
-                              );
-
-                              changeIsValidated();
-                            }
-                          : null,
-                      child: const AppText('Devam'),
+                      onPressed: isValidatedState! ? saveNewAdvert : null,
+                      child: _index == pages.length - 1 ? const AppText('Tamamla') : const AppText('Devam'),
                     ),
                   ],
                 ),

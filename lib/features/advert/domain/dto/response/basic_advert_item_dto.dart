@@ -9,6 +9,7 @@ class BasicAdvertItemDto with _$BasicAdvertItemDto {
     required String id,
     required String title,
     required String categoryName,
+    required double price,
   }) = _BasicAdvertItemDto;
 
   factory BasicAdvertItemDto.fromJson(Map<String, dynamic> json) => _$BasicAdvertItemDtoFromJson(json);

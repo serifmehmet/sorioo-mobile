@@ -11,11 +11,13 @@ class LocalUser extends HiveObject {
     this.email = '',
     this.userName = '',
     this.refreshToken = '',
-    this.googleProfilePictureUrl,
+    this.profilePictureUrl = '',
     this.token = '',
     this.password = '',
     this.isSeller = false,
     this.sellerId = '',
+    this.phoneNumber = '',
+    this.about = '',
   });
 
   factory LocalUser.empty() => LocalUser();
@@ -44,9 +46,15 @@ class LocalUser extends HiveObject {
   @HiveField(7)
   bool? isSeller;
 
-  @HiveField(8)
-  String? googleProfilePictureUrl;
-
   @HiveField(9)
   String? sellerId;
+
+  @HiveField(10)
+  String? profilePictureUrl;
+
+  @HiveField(11)
+  String? phoneNumber;
+
+  @HiveField(12)
+  String? about;
 }

@@ -6,6 +6,7 @@ import 'package:sorioo/core/theme/gap.dart';
 import 'package:sorioo/core/theme/widgets/button/app_button.dart';
 import 'package:sorioo/core/theme/widgets/text/app_text.dart';
 import 'package:sorioo/features/advert/presentation/advert_controller.dart';
+import 'package:sorioo/features/advert/presentation/widgets/advert_item_widget.dart';
 import 'package:sorioo/routing/app_routes.dart';
 
 class AdvertListView extends ConsumerWidget {
@@ -21,7 +22,39 @@ class AdvertListView extends ConsumerWidget {
           title: const AppText('İlan Listesi'),
         ),
         body: listController.when(
-          data: (advertList) => const SizedBox(),
+          data: (advertList) => Padding(
+            padding: kSemiBigPadding,
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    AppText(
+                      'İlanlarım',
+                      style: Theme.of(context).textTheme.displayMedium,
+                    ),
+                    SizedBox(
+                      width: 165,
+                      child: AppPrimaryButton(
+                        title: 'Yeni İlan Oluştur',
+                        onTap: () => GoRouter.of(context).pushNamed(
+                          AppRoutes.sellerAdvertsCreate.name,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const AppGap.big(),
+                Expanded(
+                  child: ListView.separated(
+                    separatorBuilder: (context, index) => const AppGap.regular(),
+                    itemBuilder: (context, index) => AdvertItemWidget(advertItem: advertList[index]),
+                    itemCount: advertList.length,
+                  ),
+                ),
+              ],
+            ),
+          ),
           error: (error, stackTrace) => Column(
             children: [
               Expanded(

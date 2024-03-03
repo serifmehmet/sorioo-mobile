@@ -42,13 +42,14 @@ class GoogleSignInController extends _$GoogleSignInController {
             )
             .addNewLoggedInUser(
               LocalUser(
-                id: signInResult.data!.user.id!,
-                fullName: signInResult.data!.user.fullName!,
-                email: signInResult.data!.user.email!,
-                userName: signInResult.data!.user.userName!,
+                id: signInResult.data!.userId,
+                fullName: signInResult.data!.fullName,
+                email: signInResult.data!.email,
+                phoneNumber: signInResult.data!.phoneNumber,
+                userName: signInResult.data!.userName,
                 refreshToken: signInResult.data!.refreshToken,
                 token: signInResult.data!.token,
-                googleProfilePictureUrl: signInResult.data!.user.googleProfilePictureUrl,
+                profilePictureUrl: signInResult.data!.profilePictureUrl,
                 isSeller: signInResult.data!.userRoles!.isSeller,
                 sellerId: signInResult.data!.sellerId,
               ),
@@ -56,7 +57,7 @@ class GoogleSignInController extends _$GoogleSignInController {
 
         CacheManager.instance.setStringValue(
           PreferencesKeys.userId,
-          signInResult.data!.user.id!,
+          signInResult.data!.userId,
         );
         CacheManager.instance.setBoolValue(PreferencesKeys.isLoggedIn, true);
         return const AsyncData(true);

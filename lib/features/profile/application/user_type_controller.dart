@@ -20,7 +20,7 @@ class UserTypeController extends _$UserTypeController {
 
   Future<void> makeSeller() async {
     final key = this.key;
-    final repository = ref.watch(userProfileRepositoryProviderProvider);
+    final repository = ref.watch(userProfileRepositoryProvider);
     final userId = CacheManager.instance.getStringValue(PreferencesKeys.userId);
     state = const AsyncLoading();
 

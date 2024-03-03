@@ -82,7 +82,7 @@ class ApiErrorHandler {
         case 503:
           return ServiceUnavailableException(message: e?.statusMessage);
         default:
-          return ApiException(message: 'asdadadada');
+          return ApiException(message: 'Sunucu Hatası');
       }
     } else {
       return ApiException(message: 'Acaip bir hata var');

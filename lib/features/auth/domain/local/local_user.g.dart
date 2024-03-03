@@ -22,18 +22,20 @@ class LocalUserAdapter extends TypeAdapter<LocalUser> {
       email: fields[3] as String,
       userName: fields[2] as String,
       refreshToken: fields[5] as String,
-      googleProfilePictureUrl: fields[8] as String?,
+      profilePictureUrl: fields[10] as String?,
       token: fields[4] as String,
       password: fields[6] as String?,
       isSeller: fields[7] as bool?,
       sellerId: fields[9] as String?,
+      phoneNumber: fields[11] as String?,
+      about: fields[12] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, LocalUser obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(12)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -50,10 +52,14 @@ class LocalUserAdapter extends TypeAdapter<LocalUser> {
       ..write(obj.password)
       ..writeByte(7)
       ..write(obj.isSeller)
-      ..writeByte(8)
-      ..write(obj.googleProfilePictureUrl)
       ..writeByte(9)
-      ..write(obj.sellerId);
+      ..write(obj.sellerId)
+      ..writeByte(10)
+      ..write(obj.profilePictureUrl)
+      ..writeByte(11)
+      ..write(obj.phoneNumber)
+      ..writeByte(12)
+      ..write(obj.about);
   }
 
   @override
