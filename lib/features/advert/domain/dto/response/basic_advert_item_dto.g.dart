@@ -12,6 +12,7 @@ _$_BasicAdvertItemDto _$$_BasicAdvertItemDtoFromJson(
       id: json['id'] as String,
       title: json['title'] as String,
       categoryName: json['categoryName'] as String,
+      price: (json['price'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$$_BasicAdvertItemDtoToJson(
@@ -20,4 +21,5 @@ Map<String, dynamic> _$$_BasicAdvertItemDtoToJson(
       'id': instance.id,
       'title': instance.title,
       'categoryName': instance.categoryName,
+      'price': instance.price,
     };

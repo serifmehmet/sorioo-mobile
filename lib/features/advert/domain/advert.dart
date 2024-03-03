@@ -12,7 +12,7 @@ class Advert with _$Advert {
     required String title,
     required String details,
     required String needsToStart,
-    required String userId,
+    required String sellerId,
     String? categoryName,
     String? subCategoryName,
     List<AdvertPackage>? advertPackages,

@@ -23,6 +23,7 @@ mixin _$BasicAdvertItemDto {
   String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get categoryName => throw _privateConstructorUsedError;
+  double get price => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +37,7 @@ abstract class $BasicAdvertItemDtoCopyWith<$Res> {
           BasicAdvertItemDto value, $Res Function(BasicAdvertItemDto) then) =
       _$BasicAdvertItemDtoCopyWithImpl<$Res, BasicAdvertItemDto>;
   @useResult
-  $Res call({String id, String title, String categoryName});
+  $Res call({String id, String title, String categoryName, double price});
 }
 
 /// @nodoc
@@ -55,6 +56,7 @@ class _$BasicAdvertItemDtoCopyWithImpl<$Res, $Val extends BasicAdvertItemDto>
     Object? id = null,
     Object? title = null,
     Object? categoryName = null,
+    Object? price = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -69,6 +71,10 @@ class _$BasicAdvertItemDtoCopyWithImpl<$Res, $Val extends BasicAdvertItemDto>
           ? _value.categoryName
           : categoryName // ignore: cast_nullable_to_non_nullable
               as String,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -81,7 +87,7 @@ abstract class _$$_BasicAdvertItemDtoCopyWith<$Res>
       __$$_BasicAdvertItemDtoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String title, String categoryName});
+  $Res call({String id, String title, String categoryName, double price});
 }
 
 /// @nodoc
@@ -98,6 +104,7 @@ class __$$_BasicAdvertItemDtoCopyWithImpl<$Res>
     Object? id = null,
     Object? title = null,
     Object? categoryName = null,
+    Object? price = null,
   }) {
     return _then(_$_BasicAdvertItemDto(
       id: null == id
@@ -112,6 +119,10 @@ class __$$_BasicAdvertItemDtoCopyWithImpl<$Res>
           ? _value.categoryName
           : categoryName // ignore: cast_nullable_to_non_nullable
               as String,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -120,7 +131,10 @@ class __$$_BasicAdvertItemDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_BasicAdvertItemDto implements _BasicAdvertItemDto {
   _$_BasicAdvertItemDto(
-      {required this.id, required this.title, required this.categoryName});
+      {required this.id,
+      required this.title,
+      required this.categoryName,
+      required this.price});
 
   factory _$_BasicAdvertItemDto.fromJson(Map<String, dynamic> json) =>
       _$$_BasicAdvertItemDtoFromJson(json);
@@ -131,10 +145,12 @@ class _$_BasicAdvertItemDto implements _BasicAdvertItemDto {
   final String title;
   @override
   final String categoryName;
+  @override
+  final double price;
 
   @override
   String toString() {
-    return 'BasicAdvertItemDto(id: $id, title: $title, categoryName: $categoryName)';
+    return 'BasicAdvertItemDto(id: $id, title: $title, categoryName: $categoryName, price: $price)';
   }
 
   @override
@@ -145,12 +161,13 @@ class _$_BasicAdvertItemDto implements _BasicAdvertItemDto {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.categoryName, categoryName) ||
-                other.categoryName == categoryName));
+                other.categoryName == categoryName) &&
+            (identical(other.price, price) || other.price == price));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, categoryName);
+  int get hashCode => Object.hash(runtimeType, id, title, categoryName, price);
 
   @JsonKey(ignore: true)
   @override
@@ -171,7 +188,8 @@ abstract class _BasicAdvertItemDto implements BasicAdvertItemDto {
   factory _BasicAdvertItemDto(
       {required final String id,
       required final String title,
-      required final String categoryName}) = _$_BasicAdvertItemDto;
+      required final String categoryName,
+      required final double price}) = _$_BasicAdvertItemDto;
 
   factory _BasicAdvertItemDto.fromJson(Map<String, dynamic> json) =
       _$_BasicAdvertItemDto.fromJson;
@@ -182,6 +200,8 @@ abstract class _BasicAdvertItemDto implements BasicAdvertItemDto {
   String get title;
   @override
   String get categoryName;
+  @override
+  double get price;
   @override
   @JsonKey(ignore: true)
   _$$_BasicAdvertItemDtoCopyWith<_$_BasicAdvertItemDto> get copyWith =>

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+const kTryCurrencySymbol = '\u{20BA}';
+
 const kPrimaryColor = Color(0xFF33B786);
 const kTextColor = Color(0xFF2B3443);
 const kLightTextColor = Color(0xFF7b7f84);

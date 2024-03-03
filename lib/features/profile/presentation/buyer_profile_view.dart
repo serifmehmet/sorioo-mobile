@@ -1,110 +1,131 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-import 'package:iconly/iconly.dart';
 
-import 'package:sorioo/common/providers/nav_notifier.dart';
-import 'package:sorioo/common/widgets/alert_dialogs.dart';
-import 'package:sorioo/common/widgets/profile_header_widget.dart';
 import 'package:sorioo/core/theme/constants.dart';
+import 'package:sorioo/core/theme/gap.dart';
+import 'package:sorioo/core/theme/widgets/button/app_button.dart';
 import 'package:sorioo/core/theme/widgets/text/app_text.dart';
-import 'package:sorioo/features/auth/presentation/account/account_controller.dart';
-import 'package:sorioo/features/profile/application/user_type_controller.dart';
-import 'package:sorioo/routing/app_routes.dart';
+import 'package:sorioo/features/profile/presentation/buyer_profile_controller.dart';
+import 'package:sorioo/features/profile/presentation/route_args/buyer_profile_edit_args.dart';
 
-class BuyerProfileView extends ConsumerStatefulWidget {
+import 'package:sorioo/routing/navigation_helpers.dart';
+
+class BuyerProfileView extends ConsumerWidget {
   const BuyerProfileView({super.key});
 
   @override
-  ConsumerState<BuyerProfileView> createState() => _BuyerProfileViewState();
-}
-
-class _BuyerProfileViewState extends ConsumerState<BuyerProfileView> {
-  Future<void> _submitLogOut() async {
-    final sub = ref.listenManual(accountControllerProvider.notifier, (_, __) {});
-
-    final success = await sub.read().logOut();
-
-    sub.close();
-
-    if (success && context.mounted) {
-      ref.read(navProvider.notifier).onIndexChanged(0);
-      GoRouter.of(context).goNamed(AppRoutes.home.name);
-    }
-  }
-
-  Future<void> makeSeller() async {
-    await showAlertDialog(
-      context: context,
-      title: 'Emin misin',
-      defaultActionText: 'Devam Et',
-      cancelActionText: 'İptal Et',
-      content: 'Hizmet veren olmak istediğinden emin misin?',
-    ).then((value) async {
-      if (value!) {
-        //User wants to be seller
-        final sub = ref.listenManual(userTypeControllerProvider.notifier, (_, __) {});
-
-        await sub.read().makeSeller();
-        sub.close();
-      }
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final buyerProfile = ref.watch(buyerProfileControllerProvider);
     return SafeArea(
-      child: SingleChildScrollView(
-        physics: const NeverScrollableScrollPhysics(),
-        child: Padding(
-          padding: kBigPadding,
-          child: Column(
-            children: [
-              const ProfileHeaderWidget(),
-              // const AppGap.semiBig(),
-              // const ChangeUserTypeWidget(),
-              // const AppGap.semiBig(),
-
-              ColoredBox(
-                color: Colors.black12,
-                child: ListTile(
-                  leading: const Icon(IconlyBold.star),
-                  trailing: const Icon(IconlyBold.arrow_right_2),
-                  title: AppText(
-                    'Hizmet Veren Ol',
-                    style: Theme.of(context).textTheme.bodyMedium,
+      child: Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          title: const AppText('Profilim'),
+        ),
+        body: buyerProfile.when(
+          data: (profile) {
+            return Column(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: kSemiBigPadding,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        color: kColorWhite,
+                        padding: kSemiBigPadding,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Center(
+                              child: CircleAvatar(
+                                radius: 40,
+                                backgroundImage: profile.userProfileImage != null
+                                    ? Image.network(
+                                        profile.userProfileImage!.filePath,
+                                      ).image
+                                    : Image.asset(
+                                        'assets/images/default-avatar.png',
+                                      ).image,
+                              ),
+                            ),
+                            const AppGap.big(),
+                            AppText(
+                              'Ad-Soyad',
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
+                            const AppGap.regular(),
+                            Container(
+                              width: MediaQuery.of(context).size.width,
+                              color: kDisabledContainerColor,
+                              padding: kSemiBigPadding,
+                              child: AppText(
+                                profile.fullName,
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                            ),
+                            const AppGap.semiBig(),
+                            AppText(
+                              'Telefon Numarası',
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
+                            const AppGap.regular(),
+                            Container(
+                              width: MediaQuery.of(context).size.width,
+                              color: kDisabledContainerColor,
+                              padding: kSemiBigPadding,
+                              child: AppText(
+                                profile.phoneNumber.isEmpty ? 'Belirtilmemiş' : profile.phoneNumber,
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                            ),
+                            const AppGap.semiBig(),
+                            AppText(
+                              'Hakkımda',
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
+                            const AppGap.regular(),
+                            Container(
+                              width: MediaQuery.of(context).size.width,
+                              color: kDisabledContainerColor,
+                              padding: kSemiBigPadding,
+                              child: AppText(
+                                profile.about.isEmpty
+                                    ? 'Hizmet verenlerle sağlıklı bir iletişim kurmak amaçlı kendin hakkında ufak bir bilgi verebilirsin.'
+                                    : profile.about,
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
-                  onTap: makeSeller,
                 ),
-              ),
-
-              ColoredBox(
-                color: Colors.black12,
-                child: ListTile(
-                  leading: const Icon(IconlyBold.edit),
-                  trailing: const Icon(IconlyBold.arrow_right_2),
-                  title: AppText(
-                    'Profili Düzenle',
-                    style: Theme.of(context).textTheme.bodyMedium,
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  decoration: const BoxDecoration(
+                    color: kColorWhite,
                   ),
-                  onTap: () => GoRouter.of(context).pushNamed(
-                    AppRoutes.editProfile.name,
+                  padding: kSemiBigPadding,
+                  child: AppPrimaryButton(
+                    title: 'Güncelle',
+                    onTap: () => context.navigator.pushBuyerProfileEdit(
+                      BuyerProfileEditArgs(
+                        fullName: profile.fullName,
+                        phoneNumber: profile.phoneNumber,
+                        profilePictureUrl: profile.profilePictureUrl,
+                        about: profile.about,
+                      ),
+                    ),
                   ),
                 ),
-              ),
-              Container(
-                color: Colors.black12,
-                child: ListTile(
-                  leading: const Icon(IconlyBold.logout),
-                  trailing: const Icon(IconlyBold.arrow_right_2),
-                  title: AppText(
-                    'Oturumu Kapat',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                  onTap: _submitLogOut,
-                ),
-              ),
-            ],
+              ],
+            );
+          },
+          error: (error, stackTrace) => const SizedBox(),
+          loading: () => const Center(
+            child: CircularProgressIndicator(),
           ),
         ),
       ),

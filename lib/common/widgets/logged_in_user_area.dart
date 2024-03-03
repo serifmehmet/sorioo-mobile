@@ -27,8 +27,8 @@ class LoggedInUserArea extends ConsumerWidget {
           children: [
             CircleAvatar(
               radius: avatarRadius,
-              backgroundImage: localUser.googleProfilePictureUrl != null
-                  ? Image.network(localUser.googleProfilePictureUrl!).image
+              backgroundImage: localUser.profilePictureUrl != null
+                  ? Image.network(localUser.profilePictureUrl!).image
                   : Image.asset(
                       'assets/images/default-avatar.png',
                     ).image,

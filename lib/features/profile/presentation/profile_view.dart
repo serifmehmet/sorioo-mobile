@@ -6,7 +6,7 @@ import 'package:sorioo/common/providers/local_user_provider.dart';
 import 'package:sorioo/common/widgets/preferred_app_bar_widget.dart';
 import 'package:sorioo/core/theme/constants.dart';
 
-import 'package:sorioo/features/profile/presentation/buyer_profile_view.dart';
+import 'package:sorioo/features/profile/presentation/buyer_view.dart';
 
 import 'package:sorioo/features/seller/presentation/seller_view.dart';
 
@@ -26,7 +26,7 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
 
     return Scaffold(
       appBar: const PreferredAppBarWidget(),
-      body: localUser.isSeller! ? const SellerView() : const BuyerProfileView(),
+      body: localUser.isSeller! ? const SellerView() : const BuyerView(),
     );
   }
 }

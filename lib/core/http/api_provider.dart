@@ -18,7 +18,7 @@ enum ContentType { urlEncoded, json }
 @riverpod
 Dio dio(DioRef ref) {
   late final dio = Dio();
-  dio.options.baseUrl = Env.apiRemoteUrl;
+  dio.options.baseUrl = Env.apiLocalDevUrl;
   dio.options.sendTimeout = const Duration(seconds: 45);
   // dio.options.connectTimeout = const Duration(seconds: 5);
   dio.options.receiveTimeout = const Duration(seconds: 45);

@@ -20,9 +20,13 @@ AdvertPackage _$AdvertPackageFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$AdvertPackage {
-  String get name => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
+  int get packageType => throw _privateConstructorUsedError;
   double get price => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false)
+  String? get advertId => throw _privateConstructorUsedError;
+  int? get educationOrConsultancy => throw _privateConstructorUsedError;
+  int? get workDurationLimit => throw _privateConstructorUsedError;
+  int? get advertPackageChoice => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +40,13 @@ abstract class $AdvertPackageCopyWith<$Res> {
           AdvertPackage value, $Res Function(AdvertPackage) then) =
       _$AdvertPackageCopyWithImpl<$Res, AdvertPackage>;
   @useResult
-  $Res call({String name, String description, double price});
+  $Res call(
+      {int packageType,
+      double price,
+      @JsonKey(includeToJson: false) String? advertId,
+      int? educationOrConsultancy,
+      int? workDurationLimit,
+      int? advertPackageChoice});
 }
 
 /// @nodoc
@@ -52,23 +62,38 @@ class _$AdvertPackageCopyWithImpl<$Res, $Val extends AdvertPackage>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
-    Object? description = null,
+    Object? packageType = null,
     Object? price = null,
+    Object? advertId = freezed,
+    Object? educationOrConsultancy = freezed,
+    Object? workDurationLimit = freezed,
+    Object? advertPackageChoice = freezed,
   }) {
     return _then(_value.copyWith(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
+      packageType: null == packageType
+          ? _value.packageType
+          : packageType // ignore: cast_nullable_to_non_nullable
+              as int,
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as double,
+      advertId: freezed == advertId
+          ? _value.advertId
+          : advertId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      educationOrConsultancy: freezed == educationOrConsultancy
+          ? _value.educationOrConsultancy
+          : educationOrConsultancy // ignore: cast_nullable_to_non_nullable
+              as int?,
+      workDurationLimit: freezed == workDurationLimit
+          ? _value.workDurationLimit
+          : workDurationLimit // ignore: cast_nullable_to_non_nullable
+              as int?,
+      advertPackageChoice: freezed == advertPackageChoice
+          ? _value.advertPackageChoice
+          : advertPackageChoice // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -81,7 +106,13 @@ abstract class _$$_AdvertPackageCopyWith<$Res>
       __$$_AdvertPackageCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String description, double price});
+  $Res call(
+      {int packageType,
+      double price,
+      @JsonKey(includeToJson: false) String? advertId,
+      int? educationOrConsultancy,
+      int? workDurationLimit,
+      int? advertPackageChoice});
 }
 
 /// @nodoc
@@ -95,23 +126,38 @@ class __$$_AdvertPackageCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
-    Object? description = null,
+    Object? packageType = null,
     Object? price = null,
+    Object? advertId = freezed,
+    Object? educationOrConsultancy = freezed,
+    Object? workDurationLimit = freezed,
+    Object? advertPackageChoice = freezed,
   }) {
     return _then(_$_AdvertPackage(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
+      packageType: null == packageType
+          ? _value.packageType
+          : packageType // ignore: cast_nullable_to_non_nullable
+              as int,
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as double,
+      advertId: freezed == advertId
+          ? _value.advertId
+          : advertId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      educationOrConsultancy: freezed == educationOrConsultancy
+          ? _value.educationOrConsultancy
+          : educationOrConsultancy // ignore: cast_nullable_to_non_nullable
+              as int?,
+      workDurationLimit: freezed == workDurationLimit
+          ? _value.workDurationLimit
+          : workDurationLimit // ignore: cast_nullable_to_non_nullable
+              as int?,
+      advertPackageChoice: freezed == advertPackageChoice
+          ? _value.advertPackageChoice
+          : advertPackageChoice // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -120,21 +166,33 @@ class __$$_AdvertPackageCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_AdvertPackage implements _AdvertPackage {
   _$_AdvertPackage(
-      {required this.name, required this.description, required this.price});
+      {required this.packageType,
+      required this.price,
+      @JsonKey(includeToJson: false) this.advertId,
+      this.educationOrConsultancy,
+      this.workDurationLimit,
+      this.advertPackageChoice});
 
   factory _$_AdvertPackage.fromJson(Map<String, dynamic> json) =>
       _$$_AdvertPackageFromJson(json);
 
   @override
-  final String name;
-  @override
-  final String description;
+  final int packageType;
   @override
   final double price;
+  @override
+  @JsonKey(includeToJson: false)
+  final String? advertId;
+  @override
+  final int? educationOrConsultancy;
+  @override
+  final int? workDurationLimit;
+  @override
+  final int? advertPackageChoice;
 
   @override
   String toString() {
-    return 'AdvertPackage(name: $name, description: $description, price: $price)';
+    return 'AdvertPackage(packageType: $packageType, price: $price, advertId: $advertId, educationOrConsultancy: $educationOrConsultancy, workDurationLimit: $workDurationLimit, advertPackageChoice: $advertPackageChoice)';
   }
 
   @override
@@ -142,15 +200,23 @@ class _$_AdvertPackage implements _AdvertPackage {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AdvertPackage &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
-            (identical(other.price, price) || other.price == price));
+            (identical(other.packageType, packageType) ||
+                other.packageType == packageType) &&
+            (identical(other.price, price) || other.price == price) &&
+            (identical(other.advertId, advertId) ||
+                other.advertId == advertId) &&
+            (identical(other.educationOrConsultancy, educationOrConsultancy) ||
+                other.educationOrConsultancy == educationOrConsultancy) &&
+            (identical(other.workDurationLimit, workDurationLimit) ||
+                other.workDurationLimit == workDurationLimit) &&
+            (identical(other.advertPackageChoice, advertPackageChoice) ||
+                other.advertPackageChoice == advertPackageChoice));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, description, price);
+  int get hashCode => Object.hash(runtimeType, packageType, price, advertId,
+      educationOrConsultancy, workDurationLimit, advertPackageChoice);
 
   @JsonKey(ignore: true)
   @override
@@ -168,19 +234,29 @@ class _$_AdvertPackage implements _AdvertPackage {
 
 abstract class _AdvertPackage implements AdvertPackage {
   factory _AdvertPackage(
-      {required final String name,
-      required final String description,
-      required final double price}) = _$_AdvertPackage;
+      {required final int packageType,
+      required final double price,
+      @JsonKey(includeToJson: false) final String? advertId,
+      final int? educationOrConsultancy,
+      final int? workDurationLimit,
+      final int? advertPackageChoice}) = _$_AdvertPackage;
 
   factory _AdvertPackage.fromJson(Map<String, dynamic> json) =
       _$_AdvertPackage.fromJson;
 
   @override
-  String get name;
-  @override
-  String get description;
+  int get packageType;
   @override
   double get price;
+  @override
+  @JsonKey(includeToJson: false)
+  String? get advertId;
+  @override
+  int? get educationOrConsultancy;
+  @override
+  int? get workDurationLimit;
+  @override
+  int? get advertPackageChoice;
   @override
   @JsonKey(ignore: true)
   _$$_AdvertPackageCopyWith<_$_AdvertPackage> get copyWith =>

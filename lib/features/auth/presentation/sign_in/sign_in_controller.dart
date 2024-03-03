@@ -34,19 +34,23 @@ class SingInController extends _$SingInController {
             )
             .addNewLoggedInUser(
               LocalUser(
-                id: success.data!.user.id!,
-                fullName: success.data!.user.fullName!,
+                id: success.data!.userId,
+                fullName: success.data!.fullName,
                 email: email,
+                phoneNumber: success.data!.phoneNumber,
                 password: password,
-                userName: success.data!.user.userName!,
+                userName: success.data!.userName,
+                about: success.data!.about,
+                profilePictureUrl: success.data!.profilePictureUrl,
                 refreshToken: success.data!.refreshToken,
                 token: success.data!.token,
                 isSeller: success.data!.userRoles!.isSeller,
+                sellerId: success.data!.sellerId,
               ),
             );
         CacheManager.instance.setStringValue(
           PreferencesKeys.userId,
-          success.data!.user.id!,
+          success.data!.userId,
         );
         CacheManager.instance.setBoolValue(PreferencesKeys.isLoggedIn, true);
 
@@ -83,13 +87,15 @@ class SingInController extends _$SingInController {
             )
             .addNewLoggedInUser(
               LocalUser(
-                id: signInResult.data!.user.id!,
-                fullName: signInResult.data!.user.fullName!,
-                email: signInResult.data!.user.email!,
-                userName: signInResult.data!.user.userName!,
+                id: signInResult.data!.userId,
+                fullName: signInResult.data!.fullName,
+                email: signInResult.data!.email,
+                userName: signInResult.data!.userName,
+                phoneNumber: signInResult.data!.phoneNumber,
                 refreshToken: signInResult.data!.refreshToken,
                 token: signInResult.data!.token,
-                googleProfilePictureUrl: signInResult.data!.user.googleProfilePictureUrl,
+                profilePictureUrl: signInResult.data!.profilePictureUrl,
+                about: signInResult.data!.about,
                 isSeller: signInResult.data!.userRoles!.isSeller,
                 sellerId: signInResult.data!.sellerId,
               ),
@@ -97,7 +103,7 @@ class SingInController extends _$SingInController {
 
         CacheManager.instance.setStringValue(
           PreferencesKeys.userId,
-          signInResult.data!.user.id!,
+          signInResult.data!.userId,
         );
         CacheManager.instance.setBoolValue(PreferencesKeys.isLoggedIn, true);
         return const AsyncData(true);

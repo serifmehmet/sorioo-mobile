@@ -7,7 +7,7 @@ part of 'google_sign_in_controller.dart';
 // **************************************************************************
 
 String _$googleSignInControllerHash() =>
-    r'c1441e998725b1399a5be29e21cc86e9baebf57c';
+    r'57f76fea396885e2c6af9a545e82b945b594c478';
 
 /// See also [GoogleSignInController].
 @ProviderFor(GoogleSignInController)

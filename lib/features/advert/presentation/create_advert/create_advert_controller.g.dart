@@ -7,7 +7,7 @@ part of 'create_advert_controller.dart';
 // **************************************************************************
 
 String _$createAdvertControllerHash() =>
-    r'b40f55662073f1b95f8b8e6759aa52612b71c179';
+    r'3e2beb53ed57385a7fd327820550d5092932e30e';
 
 /// See also [CreateAdvertController].
 @ProviderFor(CreateAdvertController)

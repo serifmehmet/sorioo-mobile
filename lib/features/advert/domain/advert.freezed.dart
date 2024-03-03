@@ -25,7 +25,7 @@ mixin _$Advert {
   String get title => throw _privateConstructorUsedError;
   String get details => throw _privateConstructorUsedError;
   String get needsToStart => throw _privateConstructorUsedError;
-  String get userId => throw _privateConstructorUsedError;
+  String get sellerId => throw _privateConstructorUsedError;
   String? get categoryName => throw _privateConstructorUsedError;
   String? get subCategoryName => throw _privateConstructorUsedError;
   List<AdvertPackage>? get advertPackages => throw _privateConstructorUsedError;
@@ -47,7 +47,7 @@ abstract class $AdvertCopyWith<$Res> {
       String title,
       String details,
       String needsToStart,
-      String userId,
+      String sellerId,
       String? categoryName,
       String? subCategoryName,
       List<AdvertPackage>? advertPackages,
@@ -72,7 +72,7 @@ class _$AdvertCopyWithImpl<$Res, $Val extends Advert>
     Object? title = null,
     Object? details = null,
     Object? needsToStart = null,
-    Object? userId = null,
+    Object? sellerId = null,
     Object? categoryName = freezed,
     Object? subCategoryName = freezed,
     Object? advertPackages = freezed,
@@ -99,9 +99,9 @@ class _$AdvertCopyWithImpl<$Res, $Val extends Advert>
           ? _value.needsToStart
           : needsToStart // ignore: cast_nullable_to_non_nullable
               as String,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
+      sellerId: null == sellerId
+          ? _value.sellerId
+          : sellerId // ignore: cast_nullable_to_non_nullable
               as String,
       categoryName: freezed == categoryName
           ? _value.categoryName
@@ -135,7 +135,7 @@ abstract class _$$_AdvertCopyWith<$Res> implements $AdvertCopyWith<$Res> {
       String title,
       String details,
       String needsToStart,
-      String userId,
+      String sellerId,
       String? categoryName,
       String? subCategoryName,
       List<AdvertPackage>? advertPackages,
@@ -157,7 +157,7 @@ class __$$_AdvertCopyWithImpl<$Res>
     Object? title = null,
     Object? details = null,
     Object? needsToStart = null,
-    Object? userId = null,
+    Object? sellerId = null,
     Object? categoryName = freezed,
     Object? subCategoryName = freezed,
     Object? advertPackages = freezed,
@@ -184,9 +184,9 @@ class __$$_AdvertCopyWithImpl<$Res>
           ? _value.needsToStart
           : needsToStart // ignore: cast_nullable_to_non_nullable
               as String,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
+      sellerId: null == sellerId
+          ? _value.sellerId
+          : sellerId // ignore: cast_nullable_to_non_nullable
               as String,
       categoryName: freezed == categoryName
           ? _value.categoryName
@@ -217,7 +217,7 @@ class _$_Advert implements _Advert {
       required this.title,
       required this.details,
       required this.needsToStart,
-      required this.userId,
+      required this.sellerId,
       this.categoryName,
       this.subCategoryName,
       final List<AdvertPackage>? advertPackages,
@@ -238,7 +238,7 @@ class _$_Advert implements _Advert {
   @override
   final String needsToStart;
   @override
-  final String userId;
+  final String sellerId;
   @override
   final String? categoryName;
   @override
@@ -258,7 +258,7 @@ class _$_Advert implements _Advert {
 
   @override
   String toString() {
-    return 'Advert(advertMainCategoryId: $advertMainCategoryId, advertSubCategoryId: $advertSubCategoryId, title: $title, details: $details, needsToStart: $needsToStart, userId: $userId, categoryName: $categoryName, subCategoryName: $subCategoryName, advertPackages: $advertPackages, isValidated: $isValidated)';
+    return 'Advert(advertMainCategoryId: $advertMainCategoryId, advertSubCategoryId: $advertSubCategoryId, title: $title, details: $details, needsToStart: $needsToStart, sellerId: $sellerId, categoryName: $categoryName, subCategoryName: $subCategoryName, advertPackages: $advertPackages, isValidated: $isValidated)';
   }
 
   @override
@@ -274,7 +274,8 @@ class _$_Advert implements _Advert {
             (identical(other.details, details) || other.details == details) &&
             (identical(other.needsToStart, needsToStart) ||
                 other.needsToStart == needsToStart) &&
-            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.sellerId, sellerId) ||
+                other.sellerId == sellerId) &&
             (identical(other.categoryName, categoryName) ||
                 other.categoryName == categoryName) &&
             (identical(other.subCategoryName, subCategoryName) ||
@@ -294,7 +295,7 @@ class _$_Advert implements _Advert {
       title,
       details,
       needsToStart,
-      userId,
+      sellerId,
       categoryName,
       subCategoryName,
       const DeepCollectionEquality().hash(_advertPackages),
@@ -321,7 +322,7 @@ abstract class _Advert implements Advert {
       required final String title,
       required final String details,
       required final String needsToStart,
-      required final String userId,
+      required final String sellerId,
       final String? categoryName,
       final String? subCategoryName,
       final List<AdvertPackage>? advertPackages,
@@ -340,7 +341,7 @@ abstract class _Advert implements Advert {
   @override
   String get needsToStart;
   @override
-  String get userId;
+  String get sellerId;
   @override
   String? get categoryName;
   @override

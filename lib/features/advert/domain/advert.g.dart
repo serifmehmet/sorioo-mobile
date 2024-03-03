@@ -12,7 +12,7 @@ _$_Advert _$$_AdvertFromJson(Map<String, dynamic> json) => _$_Advert(
       title: json['title'] as String,
       details: json['details'] as String,
       needsToStart: json['needsToStart'] as String,
-      userId: json['userId'] as String,
+      sellerId: json['sellerId'] as String,
       categoryName: json['categoryName'] as String?,
       subCategoryName: json['subCategoryName'] as String?,
       advertPackages: (json['advertPackages'] as List<dynamic>?)
@@ -27,7 +27,7 @@ Map<String, dynamic> _$$_AdvertToJson(_$_Advert instance) => <String, dynamic>{
       'title': instance.title,
       'details': instance.details,
       'needsToStart': instance.needsToStart,
-      'userId': instance.userId,
+      'sellerId': instance.sellerId,
       'categoryName': instance.categoryName,
       'subCategoryName': instance.subCategoryName,
       'advertPackages': instance.advertPackages,

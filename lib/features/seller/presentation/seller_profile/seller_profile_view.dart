@@ -45,7 +45,9 @@ class _SellerProfileViewState extends ConsumerState<SellerProfileView> {
                       children: [
                         CircleAvatar(
                           radius: 40,
-                          backgroundImage: Image.network(localUser.googleProfilePictureUrl!).image,
+                          backgroundImage: Image.network(
+                            localUser.profilePictureUrl!,
+                          ).image,
                         ),
                         const AppGap.regular(),
                         AppText(

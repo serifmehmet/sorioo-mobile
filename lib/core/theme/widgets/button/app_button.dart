@@ -3,29 +3,27 @@ import 'package:sorioo/core/theme/colors.dart';
 import 'package:sorioo/core/theme/constants.dart';
 import 'package:tap_builder/tap_builder.dart';
 
-import '../../gap.dart';
-import '../text/app_text.dart';
+import 'package:sorioo/core/theme/gap.dart';
+import 'package:sorioo/core/theme/widgets/text/app_text.dart';
 
 class AppPrimaryButton extends StatelessWidget {
-  final Icon? icon;
-  final String? title;
-  final MainAxisSize mainAxisSize;
-  final VoidCallback? onTap;
-  final BoxShape? boxShape;
-  final bool isLoading;
-
   const AppPrimaryButton({
-    Key? key,
+    super.key,
     this.icon,
     this.title,
     this.onTap,
     this.boxShape,
     this.mainAxisSize = MainAxisSize.min,
     this.isLoading = false,
-  })  : assert(
+  }) : assert(
           icon != null || title != null,
-        ),
-        super(key: key);
+        );
+  final Icon? icon;
+  final String? title;
+  final MainAxisSize mainAxisSize;
+  final VoidCallback? onTap;
+  final BoxShape? boxShape;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -70,25 +68,8 @@ enum AppButtonState {
 }
 
 class AppButtonLayout extends StatelessWidget {
-  final Icon? icon;
-  final String? title;
-  final MainAxisSize mainAxisSize;
-  final AppButtonState _state;
-  final Color? activeBackgroundColor;
-  final Color? disabledBackgroundColor;
-  final Color? foregroundColor;
-  final Color? fontColor;
-
-  final BoxShape? boxShape;
-  final bool hasBorder;
-  final bool hasImage;
-  final Widget? image;
-  final AppTextLevel? level;
-  final TextStyle? style;
-  final bool isLoading;
-
   const AppButtonLayout.active({
-    Key? key,
+    super.key,
     this.icon,
     this.title,
     this.mainAxisSize = MainAxisSize.min,
@@ -104,11 +85,10 @@ class AppButtonLayout extends StatelessWidget {
     this.style,
     this.isLoading = false,
   })  : _state = AppButtonState.active,
-        assert(icon != null || title != null, boxShape != null),
-        super(key: key);
+        assert(icon != null || title != null, boxShape != null);
 
   const AppButtonLayout.disabled({
-    Key? key,
+    super.key,
     this.icon,
     this.title,
     this.mainAxisSize = MainAxisSize.min,
@@ -126,14 +106,29 @@ class AppButtonLayout extends StatelessWidget {
   })  : _state = AppButtonState.disabled,
         assert(
           icon != null || title != null,
-        ),
-        super(key: key);
+        );
+  final Icon? icon;
+  final String? title;
+  final MainAxisSize mainAxisSize;
+  final AppButtonState _state;
+  final Color? activeBackgroundColor;
+  final Color? disabledBackgroundColor;
+  final Color? foregroundColor;
+  final Color? fontColor;
+
+  final BoxShape? boxShape;
+  final bool hasBorder;
+  final bool hasImage;
+  final Widget? image;
+  final AppTextLevel? level;
+  final TextStyle? style;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
     final title = this.title;
     final icon = this.icon;
-    final hasBoth = (title != null && icon != null);
+    final hasBoth = title != null && icon != null;
     final backgroundColor = () {
       switch (_state) {
         case AppButtonState.active:
@@ -149,7 +144,7 @@ class AppButtonLayout extends StatelessWidget {
       height: 58,
       decoration: BoxDecoration(
         borderRadius: boxShape != null ? null : kRegularBorderRadius,
-        border: hasBorder ? Border.all(width: 1, color: AppColors.greySC200) : null,
+        border: hasBorder ? Border.all(color: AppColors.greySC200) : null,
         shape: boxShape != null ? boxShape! : BoxShape.rectangle,
         color: backgroundColor,
       ),

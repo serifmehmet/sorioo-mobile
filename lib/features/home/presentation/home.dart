@@ -8,7 +8,7 @@ import 'package:sorioo/common/widgets/preferred_app_bar_widget.dart';
 import 'package:sorioo/core/theme/constants.dart';
 import 'package:sorioo/core/theme/gap.dart';
 import 'package:sorioo/core/theme/widgets/text/app_text.dart';
-import 'package:sorioo/features/category/domain/models/category.dart';
+
 import 'package:sorioo/features/home/presentation/widgets/ask_area_widget.dart';
 import 'package:sorioo/features/home/presentation/widgets/header_area_widget.dart';
 import 'package:sorioo/routing/app_routes.dart';

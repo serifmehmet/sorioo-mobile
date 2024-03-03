@@ -15,11 +15,15 @@ enum AppRoutes {
   //category feature
   category(name: 'category', path: '/category'),
   subCategoryList(name: 'subCategoryList', path: 'subCategoryList'),
+  advertListOnCategory(name: 'advertListOnCategory', path: 'advertListOnCategory'),
+  //advert
+  advertDetail(name: 'advertDetail', path: 'advertDetail'),
 
   sorioo(name: 'sorioo', path: '/sorioo'),
   profile(name: 'profile', path: '/profile'),
 
-  editProfile(name: 'editProfile', path: 'editProfile'),
+  buyerProfile(name: 'buyerProfile', path: '/buyerProfile'),
+  editBuyerProfile(name: 'editBuyerProfile', path: 'editBuyerProfile'),
 
   //sellerFeature
   sellerProfile(name: 'sellerProfile', path: '/sellerProfile'),

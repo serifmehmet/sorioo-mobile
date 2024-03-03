@@ -20,10 +20,16 @@ AuthResponse _$AuthResponseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$AuthResponse {
+  String get userId => throw _privateConstructorUsedError;
+  String get userName => throw _privateConstructorUsedError;
   String get token => throw _privateConstructorUsedError;
   String get refreshToken => throw _privateConstructorUsedError;
-  User get user => throw _privateConstructorUsedError;
+  String get fullName => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
+  String? get phoneNumber => throw _privateConstructorUsedError;
+  String get profilePictureUrl => throw _privateConstructorUsedError;
   String? get sellerId => throw _privateConstructorUsedError;
+  String get about => throw _privateConstructorUsedError;
   @JsonKey(name: 'userRole')
   UserRoles? get userRoles => throw _privateConstructorUsedError;
 
@@ -40,13 +46,17 @@ abstract class $AuthResponseCopyWith<$Res> {
       _$AuthResponseCopyWithImpl<$Res, AuthResponse>;
   @useResult
   $Res call(
-      {String token,
+      {String userId,
+      String userName,
+      String token,
       String refreshToken,
-      User user,
+      String fullName,
+      String email,
+      String? phoneNumber,
+      String profilePictureUrl,
       String? sellerId,
+      String about,
       @JsonKey(name: 'userRole') UserRoles? userRoles});
-
-  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -62,13 +72,27 @@ class _$AuthResponseCopyWithImpl<$Res, $Val extends AuthResponse>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? userId = null,
+    Object? userName = null,
     Object? token = null,
     Object? refreshToken = null,
-    Object? user = null,
+    Object? fullName = null,
+    Object? email = null,
+    Object? phoneNumber = freezed,
+    Object? profilePictureUrl = null,
     Object? sellerId = freezed,
+    Object? about = null,
     Object? userRoles = freezed,
   }) {
     return _then(_value.copyWith(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      userName: null == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String,
       token: null == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
@@ -77,27 +101,35 @@ class _$AuthResponseCopyWithImpl<$Res, $Val extends AuthResponse>
           ? _value.refreshToken
           : refreshToken // ignore: cast_nullable_to_non_nullable
               as String,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
+      fullName: null == fullName
+          ? _value.fullName
+          : fullName // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      phoneNumber: freezed == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      profilePictureUrl: null == profilePictureUrl
+          ? _value.profilePictureUrl
+          : profilePictureUrl // ignore: cast_nullable_to_non_nullable
+              as String,
       sellerId: freezed == sellerId
           ? _value.sellerId
           : sellerId // ignore: cast_nullable_to_non_nullable
               as String?,
+      about: null == about
+          ? _value.about
+          : about // ignore: cast_nullable_to_non_nullable
+              as String,
       userRoles: freezed == userRoles
           ? _value.userRoles
           : userRoles // ignore: cast_nullable_to_non_nullable
               as UserRoles?,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value) as $Val);
-    });
   }
 }
 
@@ -110,14 +142,17 @@ abstract class _$$_AuthResponseCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String token,
+      {String userId,
+      String userName,
+      String token,
       String refreshToken,
-      User user,
+      String fullName,
+      String email,
+      String? phoneNumber,
+      String profilePictureUrl,
       String? sellerId,
+      String about,
       @JsonKey(name: 'userRole') UserRoles? userRoles});
-
-  @override
-  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -131,13 +166,27 @@ class __$$_AuthResponseCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? userId = null,
+    Object? userName = null,
     Object? token = null,
     Object? refreshToken = null,
-    Object? user = null,
+    Object? fullName = null,
+    Object? email = null,
+    Object? phoneNumber = freezed,
+    Object? profilePictureUrl = null,
     Object? sellerId = freezed,
+    Object? about = null,
     Object? userRoles = freezed,
   }) {
     return _then(_$_AuthResponse(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      userName: null == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String,
       token: null == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
@@ -146,14 +195,30 @@ class __$$_AuthResponseCopyWithImpl<$Res>
           ? _value.refreshToken
           : refreshToken // ignore: cast_nullable_to_non_nullable
               as String,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
+      fullName: null == fullName
+          ? _value.fullName
+          : fullName // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      phoneNumber: freezed == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      profilePictureUrl: null == profilePictureUrl
+          ? _value.profilePictureUrl
+          : profilePictureUrl // ignore: cast_nullable_to_non_nullable
+              as String,
       sellerId: freezed == sellerId
           ? _value.sellerId
           : sellerId // ignore: cast_nullable_to_non_nullable
               as String?,
+      about: null == about
+          ? _value.about
+          : about // ignore: cast_nullable_to_non_nullable
+              as String,
       userRoles: freezed == userRoles
           ? _value.userRoles
           : userRoles // ignore: cast_nullable_to_non_nullable
@@ -166,30 +231,50 @@ class __$$_AuthResponseCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_AuthResponse implements _AuthResponse {
   _$_AuthResponse(
-      {required this.token,
+      {required this.userId,
+      required this.userName,
+      required this.token,
       required this.refreshToken,
-      required this.user,
+      required this.fullName,
+      required this.email,
+      this.phoneNumber,
+      this.profilePictureUrl = '',
       this.sellerId,
+      this.about = '',
       @JsonKey(name: 'userRole') this.userRoles});
 
   factory _$_AuthResponse.fromJson(Map<String, dynamic> json) =>
       _$$_AuthResponseFromJson(json);
 
   @override
+  final String userId;
+  @override
+  final String userName;
+  @override
   final String token;
   @override
   final String refreshToken;
   @override
-  final User user;
+  final String fullName;
+  @override
+  final String email;
+  @override
+  final String? phoneNumber;
+  @override
+  @JsonKey()
+  final String profilePictureUrl;
   @override
   final String? sellerId;
+  @override
+  @JsonKey()
+  final String about;
   @override
   @JsonKey(name: 'userRole')
   final UserRoles? userRoles;
 
   @override
   String toString() {
-    return 'AuthResponse(token: $token, refreshToken: $refreshToken, user: $user, sellerId: $sellerId, userRoles: $userRoles)';
+    return 'AuthResponse(userId: $userId, userName: $userName, token: $token, refreshToken: $refreshToken, fullName: $fullName, email: $email, phoneNumber: $phoneNumber, profilePictureUrl: $profilePictureUrl, sellerId: $sellerId, about: $about, userRoles: $userRoles)';
   }
 
   @override
@@ -197,20 +282,41 @@ class _$_AuthResponse implements _AuthResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AuthResponse &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.userName, userName) ||
+                other.userName == userName) &&
             (identical(other.token, token) || other.token == token) &&
             (identical(other.refreshToken, refreshToken) ||
                 other.refreshToken == refreshToken) &&
-            (identical(other.user, user) || other.user == user) &&
+            (identical(other.fullName, fullName) ||
+                other.fullName == fullName) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.phoneNumber, phoneNumber) ||
+                other.phoneNumber == phoneNumber) &&
+            (identical(other.profilePictureUrl, profilePictureUrl) ||
+                other.profilePictureUrl == profilePictureUrl) &&
             (identical(other.sellerId, sellerId) ||
                 other.sellerId == sellerId) &&
+            (identical(other.about, about) || other.about == about) &&
             (identical(other.userRoles, userRoles) ||
                 other.userRoles == userRoles));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, token, refreshToken, user, sellerId, userRoles);
+  int get hashCode => Object.hash(
+      runtimeType,
+      userId,
+      userName,
+      token,
+      refreshToken,
+      fullName,
+      email,
+      phoneNumber,
+      profilePictureUrl,
+      sellerId,
+      about,
+      userRoles);
 
   @JsonKey(ignore: true)
   @override
@@ -228,23 +334,41 @@ class _$_AuthResponse implements _AuthResponse {
 
 abstract class _AuthResponse implements AuthResponse {
   factory _AuthResponse(
-      {required final String token,
+      {required final String userId,
+      required final String userName,
+      required final String token,
       required final String refreshToken,
-      required final User user,
+      required final String fullName,
+      required final String email,
+      final String? phoneNumber,
+      final String profilePictureUrl,
       final String? sellerId,
+      final String about,
       @JsonKey(name: 'userRole') final UserRoles? userRoles}) = _$_AuthResponse;
 
   factory _AuthResponse.fromJson(Map<String, dynamic> json) =
       _$_AuthResponse.fromJson;
 
   @override
+  String get userId;
+  @override
+  String get userName;
+  @override
   String get token;
   @override
   String get refreshToken;
   @override
-  User get user;
+  String get fullName;
+  @override
+  String get email;
+  @override
+  String? get phoneNumber;
+  @override
+  String get profilePictureUrl;
   @override
   String? get sellerId;
+  @override
+  String get about;
   @override
   @JsonKey(name: 'userRole')
   UserRoles? get userRoles;

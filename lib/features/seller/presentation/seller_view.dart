@@ -25,7 +25,7 @@ class _SellerViewState extends ConsumerState<SellerView> {
     sub.close();
 
     if (success && context.mounted) {
-      ref.read(navProvider.notifier).onIndexChanged(0);
+      // ref.read(navProvider.notifier).onIndexChanged(0);
       GoRouter.of(context).goNamed(AppRoutes.home.name);
     }
   }
