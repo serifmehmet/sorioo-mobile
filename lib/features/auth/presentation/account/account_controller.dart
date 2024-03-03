@@ -25,10 +25,12 @@ class AccountController extends _$AccountController {
     final key = this.key;
 
     final newState = await AsyncValue.guard(() async {
+      final loggedInUserId = CacheManager.instance.getStringValue(
+        PreferencesKeys.userId,
+      );
+
       ref.watch(localUserRepositoryProvider).removeLoggedInUser(
-            CacheManager.instance.getStringValue(
-              PreferencesKeys.userId,
-            ),
+            loggedInUserId,
           );
 
       await CacheManager.instance.setBoolValue(

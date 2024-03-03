@@ -21,8 +21,10 @@ class AdvertItemWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return InkWell(
-      onTap: () => GoRouter.of(context).pushNamed(AppRoutes.advertDetail.name,
-          extra: AdvertDetailArgs(advertId: advertItem.id, advertUserName: advertItem.categoryName)),
+      onTap: () => GoRouter.of(context).pushNamed(
+        AppRoutes.advertDetail.name,
+        extra: AdvertDetailArgs(advertId: advertItem.id, advertUserName: advertItem.categoryName),
+      ),
       child: Container(
         decoration: BoxDecoration(
           color: kColorWhite,
@@ -32,7 +34,21 @@ class AdvertItemWidget extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Row(),
+            Row(
+              children: [
+                CircleAvatar(
+                  radius: 15,
+                  backgroundImage: Image.network(
+                    advertItem.userProfilePicture,
+                  ).image,
+                ),
+                const AppGap.regular(),
+                AppText(
+                  advertItem.userName,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+              ],
+            ),
             const AppGap.regular(),
             AppText(
               advertItem.title,

@@ -16,6 +16,12 @@ class LocalUserRepository {
     return _hive.values.first;
   }
 
+  List<LocalUser> getAllUsers() {
+    _hive = Hive.box<LocalUser>(localUserBoxName);
+
+    return _hive.values.toList();
+  }
+
   LocalUser addNewLoggedInUser(LocalUser localUser) {
     _hive = Hive.box<LocalUser>(localUserBoxName);
     _hive.add(localUser);
