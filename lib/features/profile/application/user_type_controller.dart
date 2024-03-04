@@ -40,7 +40,7 @@ class UserTypeController extends _$UserTypeController {
             )
             .makeUserSeller(userId);
 
-        ref.refresh(localUserServiceProvider);
+        // ref.invalidate(localUserServiceProvider);
 
         return AsyncValue.data(localUser);
         //return message to user

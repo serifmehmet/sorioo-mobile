@@ -18,9 +18,42 @@ class LocalUser extends HiveObject {
     this.sellerId = '',
     this.phoneNumber = '',
     this.about = '',
+    this.isLoading = false,
   });
 
   factory LocalUser.empty() => LocalUser();
+
+  LocalUser copyWith({
+    String? id,
+    String? fullName,
+    String? email,
+    String? userName,
+    String? profilePictureUrl,
+    String? refreshToken,
+    String? token,
+    String? password,
+    bool? isSeller,
+    String? sellerId,
+    String? phoneNumber,
+    String? about,
+    bool? isLoading,
+  }) {
+    return LocalUser(
+      id: id ?? this.id,
+      fullName: fullName ?? this.fullName,
+      email: email ?? this.email,
+      userName: userName ?? this.userName,
+      profilePictureUrl: profilePictureUrl ?? this.profilePictureUrl,
+      refreshToken: refreshToken ?? this.refreshToken,
+      token: token ?? this.token,
+      password: password ?? this.password,
+      isSeller: isSeller ?? this.isSeller,
+      sellerId: sellerId ?? this.sellerId,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      about: about ?? this.about,
+      isLoading: isLoading ?? this.isLoading,
+    );
+  }
 
   @HiveField(0)
   String id;
@@ -57,4 +90,6 @@ class LocalUser extends HiveObject {
 
   @HiveField(12)
   String? about;
+
+  bool? isLoading;
 }

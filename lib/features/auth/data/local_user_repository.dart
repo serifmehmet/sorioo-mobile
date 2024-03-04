@@ -31,6 +31,7 @@ class LocalUserRepository {
 
   void removeLoggedInUser(String id) {
     _hive = Hive.box<LocalUser>(localUserBoxName);
+    final users = _hive.values.toList();
     _hive.deleteAt(
       _hive.values.toList().indexWhere((lu) => lu.id == id),
     );

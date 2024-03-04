@@ -26,7 +26,11 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
 
     return Scaffold(
       appBar: const PreferredAppBarWidget(),
-      body: localUser.isSeller! ? const SellerView() : const BuyerView(),
+      body: localUser.isLoading!
+          ? const Center(child: CircularProgressIndicator())
+          : localUser.isSeller!
+              ? const SellerView()
+              : const BuyerView(),
     );
   }
 }

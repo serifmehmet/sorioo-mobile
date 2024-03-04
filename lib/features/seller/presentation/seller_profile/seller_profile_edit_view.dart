@@ -16,6 +16,7 @@ import 'package:sorioo/features/seller/presentation/seller_profile/route_args/se
 import 'package:sorioo/features/seller/presentation/seller_profile/seller_profile_controller.dart';
 import 'package:sorioo/features/seller/presentation/seller_profile/validators/update_seller_validators.dart';
 import 'package:sorioo/features/seller/presentation/seller_profile/widgets/seller_category/categories_dropdown_widget.dart';
+import 'package:sorioo/features/seller/presentation/seller_profile/widgets/seller_profile_picture_edit_widget.dart';
 
 class SellerProfileEditView extends ConsumerStatefulWidget {
   const SellerProfileEditView({required this.args, super.key});
@@ -143,13 +144,8 @@ class _SellerProfileEditViewState extends ConsumerState<SellerProfileEditView> w
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Center(
-                                child: CircleAvatar(
-                                  radius: 40,
-                                  backgroundImage: Image.network(
-                                    widget.args.profilePictureUrl,
-                                  ).image,
-                                ),
+                              SellerProfilePictureEditWidget(
+                                profilePictureUrl: widget.args.profilePictureUrl,
                               ),
                               const AppGap.semiBig(),
                               AppText(
@@ -217,6 +213,7 @@ class _SellerProfileEditViewState extends ConsumerState<SellerProfileEditView> w
                                 onDropdownChanged: (value) {
                                   setState(() {
                                     selectedCategoryId = value;
+                                    print(selectedCategoryId);
                                   });
                                 },
                               ),

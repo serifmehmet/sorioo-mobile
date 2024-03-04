@@ -9,17 +9,17 @@ part 'local_user_provider.g.dart';
 class LocalUserService extends _$LocalUserService {
   @override
   LocalUser build() {
-    final localUser = ref.watch(localUserRepositoryProvider).getLoggedUser();
+    final localUser = ref.read(localUserRepositoryProvider).getLoggedUser();
 
     return localUser;
   }
 
-  LocalUser makeUserSeller(String userId) {
-    final localUser = ref.watch(localUserRepositoryProvider).updateLocalUserRole(
+  void makeUserSeller(String userId) {
+    state = state.copyWith(isLoading: true);
+    final localUser = ref.read(localUserRepositoryProvider).updateLocalUserRole(
           userId,
         );
-    state = localUser;
-    return localUser;
+    state = state.copyWith(isSeller: localUser.isSeller, isLoading: false);
   }
 
   LocalUser updateLocalUserTokens(
@@ -27,7 +27,7 @@ class LocalUserService extends _$LocalUserService {
     String accessToken,
     String refreshToken,
   ) {
-    final localUser = ref.watch(localUserRepositoryProvider).updateLocalUserTokens(
+    final localUser = ref.read(localUserRepositoryProvider).updateLocalUserTokens(
           userId,
           accessToken,
           refreshToken,

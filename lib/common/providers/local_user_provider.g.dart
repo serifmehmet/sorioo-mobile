@@ -6,7 +6,7 @@ part of 'local_user_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$localUserServiceHash() => r'ea47c13f956aad5a0ac8c622b28c8d6236633c84';
+String _$localUserServiceHash() => r'fd738f81fd123c982f36a7c582cc900b1200a6e1';
 
 /// See also [LocalUserService].
 @ProviderFor(LocalUserService)
