@@ -7,7 +7,7 @@ part of 'user_type_controller.dart';
 // **************************************************************************
 
 String _$userTypeControllerHash() =>
-    r'd72ca0f9ea91613ee67916084185017cc5871a8b';
+    r'8bc639e8018609353cbdf4d7dbf0a8407da242bf';
 
 /// See also [UserTypeController].
 @ProviderFor(UserTypeController)

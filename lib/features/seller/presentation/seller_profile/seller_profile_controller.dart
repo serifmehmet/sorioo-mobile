@@ -12,11 +12,11 @@ part 'seller_profile_controller.g.dart';
 @riverpod
 class SellerProfileController extends _$SellerProfileController {
   Future<SingleSellerResponseDto?> _getSellerInfo() async {
-    final userId = CacheManager.instance.getStringValue(PreferencesKeys.userId);
+    final sellerId = CacheManager.instance.getStringValue(PreferencesKeys.sellerId);
 
     final repository = ref.watch(sellerRepositoryProvider);
 
-    final sellerTask = repository.getSingleSeller(userId);
+    final sellerTask = repository.getSingleSeller(sellerId: sellerId);
     SingleSellerResponseDto? sellerResponse;
     (await sellerTask.run()).match(
       (error) => AsyncError<dynamic>(error, StackTrace.current),
@@ -34,8 +34,8 @@ class SellerProfileController extends _$SellerProfileController {
   }
 
   Future<void> updateSellerInfo(UpdateSellerDto updateSellerDto) async {
-    final repository = ref.watch(sellerRepositoryProvider);
     state = const AsyncValue.loading();
+    final repository = ref.watch(sellerRepositoryProvider);
     final updateSellerTask = await repository.updateSingleSeller(updateSellerDto).run();
     updateSellerTask
       ..mapLeft((error) {

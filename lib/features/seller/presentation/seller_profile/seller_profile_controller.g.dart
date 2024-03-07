@@ -7,7 +7,7 @@ part of 'seller_profile_controller.dart';
 // **************************************************************************
 
 String _$sellerProfileControllerHash() =>
-    r'2d657ef4cb4d0a3efadc80ccd505014c1fc4561b';
+    r'0536009792950bebc24374c3258f3d671dabe2c4';
 
 /// See also [SellerProfileController].
 @ProviderFor(SellerProfileController)

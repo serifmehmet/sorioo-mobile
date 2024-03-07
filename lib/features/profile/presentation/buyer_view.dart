@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconly/iconly.dart';
+import 'package:sorioo/common/providers/local_user_provider.dart';
 
 import 'package:sorioo/common/providers/nav_notifier.dart';
 import 'package:sorioo/common/widgets/alert_dialogs.dart';
 import 'package:sorioo/common/widgets/profile_header_widget.dart';
+import 'package:sorioo/core/constants/preferences_keys.dart';
+import 'package:sorioo/core/init/cache_manager.dart';
 import 'package:sorioo/core/theme/constants.dart';
 import 'package:sorioo/core/theme/widgets/text/app_text.dart';
 import 'package:sorioo/features/auth/presentation/account/account_controller.dart';
@@ -42,7 +45,7 @@ class _BuyerViewState extends ConsumerState<BuyerView> {
       content: 'Hizmet veren olmak istediğinden emin misin?',
     ).then((value) async {
       if (value!) {
-        //User wants to be seller
+        // //User wants to be seller
         final sub = ref.listenManual(userTypeControllerProvider.notifier, (_, __) {});
 
         await sub.read().makeSeller();

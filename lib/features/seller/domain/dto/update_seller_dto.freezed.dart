@@ -27,6 +27,7 @@ mixin _$UpdateSellerDto {
   String? get industry => throw _privateConstructorUsedError;
   String? get bio => throw _privateConstructorUsedError;
   String? get mainCategoryId => throw _privateConstructorUsedError;
+  Image? get image => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -47,7 +48,10 @@ abstract class $UpdateSellerDtoCopyWith<$Res> {
       String? graduation,
       String? industry,
       String? bio,
-      String? mainCategoryId});
+      String? mainCategoryId,
+      Image? image});
+
+  $ImageCopyWith<$Res>? get image;
 }
 
 /// @nodoc
@@ -70,6 +74,7 @@ class _$UpdateSellerDtoCopyWithImpl<$Res, $Val extends UpdateSellerDto>
     Object? industry = freezed,
     Object? bio = freezed,
     Object? mainCategoryId = freezed,
+    Object? image = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -100,7 +105,23 @@ class _$UpdateSellerDtoCopyWithImpl<$Res, $Val extends UpdateSellerDto>
           ? _value.mainCategoryId
           : mainCategoryId // ignore: cast_nullable_to_non_nullable
               as String?,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as Image?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ImageCopyWith<$Res>? get image {
+    if (_value.image == null) {
+      return null;
+    }
+
+    return $ImageCopyWith<$Res>(_value.image!, (value) {
+      return _then(_value.copyWith(image: value) as $Val);
+    });
   }
 }
 
@@ -119,7 +140,11 @@ abstract class _$$_UpdateSellerDtoCopyWith<$Res>
       String? graduation,
       String? industry,
       String? bio,
-      String? mainCategoryId});
+      String? mainCategoryId,
+      Image? image});
+
+  @override
+  $ImageCopyWith<$Res>? get image;
 }
 
 /// @nodoc
@@ -140,6 +165,7 @@ class __$$_UpdateSellerDtoCopyWithImpl<$Res>
     Object? industry = freezed,
     Object? bio = freezed,
     Object? mainCategoryId = freezed,
+    Object? image = freezed,
   }) {
     return _then(_$_UpdateSellerDto(
       id: null == id
@@ -170,6 +196,10 @@ class __$$_UpdateSellerDtoCopyWithImpl<$Res>
           ? _value.mainCategoryId
           : mainCategoryId // ignore: cast_nullable_to_non_nullable
               as String?,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as Image?,
     ));
   }
 }
@@ -184,7 +214,8 @@ class _$_UpdateSellerDto implements _UpdateSellerDto {
       this.graduation,
       this.industry,
       this.bio,
-      this.mainCategoryId});
+      this.mainCategoryId,
+      this.image});
 
   factory _$_UpdateSellerDto.fromJson(Map<String, dynamic> json) =>
       _$$_UpdateSellerDtoFromJson(json);
@@ -203,10 +234,12 @@ class _$_UpdateSellerDto implements _UpdateSellerDto {
   final String? bio;
   @override
   final String? mainCategoryId;
+  @override
+  final Image? image;
 
   @override
   String toString() {
-    return 'UpdateSellerDto(id: $id, userId: $userId, fullName: $fullName, graduation: $graduation, industry: $industry, bio: $bio, mainCategoryId: $mainCategoryId)';
+    return 'UpdateSellerDto(id: $id, userId: $userId, fullName: $fullName, graduation: $graduation, industry: $industry, bio: $bio, mainCategoryId: $mainCategoryId, image: $image)';
   }
 
   @override
@@ -224,13 +257,14 @@ class _$_UpdateSellerDto implements _UpdateSellerDto {
                 other.industry == industry) &&
             (identical(other.bio, bio) || other.bio == bio) &&
             (identical(other.mainCategoryId, mainCategoryId) ||
-                other.mainCategoryId == mainCategoryId));
+                other.mainCategoryId == mainCategoryId) &&
+            (identical(other.image, image) || other.image == image));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, userId, fullName, graduation,
-      industry, bio, mainCategoryId);
+      industry, bio, mainCategoryId, image);
 
   @JsonKey(ignore: true)
   @override
@@ -254,7 +288,8 @@ abstract class _UpdateSellerDto implements UpdateSellerDto {
       final String? graduation,
       final String? industry,
       final String? bio,
-      final String? mainCategoryId}) = _$_UpdateSellerDto;
+      final String? mainCategoryId,
+      final Image? image}) = _$_UpdateSellerDto;
 
   factory _UpdateSellerDto.fromJson(Map<String, dynamic> json) =
       _$_UpdateSellerDto.fromJson;
@@ -273,6 +308,8 @@ abstract class _UpdateSellerDto implements UpdateSellerDto {
   String? get bio;
   @override
   String? get mainCategoryId;
+  @override
+  Image? get image;
   @override
   @JsonKey(ignore: true)
   _$$_UpdateSellerDtoCopyWith<_$_UpdateSellerDto> get copyWith =>

@@ -26,7 +26,7 @@ class _CategoriesDropdownWidgetState extends ConsumerState<CategoriesDropdownWid
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
             ),
-            value: widget.selectedCategoryId,
+            value: widget.selectedCategoryId == '' ? null : widget.selectedCategoryId,
             items: data!
                 .map(
                   (catData) => DropdownMenuItem<String>(

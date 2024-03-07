@@ -45,9 +45,13 @@ class _SellerProfileViewState extends ConsumerState<SellerProfileView> {
                       children: [
                         CircleAvatar(
                           radius: 40,
-                          backgroundImage: Image.network(
-                            localUser.profilePictureUrl!,
-                          ).image,
+                          backgroundImage: localUser.profilePictureUrl!.isNotEmpty
+                              ? Image.network(
+                                  localUser.profilePictureUrl!,
+                                ).image
+                              : Image.asset(
+                                  'assets/images/default-avatar.png',
+                                ).image,
                         ),
                         const AppGap.regular(),
                         AppText(
@@ -102,8 +106,8 @@ class _SellerProfileViewState extends ConsumerState<SellerProfileView> {
                   onTap: () => context.navigator.pushSellerProfileEdit(
                     SellerProfileEditPageArgs(
                       id: seller.id!,
-                      fullName: seller.sellerFullName,
-                      profilePictureUrl: seller.sellerGoogleImageUrl,
+                      fullName: localUser.fullName,
+                      profilePictureUrl: seller.sellerImagePath,
                       profileBio: seller.sellerBio,
                       sellerMainCategoryId: seller.sellerCategory != null ? seller.sellerCategory!.id : '',
                       sellerGraduation: seller.graduation,

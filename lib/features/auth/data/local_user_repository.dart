@@ -16,6 +16,12 @@ class LocalUserRepository {
     return _hive.values.first;
   }
 
+  List<LocalUser> getAllUsers() {
+    _hive = Hive.box<LocalUser>(localUserBoxName);
+
+    return _hive.values.toList();
+  }
+
   LocalUser addNewLoggedInUser(LocalUser localUser) {
     _hive = Hive.box<LocalUser>(localUserBoxName);
     _hive.add(localUser);
@@ -25,6 +31,7 @@ class LocalUserRepository {
 
   void removeLoggedInUser(String id) {
     _hive = Hive.box<LocalUser>(localUserBoxName);
+    final users = _hive.values.toList();
     _hive.deleteAt(
       _hive.values.toList().indexWhere((lu) => lu.id == id),
     );
@@ -34,9 +41,11 @@ class LocalUserRepository {
     Hive.deleteFromDisk();
   }
 
-  LocalUser updateLocalUserRole(String id) {
+  LocalUser updateLocalUserRole(String id, String sellerId) {
     _hive = Hive.box<LocalUser>(localUserBoxName);
-    final localUser = _hive.values.where((lu) => lu.id == id).first..isSeller = true;
+    final localUser = _hive.values.where((lu) => lu.id == id).first
+      ..isSeller = true
+      ..sellerId = sellerId;
 
     _hive.put(localUser.key, localUser);
 

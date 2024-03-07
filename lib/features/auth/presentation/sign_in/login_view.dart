@@ -88,7 +88,7 @@ class _LoginViewState extends ConsumerState<LoginView> with SignInValidators {
     if (kIsWeb || Platform.isAndroid) {
       googleSignIn = GoogleSignIn(
         scopes: ['email'],
-        clientId: Env.googleServerClientId,
+        serverClientId: Env.googleServerClientId,
       );
     }
 
