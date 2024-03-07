@@ -15,6 +15,9 @@ _$_UpdateSellerDto _$$_UpdateSellerDtoFromJson(Map<String, dynamic> json) =>
       industry: json['industry'] as String?,
       bio: json['bio'] as String?,
       mainCategoryId: json['mainCategoryId'] as String?,
+      image: json['image'] == null
+          ? null
+          : Image.fromJson(json['image'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_UpdateSellerDtoToJson(_$_UpdateSellerDto instance) =>
@@ -26,4 +29,5 @@ Map<String, dynamic> _$$_UpdateSellerDtoToJson(_$_UpdateSellerDto instance) =>
       'industry': instance.industry,
       'bio': instance.bio,
       'mainCategoryId': instance.mainCategoryId,
+      'image': instance.image,
     };

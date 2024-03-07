@@ -9,6 +9,7 @@ import 'package:sorioo/core/http/api_provider.dart';
 import 'package:sorioo/core/http/generic_response.dart';
 import 'package:sorioo/core/init/cache_manager.dart';
 import 'package:sorioo/features/profile/domain/buyer_profile.dart';
+import 'package:sorioo/features/profile/domain/dtos/make_seller_response_dto.dart';
 import 'package:sorioo/features/profile/domain/dtos/update_buyer_dto.dart';
 
 part 'user_profile_repository.g.dart';
@@ -18,7 +19,7 @@ class UserProfileRepository {
 
   final Dio _apiClient;
 
-  TaskEither<ApiException, GenericResponse<StatusMessageResponse>> makeUserSeller(String userId) =>
+  TaskEither<ApiException, GenericResponse<MakeSellerResponseDto>> makeUserSeller(String userId) =>
       TaskEither<ApiException, Response>.tryCatch(
         () => _apiClient.post(
           '/auth/make-seller',
@@ -47,9 +48,9 @@ class UserProfileRepository {
           )
           .chainEither(
             (dataObject) => Either.tryCatch(
-              () => GenericResponse<StatusMessageResponse>.fromJson(
+              () => GenericResponse<MakeSellerResponseDto>.fromJson(
                 dataObject,
-                (Object? statusJson) => StatusMessageResponse.fromJson(
+                (Object? statusJson) => MakeSellerResponseDto.fromJson(
                   statusJson! as Map<String, dynamic>,
                 ),
               ),

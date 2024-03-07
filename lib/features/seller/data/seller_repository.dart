@@ -53,12 +53,56 @@ class SellerRepository {
 
   TaskEither<ApiException, GenericResponse<SingleSellerResponseDto>> updateSingleSeller(UpdateSellerDto sellerDto) {
     return TaskEither<ApiException, Response<dynamic>>.tryCatch(
-      () => _client.put<dynamic>(
-        '/seller/update',
-        data: sellerDto.toJson(),
-      ),
+      () async {
+        final formData = FormData();
+
+        formData.fields.add(
+          MapEntry('id', sellerDto.id),
+        );
+
+        formData.fields.add(
+          MapEntry('userId', sellerDto.userId),
+        );
+
+        formData.fields.add(
+          MapEntry('fullName', sellerDto.fullName!),
+        );
+
+        formData.fields.add(
+          MapEntry('graduation', sellerDto.graduation!),
+        );
+
+        formData.fields.add(
+          MapEntry('industry', sellerDto.industry!),
+        );
+
+        formData.fields.add(
+          MapEntry('bio', sellerDto.bio!),
+        );
+
+        formData.fields.add(
+          MapEntry('mainCategoryId', sellerDto.mainCategoryId!),
+        );
+
+        if (sellerDto.image != null) {
+          formData.files.add(
+            MapEntry(
+              'imageFile',
+              await MultipartFile.fromFile(
+                sellerDto.image!.filePath,
+                filename: sellerDto.image!.fileName,
+              ),
+            ),
+          );
+        }
+
+        return _client.put(
+          '/seller/update',
+          data: formData,
+        );
+      },
       (error, stackTrace) => InternalServerErrorException(
-        message: 'Update işlemi esnasında bir hata oluştu.',
+        message: error.toString(),
       ),
     )
         .chainEither(

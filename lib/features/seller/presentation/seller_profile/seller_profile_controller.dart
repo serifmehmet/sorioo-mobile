@@ -34,8 +34,8 @@ class SellerProfileController extends _$SellerProfileController {
   }
 
   Future<void> updateSellerInfo(UpdateSellerDto updateSellerDto) async {
-    final repository = ref.watch(sellerRepositoryProvider);
     state = const AsyncValue.loading();
+    final repository = ref.watch(sellerRepositoryProvider);
     final updateSellerTask = await repository.updateSingleSeller(updateSellerDto).run();
     updateSellerTask
       ..mapLeft((error) {

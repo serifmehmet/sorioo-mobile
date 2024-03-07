@@ -24,16 +24,14 @@ class UserTypeController extends _$UserTypeController {
     final userId = CacheManager.instance.getStringValue(PreferencesKeys.userId);
     state = const AsyncLoading();
 
-    final result = repository.makeUserSeller(userId);
+    final result = await repository.makeUserSeller(userId).run();
 
-    state = (await result.run()).match(
-      (failure) => AsyncValue<dynamic>.error(
-        failure,
+    state = result.fold(
+      (error) => AsyncValue<dynamic>.error(
+        error,
         StackTrace.current,
       ),
       (success) {
-        //update local user objects isSeller field
-
         final localUser = ref
             .read(
               localUserServiceProvider.notifier,
@@ -43,7 +41,6 @@ class UserTypeController extends _$UserTypeController {
         // ref.invalidate(localUserServiceProvider);
 
         return AsyncValue.data(localUser);
-        //return message to user
       },
     );
   }
