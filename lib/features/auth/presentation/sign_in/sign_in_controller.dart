@@ -54,6 +54,14 @@ class SingInController extends _$SingInController {
         );
         CacheManager.instance.setBoolValue(PreferencesKeys.isLoggedIn, true);
 
+        //Check if the user is seller and then add sellerId to local cache
+        if (success.data!.sellerId != null || success.data!.sellerId!.isNotEmpty) {
+          CacheManager.instance.setStringValue(
+            PreferencesKeys.sellerId,
+            success.data!.sellerId!,
+          );
+        }
+
         return const AsyncData(true);
       },
     );

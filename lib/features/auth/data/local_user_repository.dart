@@ -41,9 +41,11 @@ class LocalUserRepository {
     Hive.deleteFromDisk();
   }
 
-  LocalUser updateLocalUserRole(String id) {
+  LocalUser updateLocalUserRole(String id, String sellerId) {
     _hive = Hive.box<LocalUser>(localUserBoxName);
-    final localUser = _hive.values.where((lu) => lu.id == id).first..isSeller = true;
+    final localUser = _hive.values.where((lu) => lu.id == id).first
+      ..isSeller = true
+      ..sellerId = sellerId;
 
     _hive.put(localUser.key, localUser);
 

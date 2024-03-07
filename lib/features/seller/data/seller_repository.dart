@@ -15,9 +15,9 @@ class SellerRepository {
 
   final Dio _client;
 
-  TaskEither<ApiException, GenericResponse<SingleSellerResponseDto>> getSingleSeller(String userId) =>
+  TaskEither<ApiException, GenericResponse<SingleSellerResponseDto>> getSingleSeller({required String sellerId}) =>
       TaskEither<ApiException, Response<dynamic>>.tryCatch(
-        () => _client.post('/seller/single', data: {'userId': userId}),
+        () => _client.post('/seller/single', data: {'sellerId': sellerId}),
         (error, stackTrace) => ApiErrorHandler.handleError(error),
       )
           .chainEither(

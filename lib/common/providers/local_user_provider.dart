@@ -14,10 +14,11 @@ class LocalUserService extends _$LocalUserService {
     return localUser;
   }
 
-  void makeUserSeller(String userId) {
+  void makeUserSeller(String userId, String sellerId) {
     state = state.copyWith(isLoading: true);
     final localUser = ref.read(localUserRepositoryProvider).updateLocalUserRole(
           userId,
+          sellerId,
         );
     state = state.copyWith(isSeller: localUser.isSeller, isLoading: false);
   }

@@ -36,7 +36,7 @@ class UserTypeController extends _$UserTypeController {
             .read(
               localUserServiceProvider.notifier,
             )
-            .makeUserSeller(userId);
+            .makeUserSeller(userId, success.data!.id);
 
         // ref.invalidate(localUserServiceProvider);
 
