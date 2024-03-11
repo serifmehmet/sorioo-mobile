@@ -25,8 +25,8 @@ mixin _$UpdateSellerDto {
   String? get fullName => throw _privateConstructorUsedError;
   String? get graduation => throw _privateConstructorUsedError;
   String? get industry => throw _privateConstructorUsedError;
-  String? get bio => throw _privateConstructorUsedError;
-  String? get mainCategoryId => throw _privateConstructorUsedError;
+  String? get sellerBio => throw _privateConstructorUsedError;
+  String? get sellerMainCategoryId => throw _privateConstructorUsedError;
   Image? get image => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -47,8 +47,8 @@ abstract class $UpdateSellerDtoCopyWith<$Res> {
       String? fullName,
       String? graduation,
       String? industry,
-      String? bio,
-      String? mainCategoryId,
+      String? sellerBio,
+      String? sellerMainCategoryId,
       Image? image});
 
   $ImageCopyWith<$Res>? get image;
@@ -72,8 +72,8 @@ class _$UpdateSellerDtoCopyWithImpl<$Res, $Val extends UpdateSellerDto>
     Object? fullName = freezed,
     Object? graduation = freezed,
     Object? industry = freezed,
-    Object? bio = freezed,
-    Object? mainCategoryId = freezed,
+    Object? sellerBio = freezed,
+    Object? sellerMainCategoryId = freezed,
     Object? image = freezed,
   }) {
     return _then(_value.copyWith(
@@ -97,13 +97,13 @@ class _$UpdateSellerDtoCopyWithImpl<$Res, $Val extends UpdateSellerDto>
           ? _value.industry
           : industry // ignore: cast_nullable_to_non_nullable
               as String?,
-      bio: freezed == bio
-          ? _value.bio
-          : bio // ignore: cast_nullable_to_non_nullable
+      sellerBio: freezed == sellerBio
+          ? _value.sellerBio
+          : sellerBio // ignore: cast_nullable_to_non_nullable
               as String?,
-      mainCategoryId: freezed == mainCategoryId
-          ? _value.mainCategoryId
-          : mainCategoryId // ignore: cast_nullable_to_non_nullable
+      sellerMainCategoryId: freezed == sellerMainCategoryId
+          ? _value.sellerMainCategoryId
+          : sellerMainCategoryId // ignore: cast_nullable_to_non_nullable
               as String?,
       image: freezed == image
           ? _value.image
@@ -139,8 +139,8 @@ abstract class _$$_UpdateSellerDtoCopyWith<$Res>
       String? fullName,
       String? graduation,
       String? industry,
-      String? bio,
-      String? mainCategoryId,
+      String? sellerBio,
+      String? sellerMainCategoryId,
       Image? image});
 
   @override
@@ -163,8 +163,8 @@ class __$$_UpdateSellerDtoCopyWithImpl<$Res>
     Object? fullName = freezed,
     Object? graduation = freezed,
     Object? industry = freezed,
-    Object? bio = freezed,
-    Object? mainCategoryId = freezed,
+    Object? sellerBio = freezed,
+    Object? sellerMainCategoryId = freezed,
     Object? image = freezed,
   }) {
     return _then(_$_UpdateSellerDto(
@@ -188,13 +188,13 @@ class __$$_UpdateSellerDtoCopyWithImpl<$Res>
           ? _value.industry
           : industry // ignore: cast_nullable_to_non_nullable
               as String?,
-      bio: freezed == bio
-          ? _value.bio
-          : bio // ignore: cast_nullable_to_non_nullable
+      sellerBio: freezed == sellerBio
+          ? _value.sellerBio
+          : sellerBio // ignore: cast_nullable_to_non_nullable
               as String?,
-      mainCategoryId: freezed == mainCategoryId
-          ? _value.mainCategoryId
-          : mainCategoryId // ignore: cast_nullable_to_non_nullable
+      sellerMainCategoryId: freezed == sellerMainCategoryId
+          ? _value.sellerMainCategoryId
+          : sellerMainCategoryId // ignore: cast_nullable_to_non_nullable
               as String?,
       image: freezed == image
           ? _value.image
@@ -213,8 +213,8 @@ class _$_UpdateSellerDto implements _UpdateSellerDto {
       this.fullName,
       this.graduation,
       this.industry,
-      this.bio,
-      this.mainCategoryId,
+      this.sellerBio,
+      this.sellerMainCategoryId,
       this.image});
 
   factory _$_UpdateSellerDto.fromJson(Map<String, dynamic> json) =>
@@ -231,15 +231,15 @@ class _$_UpdateSellerDto implements _UpdateSellerDto {
   @override
   final String? industry;
   @override
-  final String? bio;
+  final String? sellerBio;
   @override
-  final String? mainCategoryId;
+  final String? sellerMainCategoryId;
   @override
   final Image? image;
 
   @override
   String toString() {
-    return 'UpdateSellerDto(id: $id, userId: $userId, fullName: $fullName, graduation: $graduation, industry: $industry, bio: $bio, mainCategoryId: $mainCategoryId, image: $image)';
+    return 'UpdateSellerDto(id: $id, userId: $userId, fullName: $fullName, graduation: $graduation, industry: $industry, sellerBio: $sellerBio, sellerMainCategoryId: $sellerMainCategoryId, image: $image)';
   }
 
   @override
@@ -255,16 +255,17 @@ class _$_UpdateSellerDto implements _UpdateSellerDto {
                 other.graduation == graduation) &&
             (identical(other.industry, industry) ||
                 other.industry == industry) &&
-            (identical(other.bio, bio) || other.bio == bio) &&
-            (identical(other.mainCategoryId, mainCategoryId) ||
-                other.mainCategoryId == mainCategoryId) &&
+            (identical(other.sellerBio, sellerBio) ||
+                other.sellerBio == sellerBio) &&
+            (identical(other.sellerMainCategoryId, sellerMainCategoryId) ||
+                other.sellerMainCategoryId == sellerMainCategoryId) &&
             (identical(other.image, image) || other.image == image));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, userId, fullName, graduation,
-      industry, bio, mainCategoryId, image);
+      industry, sellerBio, sellerMainCategoryId, image);
 
   @JsonKey(ignore: true)
   @override
@@ -287,8 +288,8 @@ abstract class _UpdateSellerDto implements UpdateSellerDto {
       final String? fullName,
       final String? graduation,
       final String? industry,
-      final String? bio,
-      final String? mainCategoryId,
+      final String? sellerBio,
+      final String? sellerMainCategoryId,
       final Image? image}) = _$_UpdateSellerDto;
 
   factory _UpdateSellerDto.fromJson(Map<String, dynamic> json) =
@@ -305,9 +306,9 @@ abstract class _UpdateSellerDto implements UpdateSellerDto {
   @override
   String? get industry;
   @override
-  String? get bio;
+  String? get sellerBio;
   @override
-  String? get mainCategoryId;
+  String? get sellerMainCategoryId;
   @override
   Image? get image;
   @override
