@@ -90,8 +90,8 @@ class _SellerProfileViewState extends ConsumerState<SellerProfileView> {
                         child: Padding(
                           padding: kSemiBigPadding,
                           child: AppText(
-                            seller.sellerCategory != null
-                                ? seller.sellerCategory!.name
+                            seller.sellerMainCategory != null
+                                ? seller.sellerMainCategory!.name
                                 : 'Bir uzmanlık alanı seçilmemiş',
                             color: kTextColor,
                           ),
@@ -109,7 +109,7 @@ class _SellerProfileViewState extends ConsumerState<SellerProfileView> {
                       fullName: localUser.fullName,
                       profilePictureUrl: seller.sellerImagePath,
                       profileBio: seller.sellerBio,
-                      sellerMainCategoryId: seller.sellerCategory != null ? seller.sellerCategory!.id : '',
+                      sellerMainCategoryId: seller.sellerMainCategory != null ? seller.sellerMainCategory!.id : '',
                       sellerGraduation: seller.graduation,
                       sellerIndustry: seller.industry,
                     ),
