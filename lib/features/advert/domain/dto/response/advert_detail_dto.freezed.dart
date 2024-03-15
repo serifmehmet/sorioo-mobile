@@ -21,12 +21,12 @@ AdvertDetailDto _$AdvertDetailDtoFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$AdvertDetailDto {
   String get id => throw _privateConstructorUsedError;
-  String get userName => throw _privateConstructorUsedError;
-  String get title => throw _privateConstructorUsedError;
-  String get details => throw _privateConstructorUsedError;
-  String get needsToStart => throw _privateConstructorUsedError;
   List<AdvertDetailPackagesDto> get advertPackages =>
       throw _privateConstructorUsedError;
+  String? get title => throw _privateConstructorUsedError;
+  String? get details => throw _privateConstructorUsedError;
+  String? get needsToStart => throw _privateConstructorUsedError;
+  String? get userName => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,11 +42,11 @@ abstract class $AdvertDetailDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      String userName,
-      String title,
-      String details,
-      String needsToStart,
-      List<AdvertDetailPackagesDto> advertPackages});
+      List<AdvertDetailPackagesDto> advertPackages,
+      String? title,
+      String? details,
+      String? needsToStart,
+      String? userName});
 }
 
 /// @nodoc
@@ -63,37 +63,37 @@ class _$AdvertDetailDtoCopyWithImpl<$Res, $Val extends AdvertDetailDto>
   @override
   $Res call({
     Object? id = null,
-    Object? userName = null,
-    Object? title = null,
-    Object? details = null,
-    Object? needsToStart = null,
     Object? advertPackages = null,
+    Object? title = freezed,
+    Object? details = freezed,
+    Object? needsToStart = freezed,
+    Object? userName = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      userName: null == userName
-          ? _value.userName
-          : userName // ignore: cast_nullable_to_non_nullable
-              as String,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      details: null == details
-          ? _value.details
-          : details // ignore: cast_nullable_to_non_nullable
-              as String,
-      needsToStart: null == needsToStart
-          ? _value.needsToStart
-          : needsToStart // ignore: cast_nullable_to_non_nullable
-              as String,
       advertPackages: null == advertPackages
           ? _value.advertPackages
           : advertPackages // ignore: cast_nullable_to_non_nullable
               as List<AdvertDetailPackagesDto>,
+      title: freezed == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String?,
+      details: freezed == details
+          ? _value.details
+          : details // ignore: cast_nullable_to_non_nullable
+              as String?,
+      needsToStart: freezed == needsToStart
+          ? _value.needsToStart
+          : needsToStart // ignore: cast_nullable_to_non_nullable
+              as String?,
+      userName: freezed == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -108,11 +108,11 @@ abstract class _$$_AdvertDetailDtoCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      String userName,
-      String title,
-      String details,
-      String needsToStart,
-      List<AdvertDetailPackagesDto> advertPackages});
+      List<AdvertDetailPackagesDto> advertPackages,
+      String? title,
+      String? details,
+      String? needsToStart,
+      String? userName});
 }
 
 /// @nodoc
@@ -127,37 +127,37 @@ class __$$_AdvertDetailDtoCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? userName = null,
-    Object? title = null,
-    Object? details = null,
-    Object? needsToStart = null,
     Object? advertPackages = null,
+    Object? title = freezed,
+    Object? details = freezed,
+    Object? needsToStart = freezed,
+    Object? userName = freezed,
   }) {
     return _then(_$_AdvertDetailDto(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      userName: null == userName
-          ? _value.userName
-          : userName // ignore: cast_nullable_to_non_nullable
-              as String,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      details: null == details
-          ? _value.details
-          : details // ignore: cast_nullable_to_non_nullable
-              as String,
-      needsToStart: null == needsToStart
-          ? _value.needsToStart
-          : needsToStart // ignore: cast_nullable_to_non_nullable
-              as String,
       advertPackages: null == advertPackages
           ? _value._advertPackages
           : advertPackages // ignore: cast_nullable_to_non_nullable
               as List<AdvertDetailPackagesDto>,
+      title: freezed == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String?,
+      details: freezed == details
+          ? _value.details
+          : details // ignore: cast_nullable_to_non_nullable
+              as String?,
+      needsToStart: freezed == needsToStart
+          ? _value.needsToStart
+          : needsToStart // ignore: cast_nullable_to_non_nullable
+              as String?,
+      userName: freezed == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -167,11 +167,11 @@ class __$$_AdvertDetailDtoCopyWithImpl<$Res>
 class _$_AdvertDetailDto implements _AdvertDetailDto {
   _$_AdvertDetailDto(
       {required this.id,
-      required this.userName,
-      required this.title,
-      required this.details,
-      required this.needsToStart,
-      required final List<AdvertDetailPackagesDto> advertPackages})
+      required final List<AdvertDetailPackagesDto> advertPackages,
+      this.title,
+      this.details,
+      this.needsToStart,
+      this.userName})
       : _advertPackages = advertPackages;
 
   factory _$_AdvertDetailDto.fromJson(Map<String, dynamic> json) =>
@@ -179,14 +179,6 @@ class _$_AdvertDetailDto implements _AdvertDetailDto {
 
   @override
   final String id;
-  @override
-  final String userName;
-  @override
-  final String title;
-  @override
-  final String details;
-  @override
-  final String needsToStart;
   final List<AdvertDetailPackagesDto> _advertPackages;
   @override
   List<AdvertDetailPackagesDto> get advertPackages {
@@ -196,8 +188,17 @@ class _$_AdvertDetailDto implements _AdvertDetailDto {
   }
 
   @override
+  final String? title;
+  @override
+  final String? details;
+  @override
+  final String? needsToStart;
+  @override
+  final String? userName;
+
+  @override
   String toString() {
-    return 'AdvertDetailDto(id: $id, userName: $userName, title: $title, details: $details, needsToStart: $needsToStart, advertPackages: $advertPackages)';
+    return 'AdvertDetailDto(id: $id, advertPackages: $advertPackages, title: $title, details: $details, needsToStart: $needsToStart, userName: $userName)';
   }
 
   @override
@@ -206,20 +207,26 @@ class _$_AdvertDetailDto implements _AdvertDetailDto {
         (other.runtimeType == runtimeType &&
             other is _$_AdvertDetailDto &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.userName, userName) ||
-                other.userName == userName) &&
+            const DeepCollectionEquality()
+                .equals(other._advertPackages, _advertPackages) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.details, details) || other.details == details) &&
             (identical(other.needsToStart, needsToStart) ||
                 other.needsToStart == needsToStart) &&
-            const DeepCollectionEquality()
-                .equals(other._advertPackages, _advertPackages));
+            (identical(other.userName, userName) ||
+                other.userName == userName));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, userName, title, details,
-      needsToStart, const DeepCollectionEquality().hash(_advertPackages));
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      const DeepCollectionEquality().hash(_advertPackages),
+      title,
+      details,
+      needsToStart,
+      userName);
 
   @JsonKey(ignore: true)
   @override
@@ -237,13 +244,12 @@ class _$_AdvertDetailDto implements _AdvertDetailDto {
 
 abstract class _AdvertDetailDto implements AdvertDetailDto {
   factory _AdvertDetailDto(
-          {required final String id,
-          required final String userName,
-          required final String title,
-          required final String details,
-          required final String needsToStart,
-          required final List<AdvertDetailPackagesDto> advertPackages}) =
-      _$_AdvertDetailDto;
+      {required final String id,
+      required final List<AdvertDetailPackagesDto> advertPackages,
+      final String? title,
+      final String? details,
+      final String? needsToStart,
+      final String? userName}) = _$_AdvertDetailDto;
 
   factory _AdvertDetailDto.fromJson(Map<String, dynamic> json) =
       _$_AdvertDetailDto.fromJson;
@@ -251,15 +257,15 @@ abstract class _AdvertDetailDto implements AdvertDetailDto {
   @override
   String get id;
   @override
-  String get userName;
-  @override
-  String get title;
-  @override
-  String get details;
-  @override
-  String get needsToStart;
-  @override
   List<AdvertDetailPackagesDto> get advertPackages;
+  @override
+  String? get title;
+  @override
+  String? get details;
+  @override
+  String? get needsToStart;
+  @override
+  String? get userName;
   @override
   @JsonKey(ignore: true)
   _$$_AdvertDetailDtoCopyWith<_$_AdvertDetailDto> get copyWith =>

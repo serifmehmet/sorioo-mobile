@@ -23,7 +23,7 @@ class AdvertItemWidget extends ConsumerWidget {
     return InkWell(
       onTap: () => GoRouter.of(context).pushNamed(
         AppRoutes.advertDetail.name,
-        extra: AdvertDetailArgs(advertId: advertItem.id, advertUserName: advertItem.categoryName),
+        extra: AdvertDetailArgs(advertId: advertItem.id, advertUserName: advertItem.userName),
       ),
       child: Container(
         decoration: BoxDecoration(

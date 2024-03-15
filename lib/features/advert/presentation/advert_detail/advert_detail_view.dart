@@ -25,8 +25,9 @@ class AdvertDetailView extends ConsumerWidget {
           data: (advert) {
             return Column(
               children: [
+                Image.asset('assets/images/proffesional-header.png'),
                 AppText(
-                  advert.title,
+                  advert.title!,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ],
