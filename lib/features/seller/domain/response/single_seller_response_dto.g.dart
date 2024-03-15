@@ -16,9 +16,10 @@ _$_SingleSellerResponseDto _$$_SingleSellerResponseDtoFromJson(
       industry: json['industry'] as String? ?? '',
       graduation: json['graduation'] as String? ?? '',
       sellerImagePath: json['sellerImagePath'] as String? ?? '',
-      sellerCategory: json['sellerCategory'] == null
+      sellerMainCategory: json['sellerMainCategory'] == null
           ? null
-          : Category.fromJson(json['sellerCategory'] as Map<String, dynamic>),
+          : Category.fromJson(
+              json['sellerMainCategory'] as Map<String, dynamic>),
       sellerBio: json['sellerBio'] as String? ?? '',
     );
 
@@ -32,6 +33,6 @@ Map<String, dynamic> _$$_SingleSellerResponseDtoToJson(
       'industry': instance.industry,
       'graduation': instance.graduation,
       'sellerImagePath': instance.sellerImagePath,
-      'sellerCategory': instance.sellerCategory,
+      'sellerMainCategory': instance.sellerMainCategory,
       'sellerBio': instance.sellerBio,
     };

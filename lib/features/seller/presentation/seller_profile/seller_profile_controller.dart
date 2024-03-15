@@ -44,19 +44,5 @@ class SellerProfileController extends _$SellerProfileController {
       ..map((seller) {
         state = AsyncValue.data(seller.data);
       });
-    // state = (await updateSellerTask.run()).match(
-    //   (l) => AsyncValue.error(l, StackTrace.current),
-    //   (seller) {
-    //     return _getSellerInfo();
-    //   },
-    // );
-    // SingleSellerResponseDto? updatedSeller;
-
-    // state = (await updateSellerTask.run()).match(
-    //   (error) {
-    //     return AsyncError(error, StackTrace.current);
-    //   },
-    //   (s) => AsyncValue.data(s.data),
-    // );
   }
 }

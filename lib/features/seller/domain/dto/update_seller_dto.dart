@@ -12,8 +12,8 @@ class UpdateSellerDto with _$UpdateSellerDto {
     String? fullName,
     String? graduation,
     String? industry,
-    String? bio,
-    String? mainCategoryId,
+    String? sellerBio,
+    String? sellerMainCategoryId,
     Image? image,
   }) = _UpdateSellerDto;
 

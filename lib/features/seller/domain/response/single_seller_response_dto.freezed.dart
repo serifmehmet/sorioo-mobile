@@ -29,7 +29,7 @@ mixin _$SingleSellerResponseDto {
   String get graduation => throw _privateConstructorUsedError;
   String get sellerImagePath =>
       throw _privateConstructorUsedError; // String? sellerMainCategoryId,
-  Category? get sellerCategory => throw _privateConstructorUsedError;
+  Category? get sellerMainCategory => throw _privateConstructorUsedError;
   String get sellerBio => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -52,10 +52,10 @@ abstract class $SingleSellerResponseDtoCopyWith<$Res> {
       String industry,
       String graduation,
       String sellerImagePath,
-      Category? sellerCategory,
+      Category? sellerMainCategory,
       String sellerBio});
 
-  $CategoryCopyWith<$Res>? get sellerCategory;
+  $CategoryCopyWith<$Res>? get sellerMainCategory;
 }
 
 /// @nodoc
@@ -79,7 +79,7 @@ class _$SingleSellerResponseDtoCopyWithImpl<$Res,
     Object? industry = null,
     Object? graduation = null,
     Object? sellerImagePath = null,
-    Object? sellerCategory = freezed,
+    Object? sellerMainCategory = freezed,
     Object? sellerBio = null,
   }) {
     return _then(_value.copyWith(
@@ -111,9 +111,9 @@ class _$SingleSellerResponseDtoCopyWithImpl<$Res,
           ? _value.sellerImagePath
           : sellerImagePath // ignore: cast_nullable_to_non_nullable
               as String,
-      sellerCategory: freezed == sellerCategory
-          ? _value.sellerCategory
-          : sellerCategory // ignore: cast_nullable_to_non_nullable
+      sellerMainCategory: freezed == sellerMainCategory
+          ? _value.sellerMainCategory
+          : sellerMainCategory // ignore: cast_nullable_to_non_nullable
               as Category?,
       sellerBio: null == sellerBio
           ? _value.sellerBio
@@ -124,13 +124,13 @@ class _$SingleSellerResponseDtoCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
-  $CategoryCopyWith<$Res>? get sellerCategory {
-    if (_value.sellerCategory == null) {
+  $CategoryCopyWith<$Res>? get sellerMainCategory {
+    if (_value.sellerMainCategory == null) {
       return null;
     }
 
-    return $CategoryCopyWith<$Res>(_value.sellerCategory!, (value) {
-      return _then(_value.copyWith(sellerCategory: value) as $Val);
+    return $CategoryCopyWith<$Res>(_value.sellerMainCategory!, (value) {
+      return _then(_value.copyWith(sellerMainCategory: value) as $Val);
     });
   }
 }
@@ -151,11 +151,11 @@ abstract class _$$_SingleSellerResponseDtoCopyWith<$Res>
       String industry,
       String graduation,
       String sellerImagePath,
-      Category? sellerCategory,
+      Category? sellerMainCategory,
       String sellerBio});
 
   @override
-  $CategoryCopyWith<$Res>? get sellerCategory;
+  $CategoryCopyWith<$Res>? get sellerMainCategory;
 }
 
 /// @nodoc
@@ -177,7 +177,7 @@ class __$$_SingleSellerResponseDtoCopyWithImpl<$Res>
     Object? industry = null,
     Object? graduation = null,
     Object? sellerImagePath = null,
-    Object? sellerCategory = freezed,
+    Object? sellerMainCategory = freezed,
     Object? sellerBio = null,
   }) {
     return _then(_$_SingleSellerResponseDto(
@@ -209,9 +209,9 @@ class __$$_SingleSellerResponseDtoCopyWithImpl<$Res>
           ? _value.sellerImagePath
           : sellerImagePath // ignore: cast_nullable_to_non_nullable
               as String,
-      sellerCategory: freezed == sellerCategory
-          ? _value.sellerCategory
-          : sellerCategory // ignore: cast_nullable_to_non_nullable
+      sellerMainCategory: freezed == sellerMainCategory
+          ? _value.sellerMainCategory
+          : sellerMainCategory // ignore: cast_nullable_to_non_nullable
               as Category?,
       sellerBio: null == sellerBio
           ? _value.sellerBio
@@ -232,7 +232,7 @@ class _$_SingleSellerResponseDto implements _SingleSellerResponseDto {
       this.industry = '',
       this.graduation = '',
       this.sellerImagePath = '',
-      this.sellerCategory,
+      this.sellerMainCategory,
       this.sellerBio = ''});
 
   factory _$_SingleSellerResponseDto.fromJson(Map<String, dynamic> json) =>
@@ -260,14 +260,14 @@ class _$_SingleSellerResponseDto implements _SingleSellerResponseDto {
   final String sellerImagePath;
 // String? sellerMainCategoryId,
   @override
-  final Category? sellerCategory;
+  final Category? sellerMainCategory;
   @override
   @JsonKey()
   final String sellerBio;
 
   @override
   String toString() {
-    return 'SingleSellerResponseDto(id: $id, sellerGoogleImageUrl: $sellerGoogleImageUrl, sellerFullName: $sellerFullName, speciality: $speciality, industry: $industry, graduation: $graduation, sellerImagePath: $sellerImagePath, sellerCategory: $sellerCategory, sellerBio: $sellerBio)';
+    return 'SingleSellerResponseDto(id: $id, sellerGoogleImageUrl: $sellerGoogleImageUrl, sellerFullName: $sellerFullName, speciality: $speciality, industry: $industry, graduation: $graduation, sellerImagePath: $sellerImagePath, sellerMainCategory: $sellerMainCategory, sellerBio: $sellerBio)';
   }
 
   @override
@@ -288,8 +288,8 @@ class _$_SingleSellerResponseDto implements _SingleSellerResponseDto {
                 other.graduation == graduation) &&
             (identical(other.sellerImagePath, sellerImagePath) ||
                 other.sellerImagePath == sellerImagePath) &&
-            (identical(other.sellerCategory, sellerCategory) ||
-                other.sellerCategory == sellerCategory) &&
+            (identical(other.sellerMainCategory, sellerMainCategory) ||
+                other.sellerMainCategory == sellerMainCategory) &&
             (identical(other.sellerBio, sellerBio) ||
                 other.sellerBio == sellerBio));
   }
@@ -305,7 +305,7 @@ class _$_SingleSellerResponseDto implements _SingleSellerResponseDto {
       industry,
       graduation,
       sellerImagePath,
-      sellerCategory,
+      sellerMainCategory,
       sellerBio);
 
   @JsonKey(ignore: true)
@@ -333,7 +333,7 @@ abstract class _SingleSellerResponseDto implements SingleSellerResponseDto {
       final String industry,
       final String graduation,
       final String sellerImagePath,
-      final Category? sellerCategory,
+      final Category? sellerMainCategory,
       final String sellerBio}) = _$_SingleSellerResponseDto;
 
   factory _SingleSellerResponseDto.fromJson(Map<String, dynamic> json) =
@@ -354,7 +354,7 @@ abstract class _SingleSellerResponseDto implements SingleSellerResponseDto {
   @override
   String get sellerImagePath;
   @override // String? sellerMainCategoryId,
-  Category? get sellerCategory;
+  Category? get sellerMainCategory;
   @override
   String get sellerBio;
   @override

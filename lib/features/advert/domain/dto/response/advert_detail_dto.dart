@@ -8,11 +8,11 @@ part 'advert_detail_dto.g.dart';
 class AdvertDetailDto with _$AdvertDetailDto {
   factory AdvertDetailDto({
     required String id,
-    required String userName,
-    required String title,
-    required String details,
-    required String needsToStart,
     required List<AdvertDetailPackagesDto> advertPackages,
+    String? title,
+    String? details,
+    String? needsToStart,
+    String? userName,
   }) = _AdvertDetailDto;
 
   factory AdvertDetailDto.fromJson(Map<String, dynamic> json) => _$AdvertDetailDtoFromJson(json);

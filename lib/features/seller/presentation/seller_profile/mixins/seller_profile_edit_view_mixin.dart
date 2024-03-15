@@ -47,8 +47,8 @@ mixin _SellerProfileEditViewMixin on ConsumerState<SellerProfileEditView> {
         userId: CacheManager.instance.getStringValue(PreferencesKeys.userId),
         graduation: graduation,
         industry: industry,
-        bio: bio,
-        mainCategoryId: selectedCategoryId,
+        sellerBio: bio,
+        sellerMainCategoryId: selectedCategoryId,
         image: imageNotifier.filePath.isNotEmpty ? imageNotifier : null,
       );
 

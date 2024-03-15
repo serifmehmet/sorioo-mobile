@@ -77,11 +77,11 @@ class SellerRepository {
         );
 
         formData.fields.add(
-          MapEntry('bio', sellerDto.bio!),
+          MapEntry('sellerBio', sellerDto.sellerBio!),
         );
 
         formData.fields.add(
-          MapEntry('mainCategoryId', sellerDto.mainCategoryId!),
+          MapEntry('sellerMainCategoryId', sellerDto.sellerMainCategoryId!),
         );
 
         if (sellerDto.image != null) {

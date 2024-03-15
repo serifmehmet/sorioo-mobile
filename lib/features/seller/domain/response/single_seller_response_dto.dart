@@ -15,7 +15,7 @@ class SingleSellerResponseDto with _$SingleSellerResponseDto {
     @Default('') String graduation,
     @Default('') String sellerImagePath,
     // String? sellerMainCategoryId,
-    Category? sellerCategory,
+    Category? sellerMainCategory,
     @Default('') String sellerBio,
   }) = _SingleSellerResponseDto;
 
